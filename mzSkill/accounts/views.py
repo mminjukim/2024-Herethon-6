@@ -7,9 +7,21 @@ from .forms import *
 
 # Create your views here.
 
-def list(request):
+def list_view(request):
     users = User.objects.all().order_by('-id')
-    return render(request, "accounts/list.html", {'users': users })
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = ProfileForm(request.POST, request.FILES)
+            if form.is_valid():
+                profile = form.save(commit=False)
+                profile.user = request.user
+                profile.save()
+                return redirect('accounts:list')
+        else:
+            form = ProfileForm()
+    else:
+        form = None
+    return render(request, "accounts/list.html", {'users': users, 'form': form})
 
 def signup_view(request):
     if request.method == "GET":

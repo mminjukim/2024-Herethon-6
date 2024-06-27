@@ -10,8 +10,14 @@ class SignUpForm(UserCreationForm):
         # AUTH_USER_MODEL이라고 settings.py에 정의한 user모델을 가져온다는 의미
         model = User
         fields = ['first_name', 'username', 'email']
-
+# AttributeError: type object 'Profile' has no attribute 'USERNAME_FIELD'
+# >>
 class ProfileForm(forms.ModelForm):
-    class Meta:
+    # 달력형식으로
+    birthDate = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+    
+    class Meta():
         model = Profile
-        fields = ['nickname', 'birthdate', 'profile_emoji']
+        fields = ['nickname', 'birthDate', 'profile_emoji']
