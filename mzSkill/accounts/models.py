@@ -25,5 +25,9 @@ class Profile(models.Model):
     birthDate = models.DateField( null = False, blank = False)
     skills = models.ManyToManyField(Skill, related_name='user_profiles')
 
+    ROLE_CHOICES = ((1, '러너'), (2, '티쳐'))
+    role = models.PositiveIntegerField(choices=ROLE_CHOICES, null=True) # 러너, 티쳐 role 선택 
+    # 참고: https://medium.com/djangotube/django-roles-groups-and-permissions-introduction-a54d1070544
+
     def __str__(self):
         return self.nickname
