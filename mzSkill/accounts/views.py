@@ -18,7 +18,7 @@ def signup_view(request):
         login(request, user)
         return redirect('accounts:profile')  # main 앱의 main 페이지로 리디렉션
     else:
-        return render(request, 'accounts/signup.html', {'user_form': user_form, 'profile_form': profile_form})
+        return render(request, 'accounts/signup.html', {'user_form': user_form})
 
 def profile_view(request):
     if request.method == "GET":
