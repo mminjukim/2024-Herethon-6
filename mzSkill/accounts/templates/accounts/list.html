@@ -12,7 +12,10 @@
     <br />
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %} {{ form.as_p }}
-      <button type="submit">저장</button>
+      <br />
+      <form method="post" action="{% url 'main:main' %}">
+        <button type="submit">다음으로</button>
+      </form>
     </form>
     {% else %}
     <a href="{% url 'accounts:signup' %}">회원가입</a>

@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>회원가입</title>
+    <title>Document</title>
   </head>
   <body>
-    <h2>회원가입</h2>
+    <h2>내 프로필 등록하기</h2>
     <form method="post" enctype="multipart/form-data">
-      {% csrf_token %} {{ user_form.as_p }}
-      <button type="submit">회원가입</button>
+      {% csrf_token %} {{ profile_form.as_p }}
+      <button type="submit">등록하기</button>
     </form>
   </body>
 </html>
