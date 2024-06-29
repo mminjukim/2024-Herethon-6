@@ -34,6 +34,22 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['nickname', 'birthDate', 'profile_emoji']
 
+
+# 프로필 세부사항 설정
+class DetailForm(forms.ModelForm):
+
+    skills = forms.ModelMultipleChoiceField(
+        queryset = Skill.objects.all(),
+        widget = forms.CheckboxSelectMultiple,
+        required = True
+    )
+    
+    class Meta:
+        model = Profile
+        fields = ['skills']
+
+        
+
 #티칭 계획 폼 추가
 class TeachingPlanForm(forms.ModelForm):
     class Meta:
