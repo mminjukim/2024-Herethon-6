@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>티쳐 프로필</title>
+</head>
+<body>
+    <a href="{% url 'main:main' %}">back</a>
+    <p></p>
+    <h2>{{ profile.user.username }}의 프로필</h2>
+    {% if profile.profile_emoji %}
+    <img src="{{ profile.profile_emoji.url }}" alt="Profile Emoji" />
+    {% else %}
+        <p>No Profile Emoji</p>
+    {% endif %}
+    <p>생일: {{ profile.birthDate }}</p>
+    <p>스킬:
+    <ul>
+        {% for skill in profile.skills.all %}
+        <li>{{ skill.skill_name }}</li>
+        {% endfor %}
+    </ul>
+    </p>
+    <a href="{% url 'main:edit_profile_view' %}">내 프로필 수정하기</a>
+</body>
+</html>
+

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+  </head>
+  <body>
+    <h2>로그인</h2>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">로그인</button>
+    </form>
+    <br />
+    <a href="{% url 'profiles:role_choice' %}"
+      >아직 아이디가 없으신가요? 가입하러 가기</a
+    >
+  </body>
+</html>

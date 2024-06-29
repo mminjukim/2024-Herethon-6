@@ -1,64 +1,91 @@
 from django.shortcuts import render, redirect
-# account에서 로그인 되어 있다는 전제하에
 from django.contrib.auth.decorators import login_required
-from accounts.forms import ProfileForm, TeachingPlanForm
-from accounts.models import Profile, TeachingPlan
+from profiles.models import LearnerProfile, TeacherProfile, TeachingPlan
+from profiles.forms import LearnerProfileForm, TeacherProfileForm, TeachingPlanForm
 
+# 현재 로그인한 사람의 프로필을 가져와야함.
 @login_required
 def main(request):
-    profile = Profile.objects.get(user_id = request.user.id)
-    return render(request, 'main/main.html', {'profile':profile})
+    # 프로필 변수 초기화
+    profile = None
+    try:
+        # 러너아니면
+        profile = LearnerProfile.objects.get(user_id=request.user.id)
+    except LearnerProfile.DoesNotExist:
+        try:
+            # 티쳐로
+            profile = TeacherProfile.objects.get(user_id=request.user.id)
+        except TeacherProfile.DoesNotExist:
+            pass # 수정
+    return render(request, 'main/main.html', {'profile': profile})
 
-# 사용자 프로필란
+# 내 프로필 보기
+
 @login_required
 def profile_card_view(request):
+    profile = None
     try:
-        profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
-        profile = None
+        profile = LearnerProfile.objects.get(user=request.user)
+    except LearnerProfile.DoesNotExist:
+        try:
+            profile = TeacherProfile.objects.get(user=request.user)
+        except TeacherProfile.DoesNotExist:
+            pass
 
-    template_name = 'main/default_profile.html'  # 기본 템플릿 설정
+    template_name = 'main/default_profile.html'
 
-    if profile:
-        if profile.role == 1: # 러너
-            template_name = 'main/runner.html'
-        elif profile.role == 2: # 티쳐
-            template_name = 'main/teacher.html'
-    
+    if isinstance(profile, LearnerProfile):
+        template_name = 'main/learner_profile.html'
+    elif isinstance(profile, TeacherProfile):
+        template_name = 'main/teacher_profile.html'
+
     return render(request, template_name, {'profile': profile})
 
-# 프로필 수정 함수
+# 프로필 수정 함수(러너, 티쳐일때 다르게)
 @login_required
-def edit_ProfileView(request):
+def edit_profile_view(request):
+    profile = None
+    is_learner = False
+    is_teacher = False
+    template_name = ''  # 템플릿 이름을 기본값으로 초기화
     try:
-        # 현재 존재하는 사용자의 프로필을 가져온다.
-        profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
-        profile = None
-    
+        profile = LearnerProfile.objects.get(user=request.user)
+        is_learner = True
+    except LearnerProfile.DoesNotExist:
+        try:
+            profile = TeacherProfile.objects.get(user=request.user)
+            is_teacher = True
+        except TeacherProfile.DoesNotExist:
+            return redirect('profiles:role_choice')  # 프로필이 없으면 역할 선택 페이지
+
     if request.method == "POST":
-        # 프로필 폼 모델 가져오는 변수
-        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if is_learner:
+            profile_form = LearnerProfileForm(request.POST, request.FILES, instance=profile)
+        else:
+            profile_form = TeacherProfileForm(request.POST, request.FILES, instance=profile)
+        
         if profile_form.is_valid():
             profile_form.save()
-            # 저장 후 메인 페이지로 리디렉션하기
             return redirect('main:profile_card_view')
-    else: # GET 요청
-        profile_form = ProfileForm(instance=profile)
-    
-    return render(request, 'main/Edit_profile.html', {'profile_form': profile_form})
+    else:  # GET 요청
+        if is_learner:
+            profile_form = LearnerProfileForm(instance=profile)
+            template_name = 'main/learner_profile_edit.html'
+        else:
+            profile_form = TeacherProfileForm(instance=profile)
+            template_name = 'main/teacher_profile_edit.html'
+
+    return render(request, template_name, {'profile_form': profile_form})
 
 @login_required
 def main_page(request):
     return render(request, 'main/main.html')
 
-
-#티칭 계획뷰 추가
 @login_required
 def create_or_edit_teaching_plan(request):
     try:
-        profile = Profile.objects.get(user=request.user)
-    except Profile.DoesNotExist:
+        profile = TeacherProfile.objects.get(user=request.user)
+    except TeacherProfile.DoesNotExist:
         profile = None
 
     if profile:
@@ -76,7 +103,7 @@ def create_or_edit_teaching_plan(request):
                 return redirect('main:profile_card_view')
         else:
             form = TeachingPlanForm(instance=teaching_plan)
-        
+
         return render(request, 'main/edit_teaching_plan.html', {'form': form})
     else:
         return redirect('main:profile_card_view')

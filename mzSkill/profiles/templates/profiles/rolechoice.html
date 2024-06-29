@@ -3,15 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>로그인</title>
+    <title>역할 선택</title>
   </head>
   <body>
-    <h2>로그인</h2>
+    <h2>역할 선택</h2>
     <form method="post">
       {% csrf_token %} {{ form.as_p }}
-      <button type="submit">로그인</button>
+      <button type="submit">다음으로</button>
     </form>
-    <br />
-    <a href="{% url 'accounts:rolechoice' %}">회원가입</a> <!-- 회원가입 시 역할(러너/티쳐) 선택으로 넘어감 -->
   </body>
 </html>
