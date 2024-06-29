@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls') ),
     path('main/', include('main.urls')),
     path('', RedirectView.as_view(url='/main/', permanent=True)),  # 기본 루트 URL 리디렉션 설정
+    path('chat/', include('chat.urls'))
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>티칭 계획 작성/수정</title>
+  </head>
+  <body>
+    <h2><a href="{% url 'main:main' %}">&lt;<</a>티칭 계획을 작성해주세요.</h2>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">저장하기</button>
+    </form>
+  </body>
+</html>
