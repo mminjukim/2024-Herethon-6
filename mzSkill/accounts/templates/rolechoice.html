@@ -8,7 +8,7 @@
 <body>
     <h1>회원 구분</h1>
     <form action="/accounts/rolechoice/", method="post">
-        {% csrf_token %} {{ form }}
+        {% csrf_token %} {{ form.as_p }}
         <button type="submit">다음으로</button>
       </form>
 </body>
