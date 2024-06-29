@@ -43,7 +43,7 @@ class SignUpView(View): # 2단계 : 회원가입
         return render(request, 'accounts/signup.html', {'form':form})
 
 
-class ProfileView(View): # 3단계 : 프로필 등록 (추후 ProfileForm에 선호/스킬 추가 필요)
+class ProfileView(View): # 3단계 : 프로필 등록 
 
     def get(self, request, *args, **kwargs):
         form = ProfileForm()
@@ -52,12 +52,37 @@ class ProfileView(View): # 3단계 : 프로필 등록 (추후 ProfileForm에 선
     def post(self, request, *args, **kwargs):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.role = request.session['role'] # 세션에 저장돼있던 role 정보를 현재 프로필의 role에 저장
-            profile.user = request.user
-            profile.save()
-            return redirect(reverse('main:main'))
+            # profile = form.save(commit=False)
+            # profile.role = request.session['role'] # 세션에 저장돼있던 role 정보를 현재 프로필의 role에 저장
+            # profile.user = request.user
+            # profile.save()
+            request.session['nickname'] = form.data['nickname']
+            request.session['birthDate'] = form.data['birthDate']
+            request.session['profile_emoji'] = form.data['profile_emoji']
+            request.session['role'] = request.session['role']
+            return redirect(reverse('accounts:detail'))
         return render(request, 'accounts/profile.html', {'form':form})
+    
+
+class DetailView(View): # 4단계 : 프로필 세부사항 설정 
+
+    def get(self, request, *args, **kwargs):
+        form = DetailForm()
+        return render(request, 'accounts/detail.html', {'form':form})
+
+    def post(self, request, *args, **kwargs):
+        form = DetailForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit = False)
+            profile.user_id = request.user.id
+            profile.nickname = request.session['nickname']
+            profile.birthDate = request.session['birthDate']
+            profile.profile_emoji = request.session['profile_emoji']
+            profile.role = request.session['role'] 
+            profile = form.save(commit = True)
+            return redirect(reverse('main:main')) # 회원가입-프로필-세부설정까지 끝, 메인으로 
+        
+        return render(request, 'accounts/detail.html', {'form':form})
 
 
 def login_view(request):
