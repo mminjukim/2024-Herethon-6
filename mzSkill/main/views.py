@@ -6,7 +6,8 @@ from accounts.models import Profile, TeachingPlan
 
 @login_required
 def main(request):
-    return render(request, 'main/main.html')
+    profile = Profile.objects.get(user_id = request.user.id)
+    return render(request, 'main/main.html', {'profile':profile})
 
 # 사용자 프로필란
 @login_required

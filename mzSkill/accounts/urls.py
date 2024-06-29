@@ -7,6 +7,7 @@ urlpatterns = [
     path('rolechoice/', RoleChoiceView.as_view(), name='rolechoice'),
     path('signup/', SignUpView.as_view(), name = "signup"),
     path('profile/', ProfileView.as_view(), name = 'profile'),
+    path('detail/', DetailView.as_view(), name = 'detail'),
 
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),

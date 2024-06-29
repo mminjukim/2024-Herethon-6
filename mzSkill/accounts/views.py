@@ -75,3 +75,23 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('accounts:login')
+
+class DetailView(View): # 4단계 : 프로필 세부사항 설정 
+
+    def get(self, request, *args, **kwargs):
+        form = DetailForm()
+        return render(request, 'accounts/detail.html', {'form':form})
+
+    def post(self, request, *args, **kwargs):
+        form = DetailForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit = False)
+            profile.user_id = request.user.id
+            profile.nickname = request.session['nickname']
+            profile.birthDate = request.session['birthDate']
+            profile.profile_emoji = request.session['profile_emoji']
+            profile.role = request.session['role'] 
+            profile = form.save(commit = True)
+            return redirect(reverse('main:main')) # 회원가입-프로필-세부설정까지 끝, 메인으로 
+        
+        return render(request, 'accounts/detail.html', {'form':form})

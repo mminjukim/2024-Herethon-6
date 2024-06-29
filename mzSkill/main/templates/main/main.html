@@ -11,6 +11,18 @@
     <br />
     <a href="{% url 'main:profile_card_view' %}">내 프로필</a>
     <br /><br />
+    <div>
+      이름: {{ request.user.first_name }}<br />
+      생일: {{ profile.birthDate }}<br />
+      구분: {{ profile.role }}<br />
+      스킬: <br />
+      <ul>
+        {% for skill in profile.skills.all %}
+        <li>{{ skill.skill_name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <br /><br />
     <a href="{% url 'main:room' %}">채팅창</a>
     <br /><br />
     {% if request.user.is_authenticated %}

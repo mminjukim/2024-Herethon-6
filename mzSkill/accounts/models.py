@@ -1,6 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+# 러너/티쳐 성격 타입
+class Personality(models.Model):
+    personality_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.personality_name
 
 # 큰 카테고리
 class Category(models.Model):
@@ -9,7 +15,7 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
-
+# 세부 스킬
 class Skill(models.Model):
     skill_name = models.CharField(max_length=50)
     category = models.ForeignKey(Category, related_name = 'skill', on_delete=models.CASCADE)
@@ -17,7 +23,7 @@ class Skill(models.Model):
     def __str__(self):
         return f"{self.category.category_name} - {self.skill_name}"
 
-
+# 유저 프로필 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=40, blank=True)
