@@ -44,3 +44,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.nickname
+    
+class TeachingPlan(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='teaching_plans')
+    expression = models.TextField()
+    plan = models.TextField()
+    method = models.CharField(max_length=20, choices=[('free', '무료 티칭'), ('paid', '유료 티칭')])

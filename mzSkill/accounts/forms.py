@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Skill
+from .models import Profile, TeachingPlan, Skill
 # UserCreationForm: 기본 유저 생성 폼(pw1 pw2를 제공)
 
 
@@ -22,6 +22,7 @@ class SignUpForm(UserCreationForm):
         fields = ['first_name', 'username', 'email']
 
 
+
 # 프로필 등록 
 class ProfileForm(forms.ModelForm):
     # 달력형식으로
@@ -33,16 +34,8 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['nickname', 'birthDate', 'profile_emoji']
 
-
-# 프로필 세부사항 설정
-class DetailForm(forms.ModelForm):
-
-    skills = forms.ModelMultipleChoiceField(
-        queryset = Skill.objects.all(),
-        widget = forms.CheckboxSelectMultiple,
-        required = True
-    )
-    
+#티칭 계획 폼 추가
+class TeachingPlanForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ['skills']
+        model = TeachingPlan
+        fields = ['expression', 'plan', 'method']

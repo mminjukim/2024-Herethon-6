@@ -19,6 +19,8 @@
       {% endfor %}
       </ul>
     </div>
+
+    <a href="{% url 'main:room' %}">채팅창</a>
     <br /><br />
     {% if request.user.is_authenticated %}
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
