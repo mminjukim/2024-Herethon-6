@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse # 세션 구성에 필요
 
 from accounts.forms import *
 

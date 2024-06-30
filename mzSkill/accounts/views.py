@@ -24,6 +24,7 @@ class RoleChoiceView(View): # 1단계 : 역할 선택 (러너/티쳐)
         form = RoleChoiceForm(request.POST)
         if form.is_valid():
             request.session['usertype'] = form.data['usertype'] # http 세션에 choice 데이터 저장해 다음 단계로 넘겨줌
+            print(request.session['usertype'])
             return redirect(reverse('accounts:signup'))
         return render(request, 'rolechoice.html', {'form':form})
     
@@ -39,7 +40,8 @@ class SignUpView(View): # 2단계 : 회원가입
         if form.is_valid():
             user = form.save()
             login(request, user)
-            request.session['usertype'] = request.session['usertype'] # http 세션에 choice 데이터 저장해 다음 단계로 넘겨줌
+            request.session['usertype'] = request.session['usertype'] 
+            print(request.session['usertype'])
             return redirect(reverse('accounts:writeprofile'))
         return render(request, 'signup.html', {'form':form})
 
@@ -47,22 +49,25 @@ class SignUpView(View): # 2단계 : 회원가입
 class WriteProfileView(View): # 3단계 : 프로필 등록 
 
     def get(self, request, *args, **kwargs):
-        if request.session['usertype'] == 1:
+        if request.session['usertype'] == '1':
+            print('러너가입됨')
             form = WriteLearnerProfileForm()
         else:
+            print('티쳐가입됨')
             form = WriteTeacherProfileForm()
         return render(request, 'writeprofile.html', {'form':form})
     
     def post(self, request, *args, **kwargs):
-        if request.session['usertype'] == 1:
+        if request.session['usertype'] == '1':
             form = WriteLearnerProfileForm(request.POST, request.FILES)
         else:
             form = WriteTeacherProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            request.session['nickname'] = form.data['nickname']
-            request.session['birthdate'] = form.data['birthdate']
-            request.session['emoji'] = form.data['emoji']
-            request.session['usertype'] = request.session['usertype'] # http 세션에 choice 데이터 저장해 다음 단계로 넘겨줌
+            print(request.session['usertype'])
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            request.session['usertype'] = request.session['usertype'] 
             return redirect(reverse('accounts:writedetails'))
         return render(request, 'writeprofile.html', {'form':form})
     
@@ -70,29 +75,31 @@ class WriteProfileView(View): # 3단계 : 프로필 등록
 class WriteDetailsView(View):
 
     def get(self, request, *args, **kwargs):
-        if request.session['usertype'] == 1:
+        if request.session['usertype'] == '1':
             form = LearnerDetailsForm(request.POST)
         else:
             form = TeacherDetailsForm(request.POST)
         return render(request, 'writedetails.html', {'form':form})
     
     def post(self, request, *args, **kwargs):
-        if request.session['usertype'] == 1:
+        print(request.session['usertype'])
+        if request.session['usertype'] == '1':
             form = LearnerDetailsForm(request.POST)
+            if form.is_valid():
+                profile = Learner.objects.get(user_id = request.user.id)
+                profile.skills.set(form.data['skills'])
+                profile.personalities.set(form.data['skills'])
+                return redirect(reverse('main:main'))
         else:
             form = TeacherDetailsForm(request.POST)
-
-        if form.is_valid():
-            profile = form.save(commit = False)
-            profile.user_id = request.user.id
-            profile.nickname = request.session['nickname']
-            profile.birthdate = request.session['birthdate']
-            profile.emoji = request.session['emoji']
-            profile = form.save(commit = True)
-            return redirect(reverse('main:main')) # 회원가입-프로필-세부설정까지 끝, 메인으로 
-
+            if form.is_valid():
+                profile = Teacher.objects.get(user_id = request.user.id)
+                profile.skills.set(form.data['skills'])
+                profile.personalities.set(form.data['skills'])
+                return redirect(reverse('main:main'))
+        
         return render(request, 'writedetails.html', {'form':form})
-    
+
 
 
 # 로그인/로그아웃

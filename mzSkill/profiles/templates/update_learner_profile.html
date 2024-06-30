@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>러너 프로필 수정</h1>
-    <form method="post", enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %} 
         {{ form.as_table }}
         <button type="submit">다음으로</button>
