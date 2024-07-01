@@ -6,9 +6,9 @@ from profiles.models import Learner, Teacher
 
 @login_required
 def main(request):
-    profile = Learner.objects.get(user_id = request.user.id)
-    if profile is None:
+    try:
+        profile = Learner.objects.get(user_id = request.user.id)
+        return render(request, 'learner_main.html', {'profile':profile})
+    except:
         profile = Teacher.objects.get(user_id = request.user.id)
         return render(request, 'teacher_main.html', {'profile':profile})
-    else:
-        return render(request, 'learner_main.html', {'profile':profile})

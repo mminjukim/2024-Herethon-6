@@ -88,14 +88,14 @@ class WriteDetailsView(View):
             if form.is_valid():
                 profile = Learner.objects.get(user_id = request.user.id)
                 profile.skills.set(form.data['skills'])
-                profile.personalities.set(form.data['skills'])
+                profile.personalities.set(form.data['personalities'])
                 return redirect(reverse('main:main'))
         else:
             form = TeacherDetailsForm(request.POST)
             if form.is_valid():
                 profile = Teacher.objects.get(user_id = request.user.id)
                 profile.skills.set(form.data['skills'])
-                profile.personalities.set(form.data['skills'])
+                profile.personalities.set(form.data['personalities'])
                 return redirect(reverse('main:main'))
         
         return render(request, 'writedetails.html', {'form':form})

@@ -7,25 +7,9 @@
   </head>
   <body>
     <h1>러너 메인 페이지</h1>
-    <p>러너님 환영합니다, {{ profile.nickname }} </p>
+    <p>환영합니다, <b>{{ profile.nickname }}</b> 러너님</p>
     <br />
-    <div>
-      이름: {{ request.user.first_name }}<br />
-      생일: {{ profile.birthdate }}<br />
-      원하는 스킬: <br />
-      <ul>
-        {% for skill in profile.skills.all %}
-        <li>{{ skill.name }}</li>
-        {% endfor %}
-      </ul>
-      원하는 티쳐 성격: <br />
-      <ul>
-        {% for personality in profile.personalities.all %}
-        <li>{{ personality.name }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-
+    
     <a href="{% url 'profiles:show_learner_profile' profile.id %}">프로필 보기</a>
     
     {% if request.user.is_authenticated %}
