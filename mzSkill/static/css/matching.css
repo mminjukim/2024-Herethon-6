@@ -1,0 +1,90 @@
+body {
+    font-family: 'pretendard';
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #FBF8FE;
+}
+
+
+.h5 {
+    color: #A39FA6;
+    font-size: 14px;
+}
+
+.main-heading {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #454347;
+}
+
+.sub-heading {
+    font-size: 14px;
+    margin: 20px 0;
+}
+
+.options {
+    display: block;
+    justify-content: space-between;
+}
+
+.option {
+    border: 2px solid #E0E0E0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 314px;
+    height: 100px;
+    cursor: pointer;
+    position: relative;
+}
+
+.option img {
+    width: 50px;
+    height: 50px;
+
+    
+}
+
+.option p {
+    font-size: 14px;
+    margin: 10px 0 0;
+    text-align: right;
+}
+
+.option .checkmark {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #8520EA;
+    font-size: 16px;
+}
+
+.option.selected {
+    border-color: #8520EA;
+}
+
+.option.selected .checkmark {
+    display: block;
+}
+
+.account-link {
+    margin: 20px 0;
+    font-size: 14px;
+    color: #A39FA6;
+}
+
+.next-button {
+    background-color: #8520EA;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 314px;
+    height: 50px;
+}
