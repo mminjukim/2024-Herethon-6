@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>회원가입하기</h1>
-    <form action="/accounts/signup/", method="post">
+    <form action="/accounts/signup/" method="post">
         {% csrf_token %} {{ form.as_p }}
         <button type="submit">다음으로</button>
       </form>

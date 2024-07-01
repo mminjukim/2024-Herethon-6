@@ -1,0 +1,115 @@
+html {
+  background-color: whitesmoke;
+}
+.backgroundContainer {
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mainContainer {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+.matchingButton {
+  font-size: 12px;
+  max-width: 115px;
+  height: 20px;
+  margin: 5px;
+  padding: 6px;
+  border-radius: 20px;
+  border-color: #8520ea;
+  border-style: solid;
+  border-width: 1.7px;
+  line-height: 20px;
+  color: #8520ea;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 30px;
+}
+.middleContainer {
+  padding: 30px;
+}
+.mzTeacherSearchButton {
+  width: 314px;
+  height: 43px;
+  border-radius: 20px;
+  background-color: #8520ea;
+  color: white;
+  font-size: 14px;
+  font-weight: bolder;
+  line-height: 43px;
+  text-align: center;
+  margin-left: 52px;
+  margin-top: 150px;
+}
+
+.appealTeacherContainer {
+  padding: 30px;
+}
+.appealTeachers {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 30px;
+}
+.teacher1,
+.teacher2,
+.teacher3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 123px;
+  width: 110px;
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  border-radius: 10px;
+}
+.teacher1name,
+.teacher2name,
+.teacher3name {
+  font-size: 12px;
+  color: #454347;
+  margin-top: 10px;
+  font-weight: bolder;
+}
+.teacher1catagory,
+.teacher2catagory,
+.teacher3catagory {
+  text-align: center;
+  font-size: 11px;
+  color: #a39fa6;
+  margin-top: 5px;
+}
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+
+  height: 91px;
+  list-style-type: none;
+  padding-right: 40px;
+}
+.navHome,
+.navTeaching,
+.navCommunity {
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.navHome a,
+.navTeaching a,
+.navCommunity a {
+  text-decoration: none;
+  color: #a39fa6;
+}

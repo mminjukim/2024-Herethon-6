@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>프로필 세부설정</h1>
-    <form action="/accounts/writedetails/", method="post">
+    <form action="/accounts/writedetails/" method="post">
         {% csrf_token %} {{ form.as_p }}
         <button type="submit">회원가입 완료</button>
       </form>

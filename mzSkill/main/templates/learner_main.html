@@ -1,19 +1,79 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>러너 메인 페이지</title>
+    <link rel="stylesheet" href="{% static 'css/learner_main.css' %}" />
   </head>
   <body>
-    <h1>러너 메인 페이지</h1>
-    <p>환영합니다, <b>{{ profile.nickname }}</b> 러너님</p>
-    <br />
-    
-    <a href="{% url 'profiles:show_learner_profile' profile.id %}">프로필 보기</a>
-    
-    {% if request.user.is_authenticated %}
-    <a href="{% url 'accounts:logout' %}">로그아웃</a>
-    {% endif %}
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <div class="topTitle">MZ의 스킬</div>
+          <img
+            class="myPageIcon"
+            src="{% static 'images/mainLearner/🦆 icon _user_.png' %}"
+          />
+        </div>
+        <div class="middleContainer">
+          <div class="middleMessage">
+            {{ profile.nickname }} 러너님,<br />1:1 매칭을 통해 맞춤 티처를 찾아드릴게요.
+          </div>
+          <div class="matchingButton">1:1 매칭 하러 가기</div>
+        </div>
+        <div class="mzTeacherSearchButton">MZ 티쳐 찾기</div>
+        <div class="appealTeacherContainer">
+          <div class="appealMessage">어필 중인 MZ 티쳐를 소개해드려요.</div>
+          <div class="appealTeachers">
+            <div class="teacher1">
+              <img
+                width="54px"
+                height="54px"
+                src="{% static 'images/mainLearner/3dicons (6).png' %}"
+              />
+              <div class="teacher1name">나른한 바나나</div>
+              <div class="teacher1catagory">요가/영상</div>
+            </div>
+            <div class="teacher2">
+              <img
+                width="54px"
+                height="54px"
+                src="{% static 'images/mainLearner/31.png' %}"
+              />
+              <div class="teacher2name">노란 파일</div>
+              <div class="teacher2catagory">글쓰기 · 문법 및 교정</div>
+            </div>
+            <div class="teacher3">
+              <img
+                width="54px"
+                height="54px"
+                src="{% static 'images/mainLearner/31 (1).png' %}"
+              />
+              <div class="teacher3name">로켓 배송</div>
+              <div class="teacher3catagory">여행 계획</div>
+            </div>
+          </div>
+        </div>
+        <nav>
+          <ul class="navContainer">
+            <li class="navHome">
+              <img
+                src="{% static 'images/mainLearner/🦆 icon _home simple door_ (1).png' %}"
+              /><a href="{% url 'main:main' %}">메인화면</a>
+            </li>
+            <li class="navTeaching">
+              <img src="{% static 'images/mainLearner/🦆 icon _bookmark book_.png' %}">
+              <a href="">1:1티칭</a>
+            </li>
+            <li class="navCommunity">
+              <img src="{% static 'images/mainLearner/🦆 icon _chat bubble_.png' %}" />
+              <a href="">커뮤니티</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </body>
 </html>
