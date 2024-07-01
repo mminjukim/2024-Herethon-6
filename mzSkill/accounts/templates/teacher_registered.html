@@ -27,7 +27,8 @@
             </ul>
         </li>
     </ul>
-    <a href="{% url 'main:main' %}">메인화면으로 가기 ></a>
-    <!--   -->
+    <a href="{% url 'main:main' %}">메인화면으로 가기</a>
+    <a href="{% url 'profiles:write_teachingplan' profile.id %}">프로필(티칭계획) 작성하기</a>
+
 </body>
 </html>

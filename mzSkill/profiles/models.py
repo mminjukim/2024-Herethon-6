@@ -53,5 +53,9 @@ class Teacher(models.Model):
     skills = models.ManyToManyField(Skill, related_name='teacher_giving')
     personalities = models.ManyToManyField(Personality, related_name='teacher_giving')
 
+    bio = models.CharField(max_length=300, null=True)
+    teaching_plan = models.TextField(null=True)
+    is_paid = models.BooleanField(null=True)
+
     def __str__(self):
         return self.nickname

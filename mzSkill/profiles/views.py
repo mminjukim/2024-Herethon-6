@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from accounts.forms import *
+from .forms import *
 
 def show_learner_profile(request, id):
     profile = Learner.objects.get(id=id)
@@ -51,8 +52,18 @@ def update_teacher_details(request, id):
         form = TeacherDetailsForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profiles:show_teacher_profile', id) 
+            return redirect('profiles:write_teachingplan', id) 
     else:
         form = TeacherDetailsForm(instance=profile)
         return render(request, "update_teacher_details.html", {'form':form})
 
+def write_teachingplan(request, id):
+    profile = Teacher.objects.get(id=id)
+    if request.method == 'POST':
+        form = TeachingPlanForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profiles:show_teacher_profile', id) 
+    else:
+        form = TeachingPlanForm(instance=profile)
+        return render(request, "write_teachingplan.html", {'form':form})
