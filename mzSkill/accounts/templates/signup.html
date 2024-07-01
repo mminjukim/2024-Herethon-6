@@ -1,15 +1,65 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
+    <title>signup</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-    <h1>회원가입하기</h1>
-    <form action="/accounts/signup/" method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit">다음으로</button>
-      </form>
+    <section class="login-form">
+        <h1>회원가입</h1>
+        <form action="/accounts/signup/" method="post">
+            {% csrf_token %}
+            <div class="int-area">
+                <input type="text" name="first_name" id="name" autocomplete="off" required>
+                <label for="name">이름</label>
+            </div>
+            <div class="int-area">
+                <input type="text" name="username" id="id" autocomplete="off" required>
+                <label for="id">아이디
+                    <!-- <div class="btn-area">
+                        <button id="btn" type="button">중복확인</button>
+                    </div> -->
+                </label>
+            </div>
+            <div class="int-area">
+                <input type="password" name="password1" id="pw" autocomplete="off" required>
+                <label for="pw">비밀번호</label>
+            <div class="int-area">
+                <input type="password" name="password2" id="pw" autocomplete="off" required>
+                <label for="pw">비밀번호 확인</label>
+            </div>
+            <div class="int-area">
+                <input type="email" name="email" id="email" autocomplete="off" required>
+                <label for="email">이메일</label>
+            <div class="btn-area">
+                <button id="btn" type="submit">다음으로</button>
+            </div>
+        </form>
+        
+    </section>
+
+    <script>       
+        let id = $('#id');
+        let pw = $('#pw');
+        let btn = $('#btn');
+        
+        $(btn).on('click', function() {
+            if($(id).val() == "") {
+                $(id).next('label').addClass('warning');
+                setTimeout(function() {
+                    $('label').removeClass('warning');
+                }, 1500);
+            }
+            else if($(pw).val() == "") {
+                $(pw).next('label').addClass('warning');
+                setTimeout(function() {
+                    $('label').removeClass('warning');
+                }, 1500);
+            }
+        });
+    </script>    
 </body>
 </html>
