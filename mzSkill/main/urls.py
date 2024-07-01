@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.urls import path
 from .views import create_or_edit_teaching_plan, main, profile_card_view, edit_profile_view
 from chat.views import room
@@ -13,3 +14,13 @@ urlpatterns = [
     path('profile/edit/', edit_profile_view, name='edit_profile_view'),
     path('chat/', room, name = 'room'),
 ]
+=======
+from django.urls import path
+from .views import *
+
+app_name = 'main'
+
+urlpatterns = [
+    path('', main, name='main'),
+]
+>>>>>>> cfabd5778b58d5bb7907903a32c316cee0386ee3

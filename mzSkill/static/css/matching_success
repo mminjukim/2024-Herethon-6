@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F5F5F5;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 320px;
+}
+
+.welcome-text {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.sub-text {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.teacher-card {
+    background-color: #FAFAFA;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+.crown {
+    left: unset;
+    right: -10px;
+    top: -10px;
+}
+
+.icon span {
+    font-size: 24px;
+}
+
+.teacher-card h2 {
+    margin: 20px 0 10px;
+    font-size: 18px;
+}
+
+.teacher-card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.btn {
+    background-color: #E0E0E0;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn.positive {
+    background-color: #FFECB3;
+}
+
+.btn.charge {
+    background-color: #FFCDD2;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: purple;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.match-button {
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 20px;
+}
