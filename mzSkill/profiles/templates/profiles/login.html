@@ -1,19 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>로그인</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #fbf8fe;
+      }
+
+      .login-form {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .login-form h1 {
+        font-size: 22px;
+        text-align: left;
+        margin-bottom: 30px;
+        color: #454347;
+      }
+
+      .int-area {
+        width: 400px;
+        position: relative;
+        margin-top: 20px;
+        color: #454347;
+      }
+
+      .int-area:first-child {
+        margin-top: 0;
+      }
+
+      .int-area input {
+        width: 100%;
+        padding: 20px 10px 10px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #cdcad0;
+        font-size: 18px;
+        outline: none;
+      }
+
+      .int-area label {
+        position: absolute;
+        left: 10px;
+        top: 15px;
+        font-size: 18px;
+        transition: top 0.5s ease;
+      }
+
+      .int-area label.warning {
+        color: red !important;
+        animation: warning 0.3s ease;
+        animation-iteration-count: 3;
+      }
+
+      @keyframes warning {
+        0% {
+          transform: translateX(-8px);
+        }
+        25% {
+          transform: translateX(8px);
+        }
+        50% {
+          transform: translateX(-8px);
+        }
+        75% {
+          transform: translateX(8px);
+        }
+      }
+
+      .int-area input:focus + label,
+      .int-area input:valid + label {
+        top: -2px;
+        font-size: 13px;
+        color: #454347;
+      }
+
+      .btn-area {
+        margin-top: 30px;
+      }
+
+      .btn-area button {
+        width: 100%;
+        height: 50px;
+        margin: 0px 10px;
+        color: #fff;
+        background: #8520ea;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .caption {
+        margin-top: 50px;
+        text-align: right;
+      }
+
+      .caption a {
+        margin: 0 20px;
+        font-size: 15px;
+        color: #a39fa6;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
-    <h2>로그인</h2>
-    <form method="post">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">로그인</button>
-    </form>
-    <br />
-    <a href="{% url 'profiles:role_choice' %}"
-      >아직 아이디가 없으신가요? 가입하러 가기</a
-    >
+    <section class="login-form">
+      <h1>로그인</h1>
+      <form method="post">
+        {% csrf_token %}
+        <div class="int-area">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            autocomplete="off"
+            placeholder="아이디"
+            required
+          />
+          <label for="username"></label>
+        </div>
+        <div class="int-area">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            autocomplete="off"
+            placeholder="비밀번호"
+            required
+          />
+          <label for="password"></label>
+        </div>
+        <div class="btn-area">
+          <button id="btn" type="submit">로그인하기</button>
+        </div>
+        <div class="caption">
+          <a href="{% url 'profiles:role_choice' %}">회원가입하기</a>
+        </div>
+      </form>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      let username = $("#username");
+      let password = $("#password");
+      let btn = $("#btn");
+
+      $(btn).on("click", function () {
+        if ($(username).val() === "") {
+          $(username).next("label").addClass("warning");
+          setTimeout(function () {
+            $("label").removeClass("warning");
+          }, 1500);
+        } else if ($(password).val() === "") {
+          $(password).next("label").addClass("warning");
+          setTimeout(function () {
+            $("label").removeClass("warning");
+          }, 1500);
+        }
+      });
+    </script>
   </body>
 </html>

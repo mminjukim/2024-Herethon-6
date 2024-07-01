@@ -23,9 +23,9 @@ class LearnerProfileForm(forms.ModelForm):
         widget=forms.DateInput(attrs={'type': 'date'})
     )
     skills = forms.ModelMultipleChoiceField(
-        queryset=Skill.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
+    queryset=Skill.objects.all(),
+    widget=forms.CheckboxSelectMultiple,
+    required=True
     )
     
     class Meta:
@@ -37,16 +37,16 @@ class TeacherProfileForm(forms.ModelForm):
         widget=forms.DateInput(attrs={'type': 'date'})
     )
     skills = forms.ModelMultipleChoiceField(
-        queryset=Skill.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
+    queryset=Skill.objects.all(),
+    widget=forms.CheckboxSelectMultiple,
+    required=True
     )
     
     class Meta:
         model = TeacherProfile
         fields = ['nickname', 'birthDate', 'profile_emoji', 'skills']
 
-# 프로필 세부사항 설정
+# 프로필 세부사항 설정(스킬 선택)
 class DetailForm(forms.ModelForm):
 
     skills = forms.ModelMultipleChoiceField(

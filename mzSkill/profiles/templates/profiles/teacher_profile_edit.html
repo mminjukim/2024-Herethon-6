@@ -8,7 +8,9 @@
   <body>
     <h2>내 프로필 수정하기</h2>
     <form method="post" enctype="multipart/form-data">
-      {% csrf_token %} {{ profile_form.as_p }}
+      {% csrf_token %} {{ profile_form.as_p }} {% if teaching_plan_form %}
+      <h3>티칭 계획</h3>
+      {{ teaching_plan_form.as_p }} {% endif %}
       <button type="submit">저장</button>
     </form>
   </body>

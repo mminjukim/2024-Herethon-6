@@ -8,7 +8,7 @@
 <body>
     <a href="{% url 'main:main' %}">back</a>
     <p></p>
-    <h2>{{ profile.user.username }}의 프로필</h2>
+    <h2>{{ profile.nickname }}의 프로필</h2>
     {% if profile.profile_emoji %}
     <img src="{{ profile.profile_emoji.url }}" alt="Profile Emoji" />
     {% else %}
@@ -23,6 +23,8 @@
     </ul>
     </p>
     <a href="{% url 'main:edit_profile_view' %}">내 프로필 수정하기</a>
+    <br><br>
+    <a href="{% url 'profiles:logout' %}">로그아웃</a>
 </body>
 </html>
 

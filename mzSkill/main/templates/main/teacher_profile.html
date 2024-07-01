@@ -8,9 +8,9 @@
 <body>
     <a href="{% url 'main:main' %}">back</a>
     <p></p>
-    <h2>{{ profile.user.username }}의 프로필</h2>
+    <h2>{{ profile.nickname }}의 프로필</h2>
     {% if profile.profile_emoji %}
-    <img src="{{ profile.profile_emoji.url }}" alt="Profile Emoji" />
+        <img src="{{ profile.profile_emoji.url }}" alt="Profile Emoji" />
     {% else %}
         <p>No Profile Emoji</p>
     {% endif %}
@@ -18,11 +18,22 @@
     <p>스킬:
     <ul>
         {% for skill in profile.skills.all %}
-        <li>{{ skill.skill_name }}</li>
+            <li>{{ skill.skill_name }}</li>
         {% endfor %}
     </ul>
     </p>
+    <h3>티칭 계획</h3>
+    {% if profile.teaching_plans.exists %}
+        {% for plan in profile.teaching_plans.all %}
+            <p>표현: {{ plan.expression }}</p>
+            <p>계획: {{ plan.plan }}</p>
+            <p>방법: {{ plan.method }}</p>
+        {% endfor %}
+    {% else %}
+        <p>티칭 계획이 없습니다.</p>
+    {% endif %}
     <a href="{% url 'main:edit_profile_view' %}">내 프로필 수정하기</a>
 </body>
 </html>
+
 

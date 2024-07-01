@@ -1,15 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>역할 선택</title>
+    <title>matching</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+      body {
+        font-family: "pretendard";
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #fbf8fe;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      h5 {
+        color: #a39fa6;
+        font-size: 14px;
+      }
+
+      .main-heading {
+        font-size: 16px;
+        margin: 10px 0;
+        color: #454347;
+      }
+
+      .sub-heading {
+        font-size: 14px;
+        margin: 20px 0;
+      }
+
+      .options {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+      }
+
+      .option {
+        border: 2px solid #e0e0e0;
+        padding: 10px;
+        border-radius: 10px;
+        width: 150px;
+        height: 100px;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .option img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .option p {
+        font-size: 14px;
+        margin: 10px 0 0;
+        text-align: center;
+      }
+
+      .option .checkmark {
+        display: none;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: #8520ea;
+        font-size: 16px;
+      }
+
+      .option.selected {
+        border-color: #8520ea;
+      }
+
+      .option.selected .checkmark {
+        display: block;
+      }
+
+      .account-link {
+        margin: 20px 0;
+        font-size: 14px;
+        color: #a39fa6;
+      }
+
+      .next-button {
+        background-color: #8520ea;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        width: 314px;
+        height: 50px;
+      }
+    </style>
   </head>
   <body>
-    <h2>역할 선택</h2>
-    <form method="post">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">다음으로</button>
-    </form>
+    {% load static %}
+    <div class="container">
+      <h5>MZ의 스킬에 오신 것을 환영합니다.</h5>
+      <h1 class="main-heading">
+        티처와 러너의 1:1 매칭을 위한 정보를 입력해주세요.
+      </h1>
+      <h4 class="sub-heading">등록하고자 하는 유형을 선택해주세요.</h4>
+      <form method="post" action="{% url 'profiles:role_choice' %}">
+        {% csrf_token %}
+        <div class="options">
+          <div class="option" id="teacher" onclick="selectOption(2)">
+            <img
+              src="{% static 'images/matching/Graduated.png' %}"
+              alt="Teacher Icon"
+            />
+            <p>스킬을 나누고 싶다면?<br /><strong>티처</strong></p>
+            <div class="checkmark">✔</div>
+          </div>
+          <div class="option" id="runner" onclick="selectOption(1)">
+            <img
+              src="{% static 'images/matching/Pencil.png' %}"
+              alt="Runner Icon"
+            />
+            <p>배우고 싶은 분야가 있다면?<br /><strong>러너</strong></p>
+            <div class="checkmark">✔</div>
+          </div>
+        </div>
+        <input type="hidden" name="choice" id="selectedRole" required />
+        <div class="account-link">이미 가입한 계정이 있다면?</div>
+        <button type="submit" class="next-button">다음으로</button>
+      </form>
+    </div>
+    <script>
+      function selectOption(role) {
+        document.getElementById("selectedRole").value = role;
+        document.querySelectorAll(".option").forEach((option) => {
+          option.classList.remove("selected");
+        });
+        if (role === 1) {
+          document.getElementById("runner").classList.add("selected");
+        } else if (role === 2) {
+          document.getElementById("teacher").classList.add("selected");
+        }
+      }
+    </script>
   </body>
 </html>

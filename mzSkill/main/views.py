@@ -6,21 +6,25 @@ from profiles.forms import LearnerProfileForm, TeacherProfileForm, TeachingPlanF
 # 현재 로그인한 사람의 프로필을 가져와야함.
 @login_required
 def main(request):
-    # 프로필 변수 초기화
+    # 초기화
     profile = None
+    # 프로필 설정이 되지않은 이용자들은 기본 반환 템플릿이 필요하다.
+    # TypeError at /main/join() argument must be str, bytes, or os.PathLike object, not 'NoneType' 
+    template_name = 'main/main.html'
     try:
-        # 러너아니면
-        profile = LearnerProfile.objects.get(user_id=request.user.id)
+        profile = LearnerProfile.objects.get(user=request.user)
+        template_name = 'main/learner_main.html'  # 러너 메인 페이지 템플릿
     except LearnerProfile.DoesNotExist:
         try:
-            # 티쳐로
-            profile = TeacherProfile.objects.get(user_id=request.user.id)
+            profile = TeacherProfile.objects.get(user=request.user)
+            template_name = 'main/teacher_main.html'  # 티쳐 메인 페이지 템플릿
         except TeacherProfile.DoesNotExist:
-            pass # 수정
-    return render(request, 'main/main.html', {'profile': profile})
+            pass
+
+    return render(request, template_name, {'profile': profile})
+
 
 # 내 프로필 보기
-
 @login_required
 def profile_card_view(request):
     profile = None
@@ -47,16 +51,28 @@ def edit_profile_view(request):
     profile = None
     is_learner = False
     is_teacher = False
-    template_name = ''  # 템플릿 이름을 기본값으로 초기화
+    teaching_plan_form = None
+
     try:
         profile = LearnerProfile.objects.get(user=request.user)
         is_learner = True
     except LearnerProfile.DoesNotExist:
+        # 티쳐 프로필은 러너와 구분되야함
         try:
             profile = TeacherProfile.objects.get(user=request.user)
             is_teacher = True
+            try:
+                # 티칭 계획 폼을 적용해야했음.
+                teaching_plan = TeachingPlan.objects.get(profile=profile)
+            except TeachingPlan.DoesNotExist:
+                teaching_plan = None
+
+            if request.method == "POST":
+                teaching_plan_form = TeachingPlanForm(request.POST, instance=teaching_plan)
+            else:
+                teaching_plan_form = TeachingPlanForm(instance=teaching_plan)
         except TeacherProfile.DoesNotExist:
-            return redirect('profiles:role_choice')  # 프로필이 없으면 역할 선택 페이지
+            return redirect('profiles:role_choice')  # 어떤 프로필이 없으면 역할 선택 페이지
 
     if request.method == "POST":
         if is_learner:
@@ -64,18 +80,23 @@ def edit_profile_view(request):
         else:
             profile_form = TeacherProfileForm(request.POST, request.FILES, instance=profile)
         
-        if profile_form.is_valid():
+        if profile_form.is_valid() and (not is_teacher or teaching_plan_form.is_valid()):
             profile_form.save()
+            if is_teacher:
+                teaching_plan = teaching_plan_form.save(commit=False)
+                teaching_plan.profile = profile
+                teaching_plan.save()
             return redirect('main:profile_card_view')
     else:  # GET 요청
         if is_learner:
             profile_form = LearnerProfileForm(instance=profile)
-            template_name = 'main/learner_profile_edit.html'
+            template_name = 'profiles/learner_profile_edit.html'
         else:
             profile_form = TeacherProfileForm(instance=profile)
-            template_name = 'main/teacher_profile_edit.html'
+            template_name = 'profiles/teacher_profile_edit.html'
 
-    return render(request, template_name, {'profile_form': profile_form})
+    return render(request, template_name, {'profile_form': profile_form, 'teaching_plan_form': teaching_plan_form})
+
 
 @login_required
 def main_page(request):
