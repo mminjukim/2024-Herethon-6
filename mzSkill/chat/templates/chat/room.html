@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Select a Chat Room</title>
+  </head>
+  <body>
+    <h1>Select a Chat Room</h1>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% else %}
+    <ul>
+      {% csrf_token %} {% for teacher in teachers %}
+      <li>
+        <a href="{% url 'chat:chat_view' teacher.user.username %}"
+          >{{ teacher.user.username }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{% url 'main:main' %}">뒤로가기</a>
+  </body>
+</html>

@@ -9,6 +9,9 @@ urlpatterns = [
     path('writeprofile/', WriteProfileView.as_view(), name='writeprofile'),
     path('writedetails/', WriteDetailsView.as_view(), name='writedetails'),
 
+    path('teacher_registered/<int:id>/', teacher_registered, name='teacher_registered'),
+    path('learner_registered/<int:id>/', learner_registered, name='learner_registered'),
+
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
 ]

@@ -29,21 +29,25 @@ class RoleChoiceView(View): # 1단계 : 역할 선택 (러너/티쳐)
         return render(request, 'rolechoice.html', {'form':form})
     
 
-class SignUpView(View): # 2단계 : 회원가입 
-
+class SignUpView(View):  # 2단계 : 회원가입 
     def get(self, request, *args, **kwargs):
         form = SignUpForm()
-        return render(request, 'signup.html', {'form':form})
+        return render(request, 'signup.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            request.session['usertype'] = request.session['usertype'] 
-            print(request.session['usertype'])
+            usertype = request.session.get('usertype')  # 세션에서 usertype 가져오기
+            print(usertype)
+            if usertype == '1':
+                Learner.objects.create(user=user)
+            elif usertype == '2':
+                Teacher.objects.create(user=user)
             return redirect(reverse('accounts:writeprofile'))
-        return render(request, 'signup.html', {'form':form})
+        return render(request, 'signup.html', {'form': form})
+
 
 
 class WriteProfileView(View): # 3단계 : 프로필 등록 
@@ -72,7 +76,7 @@ class WriteProfileView(View): # 3단계 : 프로필 등록
         return render(request, 'writeprofile.html', {'form':form})
     
 
-class WriteDetailsView(View):
+class WriteDetailsView(View): 
 
     def get(self, request, *args, **kwargs):
         if request.session['usertype'] == '1':
@@ -84,26 +88,41 @@ class WriteDetailsView(View):
     def post(self, request, *args, **kwargs):
         print(request.session['usertype'])
         if request.session['usertype'] == '1':
-            form = LearnerDetailsForm(request.POST)
+            profile = Learner.objects.get(user_id = request.user.id)
+            form = LearnerDetailsForm(request.POST, instance=profile)
             if form.is_valid():
-                profile = Learner.objects.get(user_id = request.user.id)
-                profile.skills.set(form.data['skills'])
-                profile.personalities.set(form.data['personalities'])
-                return redirect(reverse('main:main'))
+                # profile.skills.set(form.data['skills'])
+                # profile.personalities.set(form.data['personalities'])
+                # print(id, profile.nickname)
+                id = profile.id
+                form.save()
+                return redirect('accounts:learner_registered', id)
         else:
-            form = TeacherDetailsForm(request.POST)
+            profile = Teacher.objects.get(user_id = request.user.id)
+            form = TeacherDetailsForm(request.POST, instance=profile)
             if form.is_valid():
-                profile = Teacher.objects.get(user_id = request.user.id)
-                profile.skills.set(form.data['skills'])
-                profile.personalities.set(form.data['personalities'])
-                return redirect(reverse('main:main'))
+                # profile = Teacher.objects.get(user_id = request.user.id)
+                # profile.skills.set(form.data['skills'])
+                # profile.personalities.set(form.data['personalities'])
+                id = profile.id
+                form.save()
+                # print(id, profile.nickname)
+                return redirect('accounts:teacher_registered', id) 
         
         return render(request, 'writedetails.html', {'form':form})
+    
+
+def teacher_registered(request, id):
+    profile = Teacher.objects.get(id = id)
+    return render(request, 'teacher_registered.html', {'profile':profile})
+
+def learner_registered(request, id):
+    profile = Learner.objects.get(id = id)
+    return render(request, 'learner_registered.html', {'profile':profile})
 
 
 
 # 로그인/로그아웃
-
 def login_view(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
