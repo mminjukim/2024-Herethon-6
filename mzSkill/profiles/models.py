@@ -29,7 +29,7 @@ class Skill(models.Model):
 
 # 러너 프로필 
 class Learner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='learner_profile')
 
     nickname = models.CharField(max_length=40, blank=True)
     emoji = models.ImageField(blank=True) # upload_to = 디렉터리 경로 작성요망
@@ -44,7 +44,7 @@ class Learner(models.Model):
 
 # 티쳐 프로필 
 class Teacher(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tearner_profile')
 
     nickname = models.CharField(max_length=40, blank=True)
     emoji = models.ImageField(blank=True) # upload_to = 디렉터리 경로 작성요망

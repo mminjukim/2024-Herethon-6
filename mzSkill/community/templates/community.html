@@ -6,6 +6,21 @@
     <title>커뮤니티</title>
 </head>
 <body>
-    커뮤니티
+    <h1>커뮤니티</h1>
+    <div>
+        <a href="{% url 'community:create_post' %}">새 글 작성</a>
+        {% for post in posts %} 
+        <div>
+            <a href="{% url 'community:post_detail' post.id %}">
+                <h3>{{ post.title }}</h3>
+                <ul>
+                    <li>{{ post.category }}</li>
+                    <li>날짜: {{ post.created_at }}</li>
+                </ul>
+            </a>
+        </div>
+        <hr/>
+        {% endfor %}
+    </div>
 </body>
 </html>
