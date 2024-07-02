@@ -12,14 +12,16 @@
       <div class="mainContainer">
         <div class="topContainer">
           <div class="topTitle">MZ의 스킬</div>
-          <img
-            class="myPageIcon"
-            src="{% static 'images/mainLearner/🦆 icon _user_.png' %}"
-          />
+          <a href="{% url 'profiles:show_learner_profile' profile.id %}"
+            ><img
+              class="myPageIcon"
+              src="{% static 'images/mainLearner/🦆 icon _user_.png' %}"
+          /></a>
         </div>
         <div class="middleContainer">
           <div class="middleMessage">
-            {{ profile.nickname }} 러너님,<br />1:1 매칭을 통해 맞춤 티처를 찾아드릴게요.
+            {{ profile.nickname }} 러너님,<br />1:1 매칭을 통해 맞춤 티처를
+            찾아드릴게요.
           </div>
           <div class="matchingButton">1:1 매칭 하러 가기</div>
         </div>
@@ -64,12 +66,16 @@
               /><a href="{% url 'main:main' %}">메인화면</a>
             </li>
             <li class="navTeaching">
-              <img src="{% static 'images/mainLearner/🦆 icon _bookmark book_.png' %}">
+              <img
+                src="{% static 'images/mainLearner/🦆 icon _bookmark book_.png' %}"
+              />
               <a href="">1:1티칭</a>
             </li>
             <li class="navCommunity">
-              <img src="{% static 'images/mainLearner/🦆 icon _chat bubble_.png' %}" />
-              <a href="">커뮤니티</a>
+              <img
+                src="{% static 'images/mainLearner/🦆 icon _chat bubble_.png' %}"
+              />
+              <a href="{% url 'community:community' %}">커뮤니티</a>
             </li>
           </ul>
         </nav>

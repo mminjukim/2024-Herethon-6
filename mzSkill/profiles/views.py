@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 
 from accounts.forms import *
 
+# 러너 프로필 보기
 def show_learner_profile(request, id):
     profile = Learner.objects.get(id=id)
     return render(request, 'show_learner_profile.html', {'profile':profile})
 
+# 러너 프로필 수정하기
 def update_learner_profile(request, id):
     profile = Learner.objects.get(id=id)
     if request.method == 'POST':
@@ -17,6 +19,7 @@ def update_learner_profile(request, id):
         form = WriteLearnerProfileForm(instance=profile)
         return render(request, "update_learner_profile.html", {'form':form})
 
+# 러너 성격 스킬 수정하기 
 def update_learner_details(request, id): # 수정
     profile = Learner.objects.get(id=id)
     if request.method == 'POST':
@@ -29,11 +32,12 @@ def update_learner_details(request, id): # 수정
         return render(request, "update_learner_details.html", {'form':form})
 
 
-
+# 티쳐 프로필 보기
 def show_teacher_profile(request, id):
     profile = Teacher.objects.get(id=id)
     return render(request, 'show_teacher_profile.html', {'profile':profile})
 
+# 티쳐 프로필 수정하기
 def update_teacher_profile(request, id):
     profile = Teacher.objects.get(id=id)
     if request.method == 'POST':
@@ -44,7 +48,8 @@ def update_teacher_profile(request, id):
     else:
         form = WriteTeacherProfileForm(instance=profile)
         return render(request, "update_teacher_profile.html", {'form':form})
-
+    
+# 티쳐 성격 스킬 수정하기
 def update_teacher_details(request, id): 
     profile = Teacher.objects.get(id=id)
     if request.method == 'POST':
