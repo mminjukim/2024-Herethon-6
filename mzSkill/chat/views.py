@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from .models import Message
 from profiles.models import Teacher, Learner # profiles 폴더의 models 파일에서 임포트
 
-# 티쳐 목록을 보여주는 뷰
+# 티쳐 목록을 보여주는 뷰(여기서 이제 티쳐역시 러너가 보낸 메세지를 받아야함.)
 def room(request):
     user = request.user
     # 유저가 러너인 경우
@@ -18,7 +18,7 @@ def room(request):
         messages = Message.objects.filter(receiver=user)
         for message in messages:
             learners.add(message.sender)
-            return render(request, 'chat/room.html', {'learners': learners})
+        return render(request, 'chat/room.html', {'learners': learners})
     else:
         return render(request, 'chat/error.html', {'error': '러너 또는 티쳐 계정이 아닙니다.'})
 

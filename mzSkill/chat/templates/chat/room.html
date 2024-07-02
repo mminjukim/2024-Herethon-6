@@ -7,9 +7,10 @@
     <h1>Select a Chat Room</h1>
     {% if error %}
     <p>{{ error }}</p>
-    {% else %}
+    {% endif %} {% if teachers %}
+    <h2>Teachers</h2>
     <ul>
-      {% csrf_token %} {% for teacher in teachers %}
+      {% for teacher in teachers %}
       <li>
         <a href="{% url 'chat:chat_view' teacher.user.username %}"
           >{{ teacher.user.username }}</a
@@ -17,6 +18,19 @@
       </li>
       {% endfor %}
     </ul>
+    {% endif %} {% if learners %}
+    <h2>Learners</h2>
+    <ul>
+      {% for learner in learners %}
+      <li>
+        <a href="{% url 'chat:chat_view' learner.username %}"
+          >{{ learner.username }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% if not teachers and not learners %}
+    <p>No available users to chat with.</p>
     {% endif %}
     <a href="{% url 'main:main' %}">뒤로가기</a>
   </body>
