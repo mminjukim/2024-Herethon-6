@@ -24,7 +24,7 @@ class Skill(models.Model):
     category = models.ForeignKey(Category, related_name = 'skill', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.category.name} > {self.name}"
+        return self.name
 
 
 # 러너 프로필 

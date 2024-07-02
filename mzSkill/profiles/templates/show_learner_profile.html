@@ -12,6 +12,7 @@
         {% if profile.emoji %}
         <li>프로필사진: <img src="{{ profile.emoji.url }}" alt="" height="100"></li>
         {% endif %}
+        <h2><a href="{% url 'profiles:update_learner_details' profile.id %}">1:1 매칭 세부 정보 ></a></h2>
         <li>원하는 티칭 타입: 
             <ul>
                 {% for personality in profile.personalities.all %}

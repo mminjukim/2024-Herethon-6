@@ -18,7 +18,7 @@ def update_learner_profile(request, id):
         form = WriteLearnerProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profiles:update_learner_details', id)
+            return redirect('profiles:show_learner_profile', id)
     else:
         form = WriteLearnerProfileForm(instance=profile)
         return render(request, "update_learner_profile.html", {'form':form})
@@ -48,7 +48,7 @@ def update_teacher_profile(request, id):
         form = WriteTeacherProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profiles:update_teacher_details', id)
+            return redirect('profiles:show_teacher_profile', id)
     else:
         form = WriteTeacherProfileForm(instance=profile)
         return render(request, "update_teacher_profile.html", {'form':form})
@@ -59,7 +59,7 @@ def update_teacher_details(request, id):
         form = TeacherDetailsForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profiles:write_teachingplan', id) 
+            return redirect('profiles:show_teacher_profile', id) 
     else:
         form = TeacherDetailsForm(instance=profile)
         return render(request, "update_teacher_details.html", {'form':form})
