@@ -12,7 +12,7 @@
         {% for post in posts %} 
         <div>
             <a href="{% url 'community:post_detail' post.id %}">
-                <h3>{{ post.title }}</h3>
+                <h3>{{ post.title|truncatechars:20 }}</h3>
                 <ul>
                     <li>{{ post.category }}</li>
                     <li>날짜: {{ post.created_at }}</li>

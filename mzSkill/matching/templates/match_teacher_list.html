@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매칭화면</title>
+</head>
+<body>
+    <h1>러너에게 매칭될 가능성 있는 티쳐들</h1>
+    {% for teacher in got_teachers %}
+    <div>
+        <a href="{% url 'matching:mzteacher_profile' teacher.id %}"><h3>티쳐: {{ teacher.nickname }}</h3></a>
+        <ul>
+            <li>스킬:
+                {% for skill in teacher.skills.all %}
+                {{ skill }} 
+                {% endfor %}
+            </li>
+            <li>성격:
+                {% for personality in teacher.personalities.all %}
+                {{ personality }} 
+                {% endfor %}
+            </li>
+            <li>{{ teacher.bio }}</li>
+            <li>
+                {% if teacher.is_paid == False %}
+                무료 티칭
+                {% else %}
+                유료 티칭
+                {% endif %}
+            </li>
+        </ul>
+        <hr>
+    </div>
+    {% endfor %}
+    <a href="{% url 'main:main' %}">메인화면</a>
+</body>
+</html>

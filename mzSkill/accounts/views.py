@@ -104,9 +104,6 @@ class WriteDetailsView(View):
             profile = Learner.objects.get(user_id = request.user.id)
             form = LearnerDetailsForm(request.POST, instance=profile)
             if form.is_valid():
-                # profile.skills.set(form.data['skills'])
-                # profile.personalities.set(form.data['personalities'])
-                # print(id, profile.nickname)
                 id = profile.id
                 form.save()
                 return redirect('accounts:learner_registered', id)
@@ -114,9 +111,6 @@ class WriteDetailsView(View):
             profile = Teacher.objects.get(user_id = request.user.id)
             form = TeacherDetailsForm(request.POST, instance=profile)
             if form.is_valid():
-                # profile = Teacher.objects.get(user_id = request.user.id)
-                # profile.skills.set(form.data['skills'])
-                # profile.personalities.set(form.data['personalities'])
                 id = profile.id
                 form.save()
                 # print(id, profile.nickname)
@@ -142,9 +136,12 @@ def login_view(request):
         if form.is_valid():
             login(request, form.get_user())
             return redirect('main:main')
+        else:
+            error = "아이디 또는 비밀번호가 잘못되었습니다."
+            return render(request, 'login.html', {'form': form, 'error':error})
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
 
 @login_required
 def logout_view(request):

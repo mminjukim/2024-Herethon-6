@@ -32,6 +32,8 @@
     {% endif %}
 
     <a href="{% url 'community:community' %}">목록으로</a>
+    {% if request.user == post.author %}
+    {% endif %}
 
     <h4>댓글 (총 {{ total_comments }}개)</h4>
     <form method="post" action="{% url 'community:create_comment' post.id %}">

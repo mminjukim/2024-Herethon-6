@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mz티쳐 프로필</title>
+    <link rel="stylesheet" href="{% static 'css/teacherProfile.css' %}" />
+  </head>
+  <body>
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <div class="message">MZ 티쳐 프로필</div>
+          <a href="{% url 'matching:match_teacher_list' profile.id %}"><div class="closeButton">×</div></a>
+        </div>
+        <div class="imageContainer">
+          <img src="{% static 'images/teacherProfile/Group 178.png' %}" />
+          <div class="teacherName">{{ teacher.name }}</div>
+          <div class="teacherProperty">
+            {% for skill in teacher.skills.all %}
+            {{ skill.name }}
+            {% if not forloop.last %}/{% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="teacherKeyword">
+            {% for personality in teacher.personalities.all %}
+            <div class="teacherKeyword1">{{ personality.name }}</div>    
+            {% endfor %}
+        </div>
+        <div class="middleContainer">
+          <div class="middleContainerTop">
+            <div class="teachingPlan">티칭 계획</div>
+            <div class="runnerReview">러너 리뷰</div>
+          </div>
+          <div class="middleContainerMessage">
+            <div class="dot">●</div>
+            <div class="middleMessage">
+              {{ teacher.bio }}
+            </div>
+          </div>
+          <div class="middleContainerBox">
+            {{ teacher.teaching_plan }}
+          </div>
+          <div class="teachingPlanKeyword">
+            {% if teacher.is_paid == False %}
+            무료 티칭
+            {% else %}
+            유료 티칭
+            {% endif %}
+          </div>
+        </div>
+        <a href="{% url 'matching:match_a_teacher' teacher.id %}"><div class="matchingButton">1:1 매칭 신청하기</div></a>
+      </div>
+    </div>
+  </body>
+</html>
