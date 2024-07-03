@@ -64,16 +64,29 @@ class WriteProfileView(View): # 3단계 : 프로필 등록
     def post(self, request, *args, **kwargs):
         if request.session['usertype'] == '1':
             form = WriteLearnerProfileForm(request.POST, request.FILES)
+            profile_model = Learner # 추가
         else:
             form = WriteTeacherProfileForm(request.POST, request.FILES)
+            profile_model = Teacher # 추가
+
         if form.is_valid():
-            print(request.session['usertype'])
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            request.session['usertype'] = request.session['usertype'] 
+            user = request.user # 추가: 이미 존재하는 프로필 확인
+            try:
+                profile = profile_model.objects.get(user=user)
+                form = form.save(commit=False)
+                form.user = user
+                form.id = profile.id  # 기존 프로필을 업데이트하도록 ID를 설정
+                form.save()
+
+            except profile_model.DoesNotExist:
+                profile = form.save(commit=False)
+                profile.user = user
+                profile.save()
+
+            request.session['usertype'] = request.session['usertype']
             return redirect(reverse('accounts:writedetails'))
-        return render(request, 'writeprofile.html', {'form':form})
+        return render(request, 'writeprofile.html', {'form': form})
+
     
 
 class WriteDetailsView(View): 

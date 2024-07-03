@@ -23,14 +23,35 @@ def room(request):
         return render(request, 'chat/error.html', {'error': '러너 또는 티쳐 계정이 아닙니다.'})
 
 # 채팅창 렌더링 함수
+
 @login_required
 def chat_view(request, username):
     user = request.user
-    receiver = get_object_or_404(User, username=username)
+    receiver_user = get_object_or_404(User, username=username)
+    
+    try:
+        receiver_profile = Learner.objects.get(user=receiver_user)
+    except Learner.DoesNotExist:
+        receiver_profile = Teacher.objects.get(user=receiver_user)
+
     if request.method == 'POST':
         content = request.POST.get('message')
         if content:
-            Message.objects.create(sender=user, receiver=receiver, content=content)
-    messages = Message.objects.filter(sender=user, receiver=receiver) | Message.objects.filter(sender=receiver, receiver=user)
+            Message.objects.create(sender=user, receiver=receiver_user, content=content)
+
+    messages = Message.objects.filter(sender=user, receiver=receiver_user) | Message.objects.filter(sender=receiver_user, receiver=user)
     messages = messages.order_by('timestamp')
-    return render(request, 'chat/chat.html', {'receiver': receiver, 'messages': messages})
+    
+    return render(request, 'chat/chat.html', {'receiver': receiver_profile, 'messages': messages})
+
+# @login_required
+# def chat_view(request, username):
+#     user = request.user
+#     receiver = get_object_or_404(User, username=username)
+#     if request.method == 'POST':
+#         content = request.POST.get('message')
+#         if content:
+#             Message.objects.create(sender=user, receiver=receiver, content=content)
+#     messages = Message.objects.filter(sender=user, receiver=receiver) | Message.objects.filter(sender=receiver, receiver=user)
+#     messages = messages.order_by('timestamp')
+#     return render(request, 'chat/chat.html', {'receiver': receiver, 'messages': messages})
