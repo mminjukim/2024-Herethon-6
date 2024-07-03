@@ -9,7 +9,7 @@
     <div class="chat-container">
       <div class="chat-header">
         <!-- <h1>{{ receiver.user.username }}</h1> -->
-        <a href="{% url 'chat:room' %}">나가기</a>
+        <a href="{% url 'chat:room' %}">뒤로</a>
       </div>
       <div id="chat-log" class="chat-log">
         {% for message in messages %}
@@ -89,5 +89,6 @@
         messageInputDom.value = "";
       };
     </script>
+    <br />
   </body>
 </html>

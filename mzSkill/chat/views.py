@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
@@ -54,3 +54,11 @@ def chat_view(request, username):
 #     messages = Message.objects.filter(sender=user, receiver=receiver) | Message.objects.filter(sender=receiver, receiver=user)
 #     messages = messages.order_by('timestamp')
 #     return render(request, 'chat/chat.html', {'receiver': receiver, 'messages': messages})
+
+@login_required
+def out(request, username):
+    user = request.user
+    receiver_user = get_object_or_404(User, username=username)
+    messages.delete()
+
+    return redirect('chat:room')
