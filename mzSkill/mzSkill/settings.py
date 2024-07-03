@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'profiles',
     
     'community',
+    'matching',
 ]
 
 MIDDLEWARE = [

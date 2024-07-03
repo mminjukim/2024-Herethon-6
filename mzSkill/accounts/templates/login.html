@@ -10,6 +10,9 @@
 <body>
     <section class="login-form">
         <h1>로그인</h1>
+        {% if error %}
+        <p style="color: red;">{{ error }}</p> 
+        {% endif %}
         <form action="/accounts/login/" method="post">
             {% csrf_token %}
             <div class="int-area">

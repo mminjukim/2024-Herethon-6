@@ -29,6 +29,7 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
 
     path('community/', include('community.urls')),
+    path('matching/', include('matching.urls')),
 ]
 
 if settings.DEBUG:

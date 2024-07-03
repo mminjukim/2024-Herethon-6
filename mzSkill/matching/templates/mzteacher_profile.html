@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mz티쳐 프로필</title>
+</head>
+<body>
+    <h1>mz티쳐 프로필</h1>
+    <ul>
+        <li>닉네임: {{ teacher.nickname }}</li>
+        {% if teacher.emoji %}
+        <li>프로필사진: <img src="{{ teacher.emoji.url }}" alt="" height="100"></li>
+        {% endif %}
+        <li>티칭 타입: 
+            <ul>
+                {% for personality in teacher.personalities.all %}
+                <li>{{ personality.name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>티칭 스킬 분야:
+            <ul>
+                {% for skill in teacher.skills.all %}
+                <li>{{ skill.name }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>한줄소개: {{ teacher.bio }}</li>
+        <li>티칭계획: {{ teacher.teaching_plan }}</li>
+        <li>
+            {% if teacher.is_paid == False %}
+            무료 티칭
+            {% else %}
+            유료 티칭
+            {% endif %}
+        </li>
+    </ul>
+    <a href="{% url 'matching:match_a_teacher' teacher.id %}">1:1매칭 신청하기</a>
+</body>
+</html>
