@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 
 from accounts.forms import *
+from .forms import *
+from .models import *
+
 
 # 러너 프로필 보기
 def show_learner_profile(request, id):
@@ -14,7 +17,7 @@ def update_learner_profile(request, id):
         form = WriteLearnerProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profiles:update_learner_details', id)
+            return redirect('profiles:show_learner_profile', id)
     else:
         form = WriteLearnerProfileForm(instance=profile)
         return render(request, "update_learner_profile.html", {'form':form})
@@ -44,7 +47,7 @@ def update_teacher_profile(request, id):
         form = WriteTeacherProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profiles:update_teacher_details', id)
+            return redirect('profiles:show_teacher_profile', id)
     else:
         form = WriteTeacherProfileForm(instance=profile)
         return render(request, "update_teacher_profile.html", {'form':form})
@@ -61,3 +64,13 @@ def update_teacher_details(request, id):
         form = TeacherDetailsForm(instance=profile)
         return render(request, "update_teacher_details.html", {'form':form})
 
+def write_teachingplan(request, id):
+    profile = Teacher.objects.get(id=id)
+    if request.method == 'POST':
+        form = TeachingPlanForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profiles:show_teacher_profile', id) 
+    else:
+        form = TeachingPlanForm(instance=profile)
+        return render(request, "write_teachingplan.html", {'form':form})

@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>러너 프로필 세부사항 수정</title>
+    <title>새 글 작성</title>
 </head>
 <body>
-    <h1>러너 프로필 세부사항 수정</h1>
+    <h1>커뮤니티 새글작성</h1>
     <form method="post">
         {% csrf_token %} 
         {{ form.as_p }}
-        <button type="submit">저장하기</button>
-      </form>
+        <button type="submit">새글등록</button>
+    </form>
 </body>
 </html>

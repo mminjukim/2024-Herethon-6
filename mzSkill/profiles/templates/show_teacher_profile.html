@@ -12,6 +12,7 @@
         {% if profile.emoji %}
         <li>프로필사진: <img src="{{ profile.emoji.url }}" alt="" height="100"></li>
         {% endif %}
+        <h2><a href="{% url 'profiles:update_teacher_details' profile.id %}">1:1 매칭 세부 정보 ></a></h2>
         <li>티칭 타입: 
             <ul>
                 {% for personality in profile.personalities.all %}
@@ -25,6 +26,16 @@
                 <li>{{ skill.name }}</li>
                 {% endfor %}
             </ul>
+        </li>
+        <h2><a href="{% url 'profiles:write_teachingplan' profile.id %}">티칭 계획 ></a></h2>
+        <li>{{ profile.bio }}</li>
+        <li>{{ profile.teaching_plan }}</li>
+        <li>
+            {% if profile.is_paid == False %}
+            무료 티칭
+            {% else %}
+            유료 티칭
+            {% endif %}
         </li>
     </ul>
     <a href="{% url 'profiles:update_teacher_profile' profile.id %}">프로필 수정하기</a>
