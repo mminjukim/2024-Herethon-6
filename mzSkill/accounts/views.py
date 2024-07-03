@@ -29,21 +29,25 @@ class RoleChoiceView(View): # 1단계 : 역할 선택 (러너/티쳐)
         return render(request, 'rolechoice.html', {'form':form})
     
 
-class SignUpView(View): # 2단계 : 회원가입 
-
+class SignUpView(View):  # 2단계 : 회원가입 
     def get(self, request, *args, **kwargs):
         form = SignUpForm()
-        return render(request, 'signup.html', {'form':form})
+        return render(request, 'signup.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            request.session['usertype'] = request.session['usertype'] 
-            print(request.session['usertype'])
+            usertype = request.session.get('usertype')  # 세션에서 usertype 가져오기
+            print(usertype)
+            if usertype == '1':
+                Learner.objects.create(user=user)
+            elif usertype == '2':
+                Teacher.objects.create(user=user)
             return redirect(reverse('accounts:writeprofile'))
-        return render(request, 'signup.html', {'form':form})
+        return render(request, 'signup.html', {'form': form})
+
 
 
 class WriteProfileView(View): # 3단계 : 프로필 등록 
@@ -60,16 +64,29 @@ class WriteProfileView(View): # 3단계 : 프로필 등록
     def post(self, request, *args, **kwargs):
         if request.session['usertype'] == '1':
             form = WriteLearnerProfileForm(request.POST, request.FILES)
+            profile_model = Learner # 추가
         else:
             form = WriteTeacherProfileForm(request.POST, request.FILES)
+            profile_model = Teacher # 추가
+
         if form.is_valid():
-            print(request.session['usertype'])
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            request.session['usertype'] = request.session['usertype'] 
+            user = request.user # 추가: 이미 존재하는 프로필 확인
+            try:
+                profile = profile_model.objects.get(user=user)
+                form = form.save(commit=False)
+                form.user = user
+                form.id = profile.id  # 기존 프로필을 업데이트하도록 ID를 설정
+                form.save()
+
+            except profile_model.DoesNotExist:
+                profile = form.save(commit=False)
+                profile.user = user
+                profile.save()
+
+            request.session['usertype'] = request.session['usertype']
             return redirect(reverse('accounts:writedetails'))
-        return render(request, 'writeprofile.html', {'form':form})
+        return render(request, 'writeprofile.html', {'form': form})
+
     
 
 class WriteDetailsView(View): 
@@ -113,7 +130,6 @@ def learner_registered(request, id):
 
 
 # 로그인/로그아웃
-
 def login_view(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)

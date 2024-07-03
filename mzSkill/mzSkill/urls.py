@@ -29,6 +29,7 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
 
     path('community/', include('community.urls')),
+    path('chat/', include('chat.urls')),
     path('matching/', include('matching.urls')),
 ]
 

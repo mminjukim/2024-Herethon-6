@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  django:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6380:6379" # 호스트 포트를 6380으로 변경
