@@ -1,0 +1,31 @@
+.chat-info {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.chat-info img.emoji {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-right: 10px;
+}
+
+.chat-info .chat-text {
+  flex-grow: 1;
+}
+
+.chat-info .chat-text strong {
+  display: block;
+  font-size: 1.2em;
+}
+
+.chat-info .chat-text p {
+  margin: 0;
+  color: #666;
+}
+
+.chat-info .chat-link {
+  margin-left: 10px;
+}

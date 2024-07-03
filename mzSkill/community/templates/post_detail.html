@@ -1,35 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>글 상세보기</title>
-</head>
-<body>
-    <h1> {{ post.title }} </h1>
-    <p> 날짜: {{ post.created_at }} </p>
+  </head>
+  <body>
+    <h1>{{ post.title }}</h1>
+    <p>날짜: {{ post.created_at }}</p>
     <p>카테고리: {{ post.category }}</p>
-    <p> 
-    작성자: {{ profile.nickname }}
-    </p>
+    <p>작성자: {{ profile.nickname }}</p>
     <p>{{ post.body }}</p>
+
+    <p>좋아요: {{ total_likes }}</p>
+    {% if is_liked %}
+    <form action="{% url 'community:remove_like' post.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit">좋아요 취소</button>
+    </form>
+    {% else %}
+    <form action="{% url 'community:add_like' post.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit">좋아요</button>
+    </form>
+    {% endif %} {% if request.user == post.author %}
+    <form action="{% url 'community:delete_post' post.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit">삭제</button>
+    </form>
+    <a href="{% url 'community:edit_post' post.id %}">수정</a>
+    {% endif %}
+
     <a href="{% url 'community:community' %}">목록으로</a>
 
-    <h4>댓글</h4>
+    <h4>댓글 (총 {{ total_comments }}개)</h4>
     <form method="post" action="{% url 'community:create_comment' post.id %}">
-        {% csrf_token %}
-        {{ comment_form }}
-        <input type="submit">
+      {% csrf_token %} {{ comment_form }}
+      <input type="submit" />
     </form>
-    <hr>
-    
+    <hr />
+
     {% for comment in comments %}
     <div>
-        <b>{{ comment.com_nickname }} : </b> 
-        {{ comment.com_content }}
+      <b>{{ comment.com_nickname }} : </b>
+      {{ comment.com_content }} {% if request.user == comment.author %}
+      <form
+        action="{% url 'community:delete_comment' comment.id %}"
+        method="POST"
+        style="display: inline"
+      >
+        {% csrf_token %}<button type="submit">삭제</button>
+      </form>
+      {% endif %}
     </div>
     {% endfor %}
-    
-
-</body>
+  </body>
 </html>

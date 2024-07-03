@@ -22,8 +22,7 @@ def room(request):
             learners.add(message.sender)
         return render(request, 'chat/room.html', {'learners': learners})
 
-# 채팅창 렌더링 함수
-
+# 채팅창 렌더링 함수(채팅 시작)
 @login_required
 def chat_view(request, username):
     user = request.user
