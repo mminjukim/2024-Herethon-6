@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글 상세보기</title>
+</head>
+<body>
+    <h1> {{ post.title }} </h1>
+    <p> 날짜: {{ post.created_at }} </p>
+    <p>카테고리: {{ post.category }}</p>
+    <p> 
+    작성자: {{ profile.nickname }}
+    </p>
+    <p>{{ post.body }}</p>
+    <a href="{% url 'community:community' %}">목록으로</a>
+
+    <h4>댓글</h4>
+    <form method="post" action="{% url 'community:create_comment' post.id %}">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit">
+    </form>
+    <hr>
+    
+    {% for comment in comments %}
+    <div>
+        <b>{{ comment.com_nickname }} : </b> 
+        {{ comment.com_content }}
+    </div>
+    {% endfor %}
+    
+
+</body>
+</html>
