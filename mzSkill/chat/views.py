@@ -58,3 +58,4 @@ def out(request, username):
     return redirect('chat:room')
 
 # https://codiving.kr/104
+# https://chasingdreams.tistory.com/74

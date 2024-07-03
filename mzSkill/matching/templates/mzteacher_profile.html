@@ -33,7 +33,9 @@
         <div class="middleContainer">
           <div class="middleContainerTop">
             <div class="teachingPlan">티칭 계획</div>
-            <div class="runnerReview">러너 리뷰</div>
+            <a href="{% url 'review:show_review' teacher.id %}">
+              <div class="runnerReview">러너 리뷰</div>
+            </a>
           </div>
           <div class="middleContainerMessage">
             <div class="dot">●</div>
