@@ -33,7 +33,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
-        sender_username = self.scope['user']
+        sender_username = self.scope['user'].username # 수정된 부분
         
         sender = await sync_to_async(User.objects.get)(username=sender_username)
         receiver = await sync_to_async(User.objects.get)(username=self.receiver_username)

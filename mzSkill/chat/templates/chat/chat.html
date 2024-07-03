@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chat with {{ receiver.username }}</title>
+    <title>Chat with {{ receiver.user.username }}</title>
     <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
   </head>
   <body>
     <div class="chat-container">
       <div class="chat-header">
-        <h1>{{ receiver.username }}</h1>
+        <!-- <h1>{{ receiver.user.username }}</h1> -->
         <a href="{% url 'chat:room' %}">나가기</a>
       </div>
       <div id="chat-log" class="chat-log">
@@ -37,7 +37,15 @@
     </div>
     <script>
       const username = "{{ request.user.username }}";
-      const receiverUsername = "{{ receiver.username }}";
+      const receiverUsername = "{{ receiver.user.username }}";
+      console.log(
+        "WebSocket URL: ws://" +
+          window.location.host +
+          "/ws/chat/" +
+          receiverUsername +
+          "/"
+      );
+
       const chatSocket = new WebSocket(
         "ws://" + window.location.host + "/ws/chat/" + receiverUsername + "/"
       );
