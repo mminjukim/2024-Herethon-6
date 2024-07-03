@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Select a Chat Room</title>
+  </head>
+  <body>
+    <h1>Select a Chat Room</h1>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %} {% if teachers %}
+    <h2>Teachers님 어서오세요</h2>
+    <ul>
+      {% for teacher in teachers %}
+      <li>
+        <a href="{% url 'chat:chat_view' teacher.user.username %}"
+          >{{ teacher.user.username }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% if learners %}
+    <h2>Learners님 어서오세요</h2>
+    <ul>
+      {% for learner in learners %}
+      <li>
+        <a href="{% url 'chat:chat_view' learner.username %}"
+          >{{ learner.username }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% if not teachers and not learners %}
+    <p>
+      앗 아직 티쳐를 구하지못하셨나요? 1:1 매칭을 통해 나랑 맞는 티쳐를
+      찾아보세요!
+    </p>
+    {% endif %}
+    <a href="{% url 'main:main' %}">뒤로가기</a>
+  </body>
+</html>

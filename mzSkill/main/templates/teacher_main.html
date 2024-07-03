@@ -9,9 +9,11 @@
     <h1>티쳐 메인 페이지</h1>
     <p>환영합니다, <b>{{ profile.nickname }}</b> 티쳐님</p>
     <br />
-    
-    <a href="{% url 'profiles:show_teacher_profile' profile.id %}">프로필 보기</a>
-    
+
+    <a href="{% url 'profiles:show_teacher_profile' profile.id %}"
+      >프로필 보기</a
+    >
+    <a href="{% url 'chat:room' %}">1:1대화</a>
     {% if request.user.is_authenticated %}
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
     {% endif %}

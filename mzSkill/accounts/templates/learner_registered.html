@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MZ티쳐로 등록되었어요</title>
-</head>
-<body>
-    <h1>{{ profile.nickname }} 러너님의 <br> 맞춤 MZ 티쳐를 소개해드려요.</h1>
+  </head>
+  <body>
+    <h1>
+      {{ profile.nickname }} 러너님의 <br />
+      맞춤 MZ 티쳐를 소개해드려요.
+    </h1>
     <ul>
-        <li>원하는 티칭 타입: 
-            <ul>
-                {% for personality in profile.personalities.all %}
-                <li>{{ personality.name }}</li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li>원하는 티칭 스킬 분야:
-            <ul>
-                {% for skill in profile.skills.all %}
-                <li>{{ skill.name }}</li>
-                {% endfor %}
-            </ul>
-        </li>
+      <li>
+        원하는 티칭 타입:
+        <ul>
+          {% for personality in profile.personalities.all %}
+          <li>{{ personality.name }}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        원하는 티칭 스킬 분야:
+        <ul>
+          {% for skill in profile.skills.all %}
+          <li>{{ skill.name }}</li>
+          {% endfor %}
+        </ul>
+      </li>
     </ul>
     <a href="{% url 'main:main' %}">메인화면으로 가기 ></a>
     <!--   -->
-</body>
+  </body>
 </html>

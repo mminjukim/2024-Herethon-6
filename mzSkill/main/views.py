@@ -6,9 +6,23 @@ from profiles.models import Learner, Teacher
 
 @login_required
 def main(request):
+    profile = None
     try:
         profile = Learner.objects.get(user_id = request.user.id)
         return render(request, 'learner_main.html', {'profile':profile})
-    except:
-        profile = Teacher.objects.get(user_id = request.user.id)
-        return render(request, 'teacher_main.html', {'profile':profile})
+    except Learner.DoesNotExist:
+        try:
+            profile = Teacher.objects.get(user_id = request.user.id)
+            return render(request, 'teacher_main.html', {'profile':profile})
+        except Teacher.DoesNotExist:
+            pass
+
+# 기존:
+# @login_required
+# def main(request):
+#     try:
+#         profile = Learner.objects.get(user_id = request.user.id)
+#         return render(request, 'learner_main.html', {'profile':profile})
+#     except:
+#         profile = Teacher.objects.get(user_id = request.user.id)
+#         return render(request, 'teacher_main.html', {'profile':profile})
