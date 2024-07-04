@@ -1,24 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커뮤니티</title>
+    <link rel="stylesheet" href="{% static 'css/community.css' %}">
 </head>
 <body>
-    <h1>커뮤니티</h1>
-    <hr>
-    <h3>카테고리 선택 : 
-        {% if category_id == 0 %} 전체
-        {% else %} 
-            {% for category in categories %}
-            {% if category.id == category_id %}
-                {{ category.name }}
-            {% endif %}
-            {% endfor %}
-        {% endif %}
-    </h3>
-    <div class="teachCatagoriesMain">
+    <div class="container">
+        <header>
+            <h1>커뮤니티</h1>
+            <!-- <div class="icon">
+                <a href="">
+                    <img src="{% static 'images/community/user.png' %}" alt="User Icon">
+                </a>
+            </div> -->
+        </header>
+
+        <div class="category-section">
+            <div class="category-section">
+                <div class="category">
+                    {% if category_id == 0 %} 전체
+                    {% else %} 
+                        {% for category in categories %}
+                        {% if category.id == category_id %}
+                            {{ category.name }}
+                        {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <a href="{% url 'community:community' category_id 1 %}">최신순</a> 
+            <a href="{% url 'community:community' category_id 2 %}">인기순</a>
+        </div>
         {% for category in categories %}
             {% if category.id == category_id %}
             <a href="{% url 'community:community' 0 1 %}"><div class="catagory" id="catagory1">
@@ -30,25 +45,40 @@
             </div></a>
             {% endif %}
         {% endfor %}
-    </div>
-    <hr>
-    <h4><a href="{% url 'community:create_post' %}">새 글 작성</a></h4>
-    <a href="{% url 'community:community' category_id 1 %}">최신순</a> 
-    <a href="{% url 'community:community' category_id 2 %}">인기순</a>
-    <hr>
-    <div>
-        {% for post_block in posts %} 
-        <div>
-            <a href="{% url 'community:post_detail' post_block.post.id %}">
-                <h3>{{ post_block.post.title|truncatechars:20 }}</h3>
+
+        <div class="posts">
+            {% for post_block in posts %} 
+            <a href="{% url 'community:post_detail' post_block.post.id %}" class="post">
+                <p>{{ post_block.post.title|truncatechars:15 }}</p>
+                <div class="tags">
+                    <span class="tag">{{ post_block.post.category }}</span>
+                </div>
+                <div class="post-stats">
+                    <span>♡{{ post_block.like_count }} 댓글:{{ post_block.comment_count }}</span>
+                </div>
             </a>
-            <ul>
-                <li>{{ post_block.post.category }}</li>
-                <li>좋아요: {{ post_block.like_count }} / 댓글: {{ post_block.comment_count }}</li>
-            </ul>
+            {% endfor %}
         </div>
-        <hr/>
-        {% endfor %}
+
+        <a href="{% url 'community:create_post' %}" class="write-button">
+            <img src="{% static 'images/community/writing.png' %}">
+        </a>
+
+        <nav class="bottom-nav">
+            <a href="{% url 'main:main' %}" class="nav-item">
+                <img src="{% static 'images/community/home.png' %}" alt="Community Icon">
+                <span>메인화면</span>
+            </a>
+            <a href="{% url 'chat:room'%}" class="nav-item">
+                <img src="{% static 'images/community/teaching.png' %}" alt="Community Icon">
+                <span>1:1 티칭</span>
+            </a>
+            <a href="{% url 'community:community' 0 1 %}" class="nav-item1">
+                <img src="{% static 'images/community/chat_active.png' %}" alt="Community Icon">
+            </a>
+        </nav>
     </div>
+
+    <script src="{% static 'js/community.js' %}"></script>
 </body>
 </html>
