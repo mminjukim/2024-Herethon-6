@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.serializers import serialize
 from profiles.models import Teacher
 from .models import Review
 from .forms import ReviewForm
@@ -7,8 +8,8 @@ from .forms import ReviewForm
 # 리뷰 보여주기(matching/mzteacher_profile.html)
 def show_review(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
-    reviews = Review.objects.filter(teacher=teacher).order_by('-created_at')
-    return render(request, 'mzteacher_profile.html', {"reviews":reviews})
+    reviews = Review.objects.filter(teacher=teacher).order_by('-id')
+    return render(request, 'list.html', {"teacher": teacher, "reviews": reviews})
 
 # 리뷰 작성
 @login_required

@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>러너 리뷰</title>
+    <link rel="stylesheet" href="{% static 'css/teacherProfile.css' %}" />
+  </head>
+  <body>
+    <div class="reviewContainer">
+      <a
+        href="{% url 'matching:mzteacher_profile' teacher.id %}"
+        class="backButton"
+        >← 뒤로 가기</a
+      >
+      <h2>러너 리뷰</h2>
+      {% for review in reviews %}
+      <div class="review">
+        <div class="rating">★: {{ review.rating }}</div>
+        <div class="comment">{{ review.comment }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
