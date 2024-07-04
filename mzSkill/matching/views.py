@@ -41,11 +41,18 @@ def match_a_teacher(request, teacher_id):
     return render(request, 'match_complete.html', {'teacher':teacher})
 
 
-def mzteacher_list(request):
+def mzteacher_list(request, category_id):
     teachers = Teacher.objects.all()
     categories = Category.objects.all()
+    if category_id != 0:
+        skills_in_catergory = Skill.objects.filter(category_id=category_id)
+        print(skills_in_catergory)
+        teachers = Teacher.objects.filter(skills__in=skills_in_catergory).distinct()    
+    print(teachers)
+
     context = {
         'teachers':teachers,
         'categories':categories,
+        'category_id':category_id,
     }
     return render(request, 'mzteacher_list.html', context)

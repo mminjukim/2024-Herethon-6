@@ -22,7 +22,15 @@
           <div class="teachCatagoriesTop"></div>
           <div class="teachCatagoriesMain">
             {% for category in categories %}
-            <a><div class="catagory" id="catagory1">{{ category.name }}</div></a>
+              {% if category.id == category_id %}
+              <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="catagory" id="catagory1">
+                {{ category.name }}
+              </div></a>
+              {% else %}
+              <a href="{% url 'matching:mzteacher_list' category.id %}"><div class="catagory" id="catagory1">
+                {{ category.name }}
+              </div></a>
+              {% endif %}
             {% endfor %}
           </div>
         </div>
