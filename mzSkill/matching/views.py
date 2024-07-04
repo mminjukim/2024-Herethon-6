@@ -45,13 +45,12 @@ def match_a_teacher(request, teacher_id):
 
 
 def mzteacher_list(request, category_id):
-    teachers = Teacher.objects.all()
+    teachers = Teacher.objects.all().order_by('-last_appealed')
     categories = Category.objects.all()
     if category_id != 0:
         skills_in_catergory = Skill.objects.filter(category_id=category_id)
         print(skills_in_catergory)
-        teachers = Teacher.objects.filter(skills__in=skills_in_catergory).distinct()    
-    print(teachers)
+        teachers = Teacher.objects.filter(skills__in=skills_in_catergory).distinct()
 
     context = {
         'teachers':teachers,
