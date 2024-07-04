@@ -41,6 +41,8 @@
           <div class="teacherA">
             {% if teacher.emoji %}
             <img class="profileImage" height="30px" src="{{ teacher.emoji.url }}" />
+            {% else %}
+            <img class="profileImage" height="30px" src="{% static 'images/teacherIntroduce/3dicons (2).png' %}" />
             {% endif %}
             <div class="teacherName">
                 <a href="{% url 'matching:mzteacher_profile' teacher.id %}">{{teacher.nickname}}</a> ({% for skill in teacher.skills.all %}{{skill.name}}{% if not forloop.last %}/{% endif %}{% endfor %})

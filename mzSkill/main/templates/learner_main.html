@@ -33,7 +33,7 @@
           <div class="appealMessage">어필 중인 MZ 티쳐를 소개해드려요.</div>
           <div class="appealTeachers">
             {% for teacher in teachers %}
-            <div class="teacher1">
+            <a href="{% url 'matching:mzteacher_profile' teacher.id %}"><div class="teacher1">
               {% if teacher.emoji %}
               <img
                 width="54px"
@@ -44,14 +44,14 @@
               <img
                 width="54px"
                 height="54px"
-                src="{% static 'images/mainRunner/3dicons (6).png' %}"
+                src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
               />
               {% endif %}
               <div class="teacher1name">{{ teacher.nickname }}</div>
               <div class="teacher1catagory">
                 {% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
               </div>
-            </div>
+            </div></a>
             {% endfor %}
           </div>
         </div>

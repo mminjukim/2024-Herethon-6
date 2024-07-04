@@ -15,12 +15,14 @@
           <a href="{% url 'main:main' %}"><div class="closeButton">×</div></a>
         </div>
         <div class="imageContainer">
-          <img src="{% static 'images/teacherProfile/Group 178.png' %}" />
-          <div class="teacherName">{{ teacher.name }}</div>
+          {% if teacher.emoji %}
+          <img src="{{ teacher.emoji.url }}" />
+          {% else %}
+          <img src="{% static 'images/teacherIntroduce/3dicons (2).png' %}" />
+          {% endif %}
+          <div class="teacherName">{{ teacher.nickname }}</div>
           <div class="teacherProperty">
-            {% for skill in teacher.skills.all %}
-              {{ skill.name }}{% if not forloop.last %}/{% endif %}
-            {% endfor %}
+            {% for skill in teacher.skills.all %}{{ skill.name }}{% if not forloop.last %}/{% endif %}{% endfor %}
           </div>
         </div>
         <div class="teacherKeyword">
