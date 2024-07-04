@@ -31,7 +31,7 @@
     <a href="{% url 'community:edit_post' post.id %}">수정</a>
     {% endif %}
 
-    <a href="{% url 'community:community' 0 %}">목록으로</a>
+    <a href="{% url 'community:community' 0 1 %}">목록으로</a>
     {% if request.user == post.author %}
     {% endif %}
 

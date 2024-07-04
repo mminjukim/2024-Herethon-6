@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 
-def community(request, category_id):
+def community(request, category_id, sort_by):
     got_posts = Post.objects.all().order_by('-created_at')
     categories = Category.objects.all()
     if category_id != 0:
@@ -15,6 +15,9 @@ def community(request, category_id):
         comment_count = Comment.objects.filter(linked_post=p).count()
         like_count = p.liked_users.count()
         posts.append({'post':p, 'comment_count':comment_count, 'like_count':like_count})
+
+    if sort_by == 2:
+        posts = sorted(posts, key=lambda x: x['like_count'], reverse=True)
 
     context = {
         'posts':posts,
@@ -30,7 +33,7 @@ def create_post(request): # create
             unfinished_form = form.save(commit=False)
             unfinished_form.author = request.user
             unfinished_form.save()
-            return redirect('community:community', 0)
+            return redirect('community:community', category_id=0, sort_by=1)
     else:
         form = PostForm() 
         return render(request, 'create_post.html', {'form':form})
@@ -83,7 +86,7 @@ def delete_post(request, id):
     post = get_object_or_404(Post, id = id)
     if request.user == post.author:
         post.delete()
-    return redirect('community:community', 0)
+    return redirect('community:community', category_id=0, sort_by=1)
 
 # 댓글 삭제
 def delete_comment(request, id):
