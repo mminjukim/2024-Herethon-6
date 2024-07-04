@@ -28,9 +28,12 @@ def match_teacher_list(request, learner_id):
 
 
 def mzteacher_profile(request, teacher_id):
-    learner = Learner.objects.get(user_id=request.user.id)
     teacher = Teacher.objects.get(id=teacher_id)
-    return render(request, 'mzteacher_profile.html', {'teacher':teacher, 'profile':learner})
+    try:
+        learner = Learner.objects.get(user_id=request.user.id)
+        return render(request, 'mzteacher_profile.html', {'teacher':teacher, 'profile':learner})
+    except:
+        return render(request, 'mzteacher_profile_forteacher.html', {'teacher':teacher})
 
 
 def match_a_teacher(request, teacher_id):

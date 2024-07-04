@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Write a Review for {{ teacher.user.username }}</title>
+  </head>
+  <body>
+    <h1>리뷰작성</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">작성하기</button>
+    </form>
+    <a href="{% url 'chat:chat_view' teacher.user.username %}">Back to Chat</a>
+  </body>
+</html>
