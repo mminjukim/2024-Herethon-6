@@ -15,19 +15,19 @@ def show_review(request, teacher_id):
 @login_required
 def write_review(request, teacher_username):
     teacher = get_object_or_404(Teacher, user__username = teacher_username)
+    learner = request.user
+
+    review = Review.objects.filter(teacher=teacher, learner=learner).first()
+    if not review:
+        review = Review(teacher=teacher, learner=learner)
 
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
-            review = form.save(commit=False)
-            review.teacher = teacher
-            review.learner = request.user
-            review.save()
+            form.save()
             return redirect('chat:chat_view', username=teacher_username)
-        else:
-            form = ReviewForm()
     else:
-        form = ReviewForm()
+        form = ReviewForm(instance=review)
 
     return render(request, 'write_review.html', {'form': form, 'teacher' : teacher })
 
