@@ -7,17 +7,43 @@
 </head>
 <body>
     <h1>커뮤니티</h1>
+    <hr>
+    <h3>카테고리 선택 : 
+        {% if category_id == 0 %} 전체
+        {% else %} 
+            {% for category in categories %}
+            {% if category.id == category_id %}
+                {{ category.name }}
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+    </h3>
+    <div class="teachCatagoriesMain">
+        {% for category in categories %}
+            {% if category.id == category_id %}
+            <a href="{% url 'community:community' 0 %}"><div class="catagory" id="catagory1">
+                {{ category.name }}
+            </div></a>
+            {% else %}
+            <a href="{% url 'community:community' category.id %}"><div class="catagory" id="catagory1">
+                {{ category.name }}
+            </div></a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <hr>
+    <h4><a href="{% url 'community:create_post' %}">새 글 작성</a></h4>
+    <hr>
     <div>
-        <a href="{% url 'community:create_post' %}">새 글 작성</a>
-        {% for post in posts %} 
+        {% for post_block in posts %} 
         <div>
-            <a href="{% url 'community:post_detail' post.id %}">
-                <h3>{{ post.title|truncatechars:20 }}</h3>
-                <ul>
-                    <li>{{ post.category }}</li>
-                    <li>날짜: {{ post.created_at }}</li>
-                </ul>
+            <a href="{% url 'community:post_detail' post_block.post.id %}">
+                <h3>{{ post_block.post.title|truncatechars:20 }}</h3>
             </a>
+            <ul>
+                <li>{{ post_block.post.category }}</li>
+                <li>좋아요: {{ post_block.like_count }} / 댓글: {{ post_block.comment_count }}</li>
+            </ul>
         </div>
         <hr/>
         {% endfor %}

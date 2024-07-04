@@ -4,9 +4,24 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 
-def community(request):
-    posts = Post.objects.all().order_by('-created_at')
-    return render(request, 'community.html', {"posts":posts})
+def community(request, category_id):
+    got_posts = Post.objects.all().order_by('-created_at')
+    categories = Category.objects.all()
+    if category_id != 0:
+        got_posts = Post.objects.filter(category_id=category_id).order_by('-created_at')
+
+    posts = []
+    for p in got_posts:
+        comment_count = Comment.objects.filter(linked_post=p).count()
+        like_count = p.liked_users.count()
+        posts.append({'post':p, 'comment_count':comment_count, 'like_count':like_count})
+
+    context = {
+        'posts':posts,
+        'categories':categories,
+        'category_id':category_id,
+    }
+    return render(request, 'community.html', context)
 
 def create_post(request): # create
     if request.method == 'POST':
@@ -15,7 +30,7 @@ def create_post(request): # create
             unfinished_form = form.save(commit=False)
             unfinished_form.author = request.user
             unfinished_form.save()
-            return redirect('community:community')
+            return redirect('community:community', 0)
     else:
         form = PostForm() 
         return render(request, 'create_post.html', {'form':form})
@@ -68,7 +83,7 @@ def delete_post(request, id):
     post = get_object_or_404(Post, id = id)
     if request.user == post.author:
         post.delete()
-    return redirect('community:community')
+    return redirect('community:community', 0)
 
 # 댓글 삭제
 def delete_comment(request, id):
