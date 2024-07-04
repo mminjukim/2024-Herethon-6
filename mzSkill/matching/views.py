@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Count
 from django.db.models.functions import Length
 
+from django.core.paginator import Paginator
 from profiles.models import *
 
 def match_teacher_list(request, learner_id):
@@ -23,8 +24,19 @@ def match_teacher_list(request, learner_id):
 
     teacher_scores = sorted(teacher_scores, key=lambda x:x[1], reverse=True)
     got_teachers = [t[0] for t in teacher_scores]
+
+    if not got_teachers:
+        return render(request, 'match_teacher_notfound.html', {'learner':learner}) 
+    
+    got_tc_paginator = Paginator(got_teachers, 3)
+    pgnum = request.GET.get('page')
+    got_teachers = got_tc_paginator.get_page(pgnum)
     
     return render(request, 'match_teacher_list.html', {'got_teachers':got_teachers, 'learner':learner}) 
+
+def no_match_teacher_left(request, learner_id):
+    learner = Learner.objects.get(id=learner_id)
+    return render(request, 'match_teacher_notfound.html', {'learner':learner}) 
 
 
 def mzteacher_profile(request, teacher_id):

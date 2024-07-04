@@ -1,16 +1,21 @@
 body {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
     font-family: 'pretendard';
+    max-width: 420px;
+    height: 100vh;
+    margin: 0 auto;
     background-color: #FBF8FE;
+    flex-wrap: wrap;
 }
 
 .container {
     text-align: center;
+    background-color: #FBF8FE;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .message {
@@ -21,6 +26,7 @@ body {
     color: #454347;
     font-weight: bold;
     padding-right: 100px;
+    margin-top: 20px;
 }
 
 .sub-message {
@@ -53,7 +59,7 @@ body {
     cursor: pointer;
     text-decoration: none;
     width: 314px;
-    height: 50px;
+    height:25px;
 }
 
 
@@ -61,4 +67,9 @@ body {
     color: #A39FA6;
     text-align: right;
     margin-top: 92px;
+}
+.text .link {
+    color: #A39FA6; /* 원하는 색상으로 변경 */
+    text-decoration: none;
+    font-size: 14px;
 }

@@ -4,90 +4,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>러너 메인 페이지</title>
-    <link rel="stylesheet" href="{% static 'css/learner_main.css' %}" />
+    <title>MZ의 스킬 - 메인</title>
+    <link rel="stylesheet" href="{% static 'css/mainRunner.css' %}" />
   </head>
   <body>
     <div class="backgroundContainer">
       <div class="mainContainer">
         <div class="topContainer">
           <div class="topTitle">MZ의 스킬</div>
-          <a href="{% url 'profiles:show_learner_profile' profile.id %}"
-            ><img
-              class="myPageIcon"
-              src="{% static 'images/mainLearner/🦆 icon _user_.png' %}"
+          <a href="{% url 'profiles:show_learner_profile' profile.id %}">
+            <img
+            class="myPageIcon"
+            src="{% static 'images/mainRunner/🦆 icon _user_.png' %}"
           /></a>
         </div>
         <div class="middleContainer">
           <div class="middleMessage">
-            {{ profile.nickname }} 러너님,<br />1:1 매칭을 통해 맞춤 티처를
-            찾아드릴게요.
+            {{ profile.nickname }} 러너님,<br />1:1 매칭을 통해 맞춤 티처를 찾아드릴게요.
           </div>
-          <a href="{% url 'matching:match_teacher_list' profile.id %}"
-            ><div class="matchingButton">1:1 매칭 하러 가기</div></a
-          >
+          <a href="{% url 'matching:match_teacher_list' profile.id %}">
+            <div class="matchingButton">1:1 매칭 하러 가기</div>
+          </a>
         </div>
-        <div>
-          <!-- 백엔드 임의로 추가 -->
-          <h3>내 티쳐들</h3>
-          {% for teacher in profile.my_teachers.all %}
-          <li>
-            <a href="{% url 'chat:chat_view' teacher.user.username %}">
-              {{ teacher.nickname }}
-            </a>
-          </li>
-          {% endfor %}
-        </div>
-        <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="mzTeacherSearchButton">MZ 티쳐 찾기</div></a>
+        <a href="{% url 'matching:mzteacher_list' 0 %}">
+          <div class="mzTeacherSearchButton">MZ 티쳐 찾기</div>
+        </a>
         <div class="appealTeacherContainer">
           <div class="appealMessage">어필 중인 MZ 티쳐를 소개해드려요.</div>
           <div class="appealTeachers">
+            {% for teacher in teachers %}
             <div class="teacher1">
+              {% if teacher.emoji %}
               <img
                 width="54px"
                 height="54px"
-                src="{% static 'images/mainLearner/3dicons (6).png' %}"
+                src="{{ teacher.emoji.url }}"
               />
-              <div class="teacher1name">나른한 바나나</div>
-              <div class="teacher1catagory">요가/영상</div>
-            </div>
-            <div class="teacher2">
+              {% else %}
               <img
                 width="54px"
                 height="54px"
-                src="{% static 'images/mainLearner/31.png' %}"
+                src="{% static 'images/mainRunner/3dicons (6).png' %}"
               />
-              <div class="teacher2name">노란 파일</div>
-              <div class="teacher2catagory">글쓰기 · 문법 및 교정</div>
+              {% endif %}
+              <div class="teacher1name">{{ teacher.nickname }}</div>
+              <div class="teacher1catagory">
+                {% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+              </div>
             </div>
-            <div class="teacher3">
-              <img
-                width="54px"
-                height="54px"
-                src="{% static 'images/mainLearner/31 (1).png' %}"
-              />
-              <div class="teacher3name">로켓 배송</div>
-              <div class="teacher3catagory">여행 계획</div>
-            </div>
+            {% endfor %}
           </div>
         </div>
         <nav>
           <ul class="navContainer">
             <li class="navHome">
               <img
-                src="{% static 'images/mainLearner/🦆 icon _home simple door_ (1).png' %}"
+                src="{% static 'images/mainRunner/🦆 icon _home simple door_ (1).png' %}"
               /><a href="{% url 'main:main' %}">메인화면</a>
             </li>
             <li class="navTeaching">
-              <img
-                src="{% static 'images/mainLearner/🦆 icon _bookmark book_.png' %}"
-              />
+              <img src="{% static 'images/mainRunner/🦆 icon _bookmark book_.png' %}" />
               <a href="{% url 'chat:room'%}">1:1티칭</a>
             </li>
             <li class="navCommunity">
-              <img
-                src="{% static 'images/mainLearner/🦆 icon _chat bubble_.png' %}"
-              />
+              <img src="{% static 'images/mainRunner/🦆 icon _chat bubble_.png' %}" />
               <a href="{% url 'community:community' 0 1 %}">커뮤니티</a>
             </li>
           </ul>
