@@ -45,7 +45,8 @@ def match_a_teacher(request, teacher_id):
 
 
 def mzteacher_list(request, category_id):
-    teachers = Teacher.objects.all()
+    # 내림차순으로 정렬
+    teachers = Teacher.objects.all().order_by('-last_appealed')
     categories = Category.objects.all()
     if category_id != 0:
         skills_in_catergory = Skill.objects.filter(category_id=category_id)
