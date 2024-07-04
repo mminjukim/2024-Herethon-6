@@ -31,6 +31,8 @@ urlpatterns = [
     path('community/', include('community.urls')),
     path('chat/', include('chat.urls')),
     path('matching/', include('matching.urls')),
+
+    path('review/', include('review.urls')),
 ]
 
 if settings.DEBUG:
