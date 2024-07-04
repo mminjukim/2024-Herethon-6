@@ -1,22 +1,16 @@
-html {
-    background-color: whitesmoke;
-}
-
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'pretendard';
-    max-width: 420px;
     height: 100vh;
-    margin: 0 auto;
-    background-color: #FBF8FE;
-    flex-wrap: wrap;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f3ff;
 }
 
 .container {
     text-align: center;
-    background-color: #FBF8FE;
+    background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -24,16 +18,16 @@ body {
 
 h2 {
     font-size: 24px;
-    color: #454347;
+    color: #333;
     margin-bottom: 20px;
-    margin-top: 15px;
-    text-align: left;
 }
 
 .section {
     margin-bottom: 20px;
-    color: #454347;
-    text-align: left;
+    border: 2px solid transparent;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 .options, .skills {
@@ -43,32 +37,28 @@ h2 {
 }
 
 .option, .skill {
-    width: calc(33.33% - 20px); /* 각 박스의 너비를 33.33%로 설정하고, 좌우 간격을 위해 20px을 뺍니다 */
     margin: 10px;
     text-align: center;
     position: relative;
 }
 
-.option .label, .skill .label {
+.option .label {
     display: block;
     cursor: pointer;
+    border: 2px solid transparent;
     padding: 10px;
-    border-radius: 15px;
-    background-color: #FBF8FE;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
     transition: all 0.3s ease;
-    border: 1px solid transparent;
 }
 
-.option img, .skill img {
+.option img {
     width: 50px;
     height: 50px;
     display: block;
     margin: 0 auto 10px;
 }
 
-.option span, .skill span {
+.option span, .skill {
     display: block;
     font-size: 14px;
     color: #555;
@@ -79,7 +69,11 @@ h2 {
 }
 
 .checkbox:checked + .label {
-    border-color: #8520EA;
+    border-color: #a363ff;
+}
+
+.checkbox:checked + .label .checkmark {
+    display: block;
 }
 
 .checkmark {
@@ -87,42 +81,38 @@ h2 {
     position: absolute;
     top: 10px;
     right: 10px;
-    width: 15px;
-    height: 15px;
-    background: url('../images/matching_teacher/check.png') no-repeat center center;
+    width: 20px;
+    height: 20px;
+    background: url('images/checkmark.png') no-repeat center center;
     background-size: cover;
 }
 
-.checkbox:checked + .label .checkmark {
-    display: block;
-}
-
-.skill-category {
-    text-align: left;
-}
-
-.skill-options {
+.sub-skills {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
-    width: auto;
+    justify-content: center;
 }
 
-.skill-options .skill {
-    flex: 0 1 calc(33.33% - 20px); /* 한 줄에 세 개씩 배치되도록 설정 */
+.sub-skills button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #a363ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
 }
 
 .submit-button {
     display: block;
     width: 100%;
     padding: 15px;
-    background-color: #8520EA;
+    background-color: #a363ff;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 20px;
 }
 
 .submit-button:hover {
