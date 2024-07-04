@@ -23,12 +23,19 @@
             {{ profile.nickname }} 러너님,<br />1:1 매칭을 통해 맞춤 티처를
             찾아드릴게요.
           </div>
-          <a href="{% url 'matching:match_teacher_list' profile.id %}"><div class="matchingButton">1:1 매칭 하러 가기</div></a>
+          <a href="{% url 'matching:match_teacher_list' profile.id %}"
+            ><div class="matchingButton">1:1 매칭 하러 가기</div></a
+          >
         </div>
-        <div> <!-- 백엔드 임의로 추가 -->
+        <div>
+          <!-- 백엔드 임의로 추가 -->
           <h3>내 티쳐들</h3>
           {% for teacher in profile.my_teachers.all %}
-          <li>{{ teacher.nickname }}</li>
+          <li>
+            <a href="{% url 'chat:chat_view' teacher.user.username %}">
+              {{ teacher.nickname }}
+            </a>
+          </li>
           {% endfor %}
         </div>
         <div class="mzTeacherSearchButton">MZ 티쳐 찾기</div>
