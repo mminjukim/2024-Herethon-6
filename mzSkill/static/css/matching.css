@@ -9,62 +9,97 @@ body {
     background-color: #FBF8FE;
 }
 
+.container {
+    max-width: 420px;
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #FBF8FE;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    padding: 20px;
+    box-sizing: border-box;
+}
 
-.h5 {
+h5 {
     color: #A39FA6;
     font-size: 14px;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 20px;
 }
 
 .main-heading {
-    font-size: 16px;
+    font-size: 20px;
     margin: 10px 0;
     color: #454347;
+    text-align: left;
+    margin-left: 20px;
+    line-height: 100%;
+    letter-spacing: 30%;
 }
 
 .sub-heading {
-    font-size: 14px;
+    font-size: 16px;
     margin: 20px 0;
+    color: #454347;
+    text-align: left;
+    margin-left: 20px;
 }
 
 .options {
-    display: block;
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
 }
 
 .option {
     border: 2px solid #E0E0E0;
     padding: 10px;
     border-radius: 10px;
+    display: flex;
     width: 314px;
-    height: 100px;
+    align-items: center;
+    justify-content: space-between;
     cursor: pointer;
     position: relative;
+    transition: 0.3s;
 }
 
 .option img {
-    width: 50px;
-    height: 50px;
-
-    
+    width: 55px;
+    height: 55px;
+    margin-right: 10px;
 }
 
 .option p {
     font-size: 14px;
-    margin: 10px 0 0;
-    text-align: right;
+    margin: 0;
+    color: #454347;
+    flex: 1;
+    text-align: left;
 }
 
-.option .checkmark {
-    display: none;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    color: #8520EA;
+.option strong {
     font-size: 16px;
+    color: #454347;
+}
+
+.checkmark {
+    display: none;
+}
+
+.checkmark img {
+    width: 27px;
+    height: 27px;
 }
 
 .option.selected {
     border-color: #8520EA;
+    background-color: #F3E9FE;
 }
 
 .option.selected .checkmark {
@@ -75,6 +110,14 @@ body {
     margin: 20px 0;
     font-size: 14px;
     color: #A39FA6;
+    text-align: left;
+    margin-left: 20px;
+    text-decoration: none;
+}
+.account-link a {
+    color: #A39FA6;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
 .next-button {
@@ -84,7 +127,15 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
-    width: 314px;
-    height: 50px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 290px;
+    height: 25px;
+    margin-top: 20px;
+    margin-left: 0px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* 링크 스타일 제거 */
 }

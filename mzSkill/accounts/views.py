@@ -45,6 +45,7 @@ class SignUpView(View):  # 2단계 : 회원가입
                 Learner.objects.create(user=user)
             elif usertype == '2':
                 Teacher.objects.create(user=user)
+            request.session['usertype'] = usertype # http 세션에 choice 데이터 저장해 다음 단계로 넘겨줌
             return redirect(reverse('accounts:writeprofile'))
         return render(request, 'signup.html', {'form': form})
 
