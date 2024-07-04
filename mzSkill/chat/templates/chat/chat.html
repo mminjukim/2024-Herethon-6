@@ -9,12 +9,9 @@
     <div class="chat-container">
       <div class="chat-header">
         <!-- <h1>{{ receiver.user.username }}</h1> -->
-        <a href="{% url 'chat:out' receiver.user.username  %}">나가기</a>
         <a href="{% url 'chat:room' %}">뒤로</a>
-        {% if request.user.username != receiver.user.username %}
-        <a href="{% url 'review:write_review' receiver.user.username %}"
-          >티쳐에게 리뷰작성하기</a
-        >
+        {% if not is_teacher and request.user.username != receiver.user.username %}
+          <a href="{% url 'review:write_review' receiver.user.username %}">리뷰작성</a>
         {% endif %}
       </div>
       <div id="chat-log" class="chat-log">
@@ -96,5 +93,6 @@
       };
     </script>
     <br />
+    <a href="{% url 'chat:out' receiver.user.username  %}">나가기</a>
   </body>
 </html>

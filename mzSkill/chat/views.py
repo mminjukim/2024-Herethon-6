@@ -34,6 +34,8 @@ def chat_view(request, username):
     except Learner.DoesNotExist:
         receiver_profile = Teacher.objects.get(user=receiver_user)
 
+    is_teacher = Teacher.objects.filter(user=user).exists()
+
     if request.method == 'POST':
         content = request.POST.get('message')
         if content:
@@ -42,7 +44,7 @@ def chat_view(request, username):
     messages = Message.objects.filter(sender=user, receiver=receiver_user) | Message.objects.filter(sender=receiver_user, receiver=user)
     messages = messages.order_by('timestamp')
     
-    return render(request, 'chat/chat.html', {'receiver': receiver_profile, 'messages': messages})
+    return render(request, 'chat/chat.html', {'receiver': receiver_profile, 'messages': messages, 'is_teacher': is_teacher,})
 
 @login_required
 def out(request, username):
