@@ -9,7 +9,8 @@
     <h1>티쳐 메인 페이지</h1>
     <p>환영합니다, <b>{{ profile.nickname }}</b> 티쳐님</p>
     <br />
-
+    <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="mzTeacherSearchButton">MZ 티쳐 찾기</div></a>
+    <br>
     <a href="{% url 'profiles:show_teacher_profile' profile.id %}"
       >프로필 보기</a
     >
