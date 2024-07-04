@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <title>매칭화면</title>
 </head>
 <body>
-    <h1>러너에게 매칭될 가능성 있는 티쳐들</h1>
+    <h1>{{ learner.nickname }}님의<br>맞춤 MZ 티쳐를 소개해드려요</h1>
     {% for teacher in got_teachers %}
     <div>
         <a href="{% url 'matching:mzteacher_profile' teacher.id %}"><h3>티쳐: {{ teacher.nickname }}</h3></a>

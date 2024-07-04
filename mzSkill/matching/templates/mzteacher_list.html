@@ -1,0 +1,52 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MZ티쳐 전체보기</title>
+    <link rel="stylesheet" href="{% static 'css/teacherInroduce.css' %}" />
+  </head>
+  <body>
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <a href="{% url 'main:main' %}"><div class="꺽쇄">&lt;</div></a>
+          <div class="message">
+            원하는 MZ 티쳐를 찾아<br />
+            1:1 매칭을 신청할 수 있어요.
+          </div>
+        </div>
+
+        <div class="teachCatagories">
+          <div class="teachCatagoriesTop"></div>
+          <div class="teachCatagoriesMain">
+            {% for category in categories %}
+            <a><div class="catagory" id="catagory1">{{ category.name }}</div></a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="allTeachers">
+          <div class="정렬">최신순</div>
+          {% for teacher in teachers %}
+          <div class="teacherA">
+            {% if teacher.emoji %}
+            <img class="profileImage" height="30px" src="{{ teacher.emoji.url }}" />
+            {% endif %}
+            <div class="teacherName">
+                <a href="{% url 'matching:mzteacher_profile' teacher.id %}">{{teacher.nickname}}</a> ({% for skill in teacher.skills.all %}{{skill.name}}{% if not forloop.last %}/{% endif %}{% endfor %})
+            </div>
+            {% if teacher.is_paid == True %}
+            <img src="{% static 'images/teacherIntroduce/Vector (1).png' %}" />
+            {% endif %}
+            <div class="teacherIntroduce">
+              {{ teacher.bio }}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -31,7 +31,7 @@
           <li>{{ teacher.nickname }}</li>
           {% endfor %}
         </div>
-        <div class="mzTeacherSearchButton">MZ 티쳐 찾기</div>
+        <a href="{% url 'matching:mzteacher_list' %}"><div class="mzTeacherSearchButton">MZ 티쳐 찾기</div></a>
         <div class="appealTeacherContainer">
           <div class="appealMessage">어필 중인 MZ 티쳐를 소개해드려요.</div>
           <div class="appealTeachers">

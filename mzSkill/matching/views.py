@@ -14,18 +14,17 @@ def match_teacher_list(request, learner_id):
     teacher_scores = []
     for teacher in teachers:
         skill_count = teacher.skills.filter(id__in=wanting_skills).count()
-        score = skill_count
+        score = skill_count * 10
 
         personality_count = teacher.personalities.filter(id__in=learner.personalities.all()).count()
         score += personality_count
 
         teacher_scores.append((teacher, score))
 
-    teacher_scores.sort(key=lambda x:[1], reverse=True)
+    teacher_scores = sorted(teacher_scores, key=lambda x:x[1], reverse=True)
     got_teachers = [t[0] for t in teacher_scores]
-    print(got_teachers)
     
-    return render(request, 'match_teacher_list.html', {'got_teachers':got_teachers}) 
+    return render(request, 'match_teacher_list.html', {'got_teachers':got_teachers, 'learner':learner}) 
 
 
 def mzteacher_profile(request, teacher_id):
@@ -40,3 +39,13 @@ def match_a_teacher(request, teacher_id):
     learner.my_teachers.add(teacher)
     print(learner.my_teachers.all)
     return render(request, 'match_complete.html', {'teacher':teacher})
+
+
+def mzteacher_list(request):
+    teachers = Teacher.objects.all()
+    categories = Category.objects.all()
+    context = {
+        'teachers':teachers,
+        'categories':categories,
+    }
+    return render(request, 'mzteacher_list.html', context)

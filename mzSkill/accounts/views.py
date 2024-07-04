@@ -106,7 +106,7 @@ class WriteDetailsView(View):
             if form.is_valid():
                 id = profile.id
                 form.save()
-                return redirect('accounts:learner_registered', id)
+                return redirect('matching:match_teacher_list', id)
         else:
             profile = Teacher.objects.get(user_id = request.user.id)
             form = TeacherDetailsForm(request.POST, instance=profile)
@@ -122,10 +122,6 @@ class WriteDetailsView(View):
 def teacher_registered(request, id):
     profile = Teacher.objects.get(id = id)
     return render(request, 'teacher_registered.html', {'profile':profile})
-
-def learner_registered(request, id):
-    profile = Learner.objects.get(id = id)
-    return render(request, 'learner_registered.html', {'profile':profile})
 
 
 
