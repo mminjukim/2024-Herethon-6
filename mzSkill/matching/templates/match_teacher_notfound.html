@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맞춤 MZ 티쳐를 찾지 못했어요</title>
+    <link rel="stylesheet" href="{% static 'css/notfound.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="message">{{ learner.nickname }} 러너님의 <br>맞춤 MZ 티쳐를 찾지 못했어요.</br></div>
+        <div class="sub-message">세부 정보를 수정하면 <br>1:1 매칭 성공 가능성이 올라갈 수 있어요.</br></div>
+        <img src="{% static 'images/notfound/notfound.png' %}" alt="Magnifying Glass" class="magnifying-glass">
+        <div class="buttons">
+            <a href="{% url 'main:main' %}" class="button">되돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>
+
