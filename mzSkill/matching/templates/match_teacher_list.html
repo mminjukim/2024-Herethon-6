@@ -45,6 +45,9 @@
                 <img src="{% static 'images/matching_success/right.png' %}" alt="Arrow Image" class="arrow-image">
             </div>
         </div>
+        <a href="{% url 'matching:match_a_teacher' teacher.id %}">
+            <button class="submit-button">1:1 매칭 신청하기</button>
+        </a>
         {% endfor %}
 
         <div class="footer">
@@ -61,9 +64,7 @@
                 {% endif %}
                 <a href="{% url 'main:main' %}" class="footer-link gray-link">메인화면으로 가기</a>
             </div>
-            <a href="{% url 'matching:match_a_teacher' teacher.id %}">
-                <button class="submit-button">1:1 매칭 신청하기</button>
-            </a>
+            
         </div>
     </div>
     <script src="{% static 'js/matching_success.js' %}"></script>
