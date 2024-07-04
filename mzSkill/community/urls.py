@@ -1,10 +1,12 @@
 from django.urls import path
+from django.views.generic import RedirectView
 from .views import *
 
 app_name = 'community'
 
 urlpatterns = [
-    path('', community, name='community'),
+    path('', RedirectView.as_view(url='/community/0/', permanent=True)),
+    path('<int:category_id>/', community, name='community'),
 
     path('create_post/', create_post, name='create_post'),
     path('create_comment/<int:id>/', create_comment, name='create_comment'),

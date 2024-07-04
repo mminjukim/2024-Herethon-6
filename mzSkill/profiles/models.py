@@ -44,6 +44,8 @@ class Teacher(models.Model):
     teaching_plan = models.TextField(null=True)
     is_paid = models.BooleanField(null=True)
 
+    last_appealed = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.nickname
     

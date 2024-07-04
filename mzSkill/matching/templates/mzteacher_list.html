@@ -23,7 +23,7 @@
           <div class="teachCatagoriesMain">
             {% for category in categories %}
               {% if category.id == category_id %}
-              <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="catagory" id="catagory1">
+              <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="catagory" id="catagory1" style="background-color: rgb(172, 114, 244);">
                 {{ category.name }}
               </div></a>
               {% else %}

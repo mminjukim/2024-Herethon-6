@@ -39,6 +39,8 @@
         </li>
     </ul>
     <a href="{% url 'profiles:update_teacher_profile' profile.id %}">프로필 수정하기</a>
+    <a href="{% url 'profiles:appeal_teacher' profile.id %}">어필하기</a>
+    최근 어필시간: {{ profile.last_appealed }}
     <a href="{% url 'main:main' %}">메인화면</a>
 </body>
 </html>

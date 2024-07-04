@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from accounts.forms import *
 from .forms import *
 from .models import *
-
+from django.utils import timezone
 
 # 러너 프로필 보기
 def show_learner_profile(request, id):
@@ -74,3 +74,9 @@ def write_teachingplan(request, id):
     else:
         form = TeachingPlanForm(instance=profile)
         return render(request, "write_teachingplan.html", {'form':form})
+    
+def appeal_teacher(request, id):
+    profile = Teacher.objects.get(id=id)
+    profile.last_appealed = timezone.localtime()
+    profile.save(update_fields=['last_appealed'])
+    return render(request, 'show_teacher_profile.html', {'profile':profile})
