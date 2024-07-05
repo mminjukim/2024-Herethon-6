@@ -1,4 +1,4 @@
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,7 +41,7 @@
 
           <div class="teachingTeacherContainer">
             {% for teacher in my_teachers %}
-            <a href="{% url 'matching:mzteacher_profile' teacher.id %}">
+            <a href="{% url 'chat:chat_view' teacher.user.username %}">
               <div class="teacher1">
                 {% if teacher.emoji %}
                 <img
@@ -61,55 +61,68 @@
               </div>
             </a>
             {% endfor %}
+            <a href="{% url 'chat:room'%}">
+              <div class="elseTeacher">
+                <img src="{% static 'images/mainRunner/🦆 icon _more vertical_.png' %}" />
+              </div>
+            </a>
           </div>
-        </div></a>
+        </div>
 
-         <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="mzTeacherSearchButton">
-          <img class="searchButton" src="{% static 'images/mainRunner/Group.png' %}" />
-          <div class="searcherTitle">MZ 티쳐 찾기</div>
-        </div></a>   
-        
+        <a href="{% url 'matching:mzteacher_list' 0 %}"
+          ><div class="mzTeacherSearchButton">
+            <img class="searchButton" src="{% static 'images/mainRunner/Group.png' %}" />
+            <div class="searcherTitle">MZ 티쳐 찾기</div>
+          </div></a
+        >
+
         <div class="appealTeacherContainer">
           <div class="appealMessage">어필 중인 MZ 티쳐를 소개해드려요.</div>
           <div class="appealTeachers">
             {% for teacher in teachers %}
-            <div class="teacherA">
-              {% if teacher.emoji %}
-              <img
-                width="54px"
-                height="54px"
-                src="{{ teacher.emoji.url }}"
-              />
-              {% else %}
-              <img
-                width="54px"
-                height="54px"
-                src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
-              />
-              {% endif %}
-              <div class="teacherAname">
-                {{ teacher.nickname }}({% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %})
+            <a href="{% url 'matching:mzteacher_profile' teacher.id %}">
+              <div class="teacherA">
+                {% if teacher.emoji %}
+                <img
+                  class="appealteacherImage"
+                  src="{{ teacher.emoji.url }}"
+                />
+                {% else %}
+                <img
+                  class="appealteacherImage"
+                  src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
+                />
+                {% endif %}
+                <div class="introducebox">
+                  <div class="teacherAname">
+                    {{ teacher.nickname }}({% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %})
+                  </div>
+                  <div class="teacherIntroduce">
+                    {{ teacher.bio }}
+                  </div>
+                </div>
               </div>
-              <div class="teacherIntroduce">
-                {{ teacher.bio }}
-              </div>
-            </div>
+            </a>
             {% endfor %}
           </div>
         </div>
         <nav>
           <ul class="navContainer">
             <li class="navHome">
-              <img
-                src="{% static 'images/mainRunner/🦆 icon _home simple door_ (1).png' %}"
-              /><a href="{% url 'main:main' %}">메인화면</a>
+              <a href="{% url 'main:main' %}"
+                ><img src="{% static 'images/mainRunner/Group 214.png' %}"
+              /></a>
             </li>
             <li class="navTeaching">
-              <img src="{% static 'images/mainRunner/🦆 icon _bookmark book_.png' %}" />
+              <a href="{% url 'chat:room'%}"
+                ><img src="{% static 'images/mainRunner/🦆 icon _bookmark book_.png' %}"
+              /></a>
               <a href="{% url 'chat:room'%}">1:1티칭</a>
             </li>
             <li class="navCommunity">
-              <img src="{% static 'images/mainRunner/🦆 icon _chat bubble_.png' %}" />
+              <a href="{% url 'community:community' 0 1 %}"
+                ><img src="{% static 'images/mainRunner/🦆 icon _chat bubble_.png' %}"
+              /></a>
               <a href="{% url 'community:community' 0 1 %}">커뮤니티</a>
             </li>
           </ul>
