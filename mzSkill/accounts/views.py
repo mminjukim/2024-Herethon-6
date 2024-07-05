@@ -94,30 +94,39 @@ class WriteDetailsView(View):
 
     def get(self, request, *args, **kwargs):
         if request.session['usertype'] == '1':
-            form = LearnerDetailsForm(request.POST)
+            return render(request, 'writedetails_learner.html')
         else:
-            form = TeacherDetailsForm(request.POST)
-        return render(request, 'writedetails.html', {'form':form})
+            return render(request, 'writedetails_teacher.html')
     
     def post(self, request, *args, **kwargs):
         print(request.session['usertype'])
         if request.session['usertype'] == '1':
             profile = Learner.objects.get(user_id = request.user.id)
-            form = LearnerDetailsForm(request.POST, instance=profile)
-            if form.is_valid():
-                id = profile.id
-                form.save()
-                return redirect('matching:match_teacher_list', id)
+            # form = LearnerDetailsForm(request.POST, instance=profile)
+            # if form.is_valid():
+            #     id = profile.id
+            #     form.save()
+            #     return redirect('matching:match_teacher_list', id)
+            # return render(request, 'writedetails_learner.html', {'form':form})
+            id = profile.id
+            skills = request.POST.getlist('skills[]')
+            profile.skills.set(skills)
+            personalities = request.POST.getlist('personalities[]')
+            profile.personalities.set(personalities)
+            return redirect('matching:match_teacher_list', id)
         else:
             profile = Teacher.objects.get(user_id = request.user.id)
-            form = TeacherDetailsForm(request.POST, instance=profile)
-            if form.is_valid():
-                id = profile.id
-                form.save()
-                # print(id, profile.nickname)
-                return redirect('accounts:teacher_registered', id) 
-        
-        return render(request, 'writedetails.html', {'form':form})
+            # form = TeacherDetailsForm(request.POST, instance=profile)
+            # if form.is_valid():
+            #     id = profile.id
+            #     form.save()
+            #     return redirect('accounts:teacher_registered', id)
+            id = profile.id
+            skills = request.POST.getlist('skills[]')
+            profile.skills.set(skills)
+            personalities = request.POST.getlist('personalities[]')
+            profile.personalities.set(personalities)
+            return redirect('accounts:teacher_registered', id)
     
 
 def teacher_registered(request, id):
