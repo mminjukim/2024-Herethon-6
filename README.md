@@ -24,9 +24,23 @@
 <hr>
 
 ```
-function test() {
-  console.log("notice the blank line before this function?");
-}
+all_project/
+├── accounts/
+│ ├── migrations/
+│ │ └── pycache/
+│ ├── static/
+│ │ ├── css/
+│ │ ├── img/
+│ │ └── js/
+│ ├── templates/
+│ └── pycache/
+├── codea/
+│ └── pycache/
+├── media/
+│ └── profile_images/
+├── search/
+│ ├── migrations/
+│ │ └── pycache/
 ```
 
 <li>폴더 구조</li>
