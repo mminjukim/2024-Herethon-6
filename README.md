@@ -2,18 +2,18 @@
 2024 여기톤 : HERETHON 6조
 
 
-👨‍💻 Role & Contribution
+<h1>👨‍💻 Role & Contribution</h1>
 <hr>
-<h1>기획/디자인</h1>
+<h2>기획/디자인</h2>
 
 <li>전수민</li>
 
-<h1>프론트엔드</h1>
+<h2>프론트엔드</h2>
 
 <li>김예원</li>
 <li>김정은</li>
 
-<h1>백엔드</h1>
+<h2>백엔드</h2>
 
 <li>손재윤</li>
 <li>김민주</li>
