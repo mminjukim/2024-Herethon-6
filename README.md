@@ -37,7 +37,6 @@
 
 <!-- Design -->
 <p><strong>Design</strong></p>
-<br>
-![image](https://github.com/2024-HERETHON/2024-Herethon-6/assets/153150703/3d129b05-a2ec-4f41-aab5-30682230d049)
+    <h2>👋FIGMA👋</h2>
 
 
