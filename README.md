@@ -24,25 +24,24 @@
 <hr>
 
 # 폴더 구조
-
-\```
 all_project/
 ├── accounts/
-│   ├── migrations/
-│   │   └── __pycache__/
-│   ├── static/
-│   │   ├── css/
-│   │   ├── img/
-│   │   └── js/
-│   ├── templates/
-│   └── __pycache__/
+│ ├── migrations/
+│ │ └── pycache/
+│ ├── static/
+│ │ ├── css/
+│ │ ├── img/
+│ │ └── js/
+│ ├── templates/
+│ └── pycache/
 ├── codea/
-│   └── __pycache__/
+│ └── pycache/
 ├── media/
-│   └── profile_images/
+│ └── profile_images/
 ├── search/
-│   ├── migrations/
-│   │   └── __pycache__/
-\```
+│ ├── migrations/
+│ │ └── pycache/
+
+
 
 
