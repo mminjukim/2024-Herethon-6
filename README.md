@@ -23,6 +23,12 @@
 
 <hr>
 
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
+
 <li>폴더 구조</li>
 ```
 all_project/
