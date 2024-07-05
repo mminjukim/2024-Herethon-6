@@ -21,7 +21,7 @@
         <div class="middleContainer">
           <div class="middleMessage">
             <span style="color: #8520ea; font-weight: bolder; font-size: 21px"
-              >{{ profile.nickname }} 티처</span
+              >{{ profile.nickname }}</span
             >님,<br /><span
               style="color: #454347; font-size: 17px; font-weight: bolder"
               >특색있는 티칭으로 스킬을 공유해주세요.</span
@@ -108,18 +108,18 @@
         </div>
         <nav>
           <ul class="navContainer">
-            <li class="navHome">
+            <li class="nav-item">
               <a href="{% url 'main:main' %}"
                 ><img src="{% static 'images/mainRunner/Group 214.png' %}"
               /></a>
             </li>
-            <li class="navTeaching">
+            <li class="nav-item">
               <a href="{% url 'chat:room'%}"
                 ><img src="{% static 'images/mainRunner/🦆 icon _bookmark book_.png' %}"
               /></a>
               <a href="{% url 'chat:room'%}">1:1티칭</a>
             </li>
-            <li class="navCommunity">
+            <li class="nav-item">
               <a href="{% url 'community:community' 0 1 %}"
                 ><img src="{% static 'images/mainRunner/🦆 icon _chat bubble_.png' %}"
               /></a>

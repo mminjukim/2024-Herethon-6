@@ -27,7 +27,7 @@
                 {% endif %}
                 <h3>{{ got_teachers.0.nickname }}</h3>
                 <p class="card-subtitle">
-                    {% for skill in got_teachers.0.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                    {% for skill in got_teachers.0.skills.all %}{{ skill|truncatechars:10 }}{% if not forloop.last %}/{% endif %}{% endfor %}
                 </p>
                 <p class="card-details">{{ got_teachers.0.bio }}</p>
                 <div class="card-buttons">
@@ -55,7 +55,7 @@
                 {% endif %}
                 <h3>{{ got_teachers.1.nickname }}</h3>
                 <p class="card-subtitle">
-                    {% for skill in got_teachers.1.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                    {% for skill in got_teachers.1.skills.all %}{{ skill|truncatechars:10 }}{% if not forloop.last %}/{% endif %}{% endfor %}
                 </p>
                 <p class="card-details">{{ got_teachers.1.bio }}</p>
                 <div class="card-buttons">
@@ -84,7 +84,7 @@
                 {% endif %}
                 <h3>{{ got_teachers.2.nickname }}</h3>
                 <p class="card-subtitle">
-                    {% for skill in got_teachers.2.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                    {% for skill in got_teachers.2.skills.all %}{{ skill|truncatechars:10 }}{% if not forloop.last %}/{% endif %}{% endfor %}
                 </p>
                 <p class="card-details">{{ got_teachers.2.bio }}</p>
                 <div class="card-buttons">
