@@ -1,0 +1,109 @@
+html {
+  background-color: whitesmoke;
+}
+.backgroundContainer {
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+.mainContainer {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.topContainer {
+  display: grid;
+  grid-template-columns: 20fr 1fr;
+  place-items: center;
+  padding: 30px;
+}
+.search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.matchingTitle {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #454347;
+}
+input {
+  min-width: 300px;
+  height: 40px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: #a39fa6;
+  background-image: url(../images/mainChat/mingcute_search-line.png);
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+.chat1,
+.chat2,
+.chat3 {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  padding: 15px;
+}
+.chat1name,
+.chat2name,
+.chat3name {
+  color: #454347;
+  font-weight: bolder;
+  padding-top: 15px;
+  padding-left: 10px;
+  font-size: 16px;
+}
+.chat2message,
+.chat3message {
+  grid-column: 2/3;
+  color: #a39fa6;
+  font-size: 14px;
+  padding-left: 10px;
+}
+.chatimage {
+  grid-row: 1/3;
+}
+.navContainer {
+  display: flex;
+  min-width: 339px;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  height: 91px;
+  list-style-type: none;
+  padding-right: 40px;
+  position: absolute;
+  bottom: 0%;
+}
+.navHome,
+.navTeaching,
+.navCommunity {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.navHome a,
+.navTeaching a,
+.navCommunity a {
+  text-decoration: none;
+  color: #a39fa6;
+}
+.chat1message {
+  background-color: #8520ea;
+  border-radius: 100%;
+  width: 22px;
+  height: 22px;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 22px;
+  position: relative;
+  left: 89%;
+  top: -30%;
+}

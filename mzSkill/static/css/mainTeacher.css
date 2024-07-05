@@ -3,7 +3,7 @@ html {
 }
 .backgroundContainer {
   max-width: 420px;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0 auto;
   background-color: #fbf8fe;
   display: flex;
@@ -48,17 +48,19 @@ html {
   grid-template-columns: 1fr 2fr;
   place-items: center;
   margin: 0 auto;
-  margin-bottom: 20px;
 }
 .teachingTop {
   display: flex;
 }
-.teachingTeacherTitle,
+.teachingRunnerTitle,
 .appealMessage {
   color: #454347;
   font-size: 16px;
   font-weight: bolder;
   padding-left: 30px;
+}
+.appealMessage {
+  margin-top: 20px;
 }
 .꺽쇄채팅목록이동 {
   color: #454347;
@@ -81,15 +83,20 @@ html {
   flex-direction: column;
   align-items: center;
 }
-.teachingTeacherContainer {
+.appealteacherImage {
+  grid-row: 1/3;
+  margin-top: 10px;
+  margin: 5px;
+}
+.teachingRunnerContainer {
   display: flex;
   justify-content: center;
   padding-bottom: 20px;
   padding-top: 20px;
 }
-.teacher1,
-.teacher2,
-.elseTeacher {
+.runner1,
+.runner2,
+.elseRunner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,11 +105,7 @@ html {
   box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
   border-radius: 10px;
 }
-.appealteacherImage {
-  grid-row: 1/3;
-  margin-top: 10px;
-  margin: 5px;
-}
+
 .teacherA,
 .teacherB {
   box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
@@ -110,7 +113,6 @@ html {
   min-height: 70px;
   display: grid;
   grid-template-columns: 1fr 7fr;
-  grid-template-rows: 1fr 1fr;
   border-radius: 10px;
   margin-top: 30px;
   grid-column: 1/3;
@@ -120,17 +122,14 @@ html {
   grid-row-start: 2;
   font-size: 12px;
   color: #a39fa6;
-  text-align: left;
-  padding-top: 0;
-  margin-top: 0%;
 }
-.elseTeacher {
+.elseRunner {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.teacher1name,
-.teacher2name,
+.runner1name,
+.runner2name,
 .teacher3name,
 .teacherAname,
 .teacherBname {
@@ -139,8 +138,8 @@ html {
   margin-top: 10px;
   font-weight: bolder;
 }
-.teacher1catagory,
-.teacher2catagory,
+.runner1catagory,
+.runner2catagory,
 .teacher3catagory,
 .teacherIntroduce {
   text-align: center;
@@ -148,12 +147,14 @@ html {
   color: #a39fa6;
   margin-top: 5px;
 }
+a {
+  text-decoration: none;
+}
 .navContainer {
   display: flex;
   justify-content: space-between;
   background-color: white;
   border-radius: 20px 20px 0 0;
-
   height: 91px;
   list-style-type: none;
   padding-right: 40px;
@@ -172,7 +173,4 @@ html {
 .navCommunity a {
   text-decoration: none;
   color: #a39fa6;
-}
-a {
-  text-decoration: none;
 }
