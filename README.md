@@ -24,7 +24,7 @@
 <hr>
 
 <li>폴더 구조</li>
-
+```
 all_project/
 ├── accounts/
 │ ├── migrations/
@@ -42,6 +42,7 @@ all_project/
 ├── search/
 │ ├── migrations/
 │ │ └── pycache/
+```
 
 <li>개발환경 실행방법</li>
 $ python -m venv myvenv    #가상환경 생성
