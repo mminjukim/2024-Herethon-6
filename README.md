@@ -18,8 +18,8 @@
 <li>손재윤</li>
 <li>김민주</li>
 
-🔧 Stack
-<hr>  
+<hr>
+<h1>🔧 Stack</h1>
 <!-- Frontend -->
     <p><strong>Frontend</strong></p>
     <div>
