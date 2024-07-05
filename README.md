@@ -6,17 +6,17 @@
 <hr>
 <h2>기획/디자인</h2>
 
-<li>전수민</li>
+<li>전수민(서울여자대학교)</li>
 
 <h2>프론트엔드</h2>
 
-<li>김예원</li>
-<li>김정은</li>
+<li>김예원(이화여자대학교)</li>
+<li>김정은(성신여자대학교)</li>
 
 <h2>백엔드</h2>
 
-<li>손재윤</li>
-<li>김민주</li>
+<li>손재윤(덕성여자대학교)</li>
+<li>김민주(동덕여자대학교)</li>
 
 <hr>
 <h1>Title</h1>
@@ -42,6 +42,13 @@ all_project/
 │ ├── migrations/
 │ │ └── pycache/
 
+<h3>개발 환경에서 실행방법</h3>
+$ python -m venv myvenv    #가상환경 생성
+$ source newvenv/Scripts/activate
+$ pip install pillow
+$ pip install django
+$ cd Dcodea
+$ python manage.py runserver
 
 
 
