@@ -25,23 +25,36 @@
 <li>폴더구조</li>
 
 ```
-all_project/
+mzSkill/
 ├── accounts/
-│ ├── migrations/
-│ │ └── pycache/
-│ ├── static/
-│ │ ├── css/
-│ │ ├── img/
-│ │ └── js/
-│ ├── templates/
-│ └── pycache/
-├── codea/
-│ └── pycache/
+├── chat/
+│   ├── __pycache__/
+│   ├── migrations/
+│   ├── templates/
+│   │   └── chat/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── consumers.py
+│   ├── models.py
+│   ├── routing.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── community/
+├── main/
+├── matching/
 ├── media/
-│ └── profile_images/
-├── search/
-│ ├── migrations/
-│ │ └── pycache/
+├── mzSkill/
+├── profiles/
+├── review/
+├── static/
+├── db.sqlite3
+├── docker-compose.yml
+├── Dockerfile
+├── manage.py
+├── requirements.txt
+└── .gitignore
 ```
 
 
