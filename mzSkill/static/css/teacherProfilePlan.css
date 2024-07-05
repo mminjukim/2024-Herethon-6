@@ -72,8 +72,8 @@ a {
   font-weight: bolder;
   text-align: center;
 }
-.teachingPlanKeyword {
-}
+/* .teachingPlanKeyword {
+} */
 .middleContainer {
   display: flex;
   flex-direction: column;

@@ -4,9 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MZ티쳐 프로필</title>
-    <link rel="stylesheet" href="{% static 'css/teacherProfile.css' %}" />
-    <script src="{% static 'js/teacherProfile.js' %}" defer></script>
+    <title>티칭 플랜</title>
+    <link rel="stylesheet" href="{% static 'css/teacherProfilePlan.css' %}" />
+
     <style>
       .underline {
         border-bottom: 2px solid #8520ea;
@@ -37,30 +37,41 @@
           </div>
         </div>
         <div class="teacherKeyword">
-            {% for personality in teacher.personalities.all %}
-            <div class="teacherKeyword1">{{ personality.name }}</div>
-            {% endfor %}
-        </div>
+          {% for personality in teacher.personalities.all %}
+          <div class="teacherKeyword1">{{ personality.name }}</div>
+          {% endfor %}
+      </div>
         <div class="middleContainer">
           <div class="middleContainerTop">
-            <div
-              id="teachingPlan"
-              class="teachingPlan underline"
-              onclick="showContent('teachingPlan')"
+            <a href="{% url 'matching:mzteacher_profile' teacher.id %}">
+              <div id="teachingPlan" class="teachingPlan underline">
+                티칭 계획
+              </div>
+            </a>
+            <a href="{% url 'matching:show_review' teacher.id %}">
+              <div
+                class="runnerReview no-underline"
+              >
+                러너 리뷰
+              </div></a
             >
-              티칭 계획
-            </div>
-            <div
-              id="runnerReview"
-              class="runnerReview no-underline"
-              onclick="showContent('runnerReview')"
-            >
-              러너 리뷰
-            </div>
           </div>
-          <div id="contentBox" class="middleContainer">
 
-          </div>
+          <div class="middleContainerMessage">
+            <div class="dot">●</div>
+            <div class="middleMessage">
+              {{ teacher.bio }}
+            </div>
+        </div>
+        <div class="middleContainerBox">
+            {{ teacher.teaching_plan|linebreaksbr }}
+        </div>
+        <div class="teachingPlanKeyword">
+          {% if teacher.is_paid == False %}
+            무료 티칭
+          {% else %}
+            유료 티칭
+          {% endif %}
         </div>
         <a href="{% url 'matching:match_a_teacher' teacher.id %}"><div class="matchingButton">1:1 매칭 신청하기</div></a>
       </div>

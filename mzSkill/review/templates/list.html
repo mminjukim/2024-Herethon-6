@@ -4,23 +4,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>러너 리뷰</title>
-    <link rel="stylesheet" href="{% static 'css/teacherProfile.css' %}" />
+    <title>티쳐 리뷰</title>
+    <link rel="stylesheet" href="{% static 'css/teacherProfileReview.css' %}" />
+
+    <style>
+      .no-underline {
+        border-bottom: 2px solid #8520ea;
+        color: #8520ea;
+      }
+      .underline {
+        border-bottom: 2px solid #cdcad0;
+        color: #cdcad0;
+      }
+    </style>
   </head>
   <body>
-    <div class="reviewContainer">
-      <a
-        href="{% url 'matching:mzteacher_profile' teacher.id %}"
-        class="backButton"
-        >← 뒤로 가기</a
-      >
-      <h2>러너 리뷰</h2>
-      {% for review in reviews %}
-      <div class="review">
-        <div class="rating">★: {{ review.rating }}</div>
-        <div class="comment">{{ review.comment }}</div>
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <div class="message">MZ 티쳐 프로필</div>
+          <a href="{% url 'main:main' %}"><div class="closeButton">×</div></a>
+        </div>
+        <div class="imageContainer">
+          {% if teacher.emoji %}
+          <img src="{{ teacher.emoji.url }}" />
+          {% else %}
+          <img src="{% static 'images/teacherIntroduce/3dicons (2).png' %}" />
+          {% endif %}
+          <div class="teacherName">{{ teacher.nickname }}</div>
+          <div class="teacherProperty">
+            {% for skill in teacher.skills.all %}{{ skill.name }}{% if not forloop.last %}/{% endif %}{% endfor %}
+          </div>
+        </div>
+        <div class="teacherKeyword">
+          {% for personality in teacher.personalities.all %}
+          <div class="teacherKeyword1">{{ personality.name }}</div>
+          {% endfor %}
       </div>
-      {% endfor %}
+        <div class="middleContainer">
+          <div class="middleContainerTop">
+            <a href="{% url 'matching:mzteacher_profile' teacher.id %}">
+              <div id="teachingPlan" class="teachingPlan underline">
+                티칭 계획
+              </div>
+            </a>
+            <a href="{% url 'review:show_review' teacher.id %}"
+              ><div id="runnerReview" class="runnerReview no-underline">
+                러너 리뷰
+              </div></a
+            >
+          </div>
+          <div class="middleContainerMessage">
+            <div class="dot"></div>
+            <div class="middleMessage">
+              {% for review in reviews %}
+              <div class="review">
+                <div class="reviewHeader">
+                  <span class="stars">
+                    {{ review.rating }}점
+                  </span>
+                  <span class="divider">|</span>
+                  <span class="reviewer">{{review.learner|truncatechars:2}} 러너</span>
+                </div>
+                <div class="reviewContent">
+                  {{ review.comment }}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

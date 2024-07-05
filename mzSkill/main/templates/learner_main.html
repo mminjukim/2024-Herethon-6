@@ -106,7 +106,7 @@
             {% endfor %}
           </div>
         </div>
-        <nav>
+        <!-- <nav>
           <ul class="navContainer">
             <li class="navHome">
               <a href="{% url 'main:main' %}"
@@ -126,7 +126,20 @@
               <a href="{% url 'community:community' 0 1 %}">커뮤니티</a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
+        <nav class="bottom-nav">
+          <a href="{% url 'main:main' %}" class="nav-item">
+              <img src="{% static 'images/mainRunner/Group 214.png' %}" alt="Community Icon">
+          </a>
+          <a href="{% url 'chat:room'%}" class="nav-item">
+              <img src="{% static 'images/community/teaching.png' %}" alt="Community Icon">
+              <span>1:1 티칭</span>
+          </a>
+          <a href="{% url 'community:community' 0 1 %}" class="nav-item1">
+              <img src="{% static 'images/mainRunner/🦆 icon _chat bubble_.png' %}" alt="Community Icon">
+              <span>커뮤니티</span>
+          </a>
+      </nav>
       </div>
     </div>
   </body>
