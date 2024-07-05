@@ -27,7 +27,7 @@
         <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white">
         <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"> 
     </div>
-    
+<hr>   
 <!-- Backend -->
     <p><strong>Backend</strong></p>
     <div>
