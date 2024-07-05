@@ -24,6 +24,7 @@
 <hr>
 
 # 폴더 구조
+!<-- path -->
 all_project/
 ├── accounts/
 │ ├── migrations/
