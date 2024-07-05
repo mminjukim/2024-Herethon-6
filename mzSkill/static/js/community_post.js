@@ -25,6 +25,7 @@ document.querySelector('.comment-input button').addEventListener('click', functi
         newComment.appendChild(userImage);
         newComment.appendChild(commentContent);
         
+        
         commentSection.appendChild(newComment);
         
         document.querySelector('.comment-input input').value = '';
