@@ -34,7 +34,7 @@
         <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white">
         <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white">
     </div>
-
+<hr>
 <!-- Design -->
 
 <p><strong>Design</strong></p>
