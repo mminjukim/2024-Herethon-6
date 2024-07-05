@@ -38,7 +38,6 @@
 <!-- Design -->
 <p><strong>Design</strong></p>
 <br>
-![image](https://github.com/2024-HERETHON/2024-Herethon-6/assets/153150703/7a175a79-c8e5-4089-b264-7f36139fce94)
-
+![image](https://github.com/2024-HERETHON/2024-Herethon-6/assets/153150703/3d129b05-a2ec-4f41-aab5-30682230d049)
 
 
