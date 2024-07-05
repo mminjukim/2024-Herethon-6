@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,49 +10,106 @@
 <body>
     <div class="container">
         <div class="header">
-            <p class ="card-title">{{ learner.nickname }} 러너님의<br>맞춤 MZ 티처를 소개해드려요.</p>
+            <p class="card-title">{{ learner.nickname }} 러너님의<br>맞춤 MZ 티처를 소개해드려요.</p>
             <p class="sub-text">신청하기 버튼을 클릭하면 1:1 매칭에 성공해요.</p>
         </div>
 
-        {% for teacher in got_teachers %}
         <div class="card-container">
-            <div class="card">
-                {% if teacher.is_paid %}
+            <!-- 카드 1 -->
+            <div class="card active">
+                {% if got_teachers.0.is_paid %}
                 <img src="{% static 'images/matching_success/crown.png' %}" alt="Crown Image" class="crown-image">
-                {% endif %}
-                {% if teacher.emoji %}
-                <img src="{{ teacher.emoji.url }}" alt="teacher proile emoji" class="card-image">
+                {% endif %}                
+                {% if got_teachers.0.emoji %}
+                <img src="{{ got_teachers.0.emoji.url }}" alt="teacher proile emoji" class="card-image">
                 {% else %}
                 <img src="{% static 'images/matching_success/Sun.png' %}" alt="default" class="card-image">
                 {% endif %}
-                <h3><a href="{% url 'matching:mzteacher_profile' teacher.id %}">{{ teacher.nickname }}</a></h3>
+                <h3>{{ got_teachers.0.nickname }}</h3>
                 <p class="card-subtitle">
-                    {% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                    {% for skill in got_teachers.0.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
                 </p>
-                <p class="card-details">{{ teacher.bio }}</p>
+                <p class="card-details">{{ got_teachers.0.bio }}</p>
                 <div class="card-buttons">
-                    <button class="button">{{ teacher.personalities.all|first }}</button>
-                    <button class="button">
-                        {% if teacher.is_paid == False %}
+                    <button type="button" class="button" name="feature" value="친절해요">{{ got_teachers.0.personalities.all|first }}</button>
+                    <button type="button" class="button" name="feature" value="유료 티칭">
+                        {% if got_teachers.0.is_paid == False %}
                         무료 티칭
                         {% else %}
                         유료 티칭
                         {% endif %}
                     </button>
                 </div>
+                <a href="{% url 'matching:match_a_teacher' got_teachers.0.id %}" class="submit-button">1:1 매칭 신청하기</a>
             </div>
+            <!-- 카드 2 -->
+             {% if got_teachers.1 %}
+            <div class="card">
+                {% if got_teachers.1.is_paid %}
+                <img src="{% static 'images/matching_success/crown.png' %}" alt="Crown Image" class="crown-image">
+                {% endif %}                
+                {% if got_teachers.1.emoji %}
+                <img src="{{ got_teachers.1.emoji.url }}" alt="teacher proile emoji" class="card-image">
+                {% else %}
+                <img src="{% static 'images/matching_success/Sun.png' %}" alt="default" class="card-image">
+                {% endif %}
+                <h3>{{ got_teachers.1.nickname }}</h3>
+                <p class="card-subtitle">
+                    {% for skill in got_teachers.1.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                </p>
+                <p class="card-details">{{ got_teachers.1.bio }}</p>
+                <div class="card-buttons">
+                    <button type="button" class="button" name="feature" value="친절해요">{{ got_teachers.1.personalities.all|first }}</button>
+                    <button type="button" class="button" name="feature" value="유료 티칭">
+                        {% if got_teachers.1.is_paid == False %}
+                        무료 티칭
+                        {% else %}
+                        유료 티칭
+                        {% endif %}
+                    </button>
+                </div>
+                <a href="{% url 'matching:match_a_teacher' got_teachers.1.id %}" class="submit-button">1:1 매칭 신청하기</a>
+            </div>
+            {% endif %}
+            <!-- 카드 3 -->
+            {% if got_teachers.2 %}
+            <div class="card">
+                {% if got_teachers.2.is_paid %}
+                <img src="{% static 'images/matching_success/crown.png' %}" alt="Crown Image" class="crown-image">
+                {% endif %}                
+                {% if got_teachers.2.emoji %}
+                <img src="{{ got_teachers.2.emoji.url }}" alt="teacher proile emoji" class="card-image">
+                {% else %}
+                <img src="{% static 'images/matching_success/Sun.png' %}" alt="default" class="card-image">
+                {% endif %}
+                <h3>{{ got_teachers.2.nickname }}</h3>
+                <p class="card-subtitle">
+                    {% for skill in got_teachers.2.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                </p>
+                <p class="card-details">{{ got_teachers.2.bio }}</p>
+                <div class="card-buttons">
+                    <button type="button" class="button" name="feature" value="친절해요">{{ got_teachers.2.personalities.all|first }}</button>
+                    <button type="button" class="button" name="feature" value="유료 티칭">
+                        {% if got_teachers.2.is_paid == False %}
+                        무료 티칭
+                        {% else %}
+                        유료 티칭
+                        {% endif %}
+                    </button>
+                </div>
+                <a href="{% url 'matching:match_a_teacher' got_teachers.2.id %}" class="submit-button">1:1 매칭 신청하기</a>
+            </div>
+            {% endif %}
+            <!-- 화살표 컨테이너 -->
+
             <div class="arrow-container">
                 <img src="{% static 'images/matching_success/right.png' %}" alt="Arrow Image" class="arrow-image">
             </div>
         </div>
-        <a href="{% url 'matching:match_a_teacher' teacher.id %}">
-            <button class="submit-button">1:1 매칭 신청하기</button>
-        </a>
-        {% endfor %}
 
         <div class="footer">
             <div class="dots">
-                <span class="dot active"></span>
+                <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
             </div>
@@ -64,7 +121,6 @@
                 {% endif %}
                 <a href="{% url 'main:main' %}" class="footer-link gray-link">메인화면으로 가기</a>
             </div>
-            
         </div>
     </div>
     <script src="{% static 'js/matching_success.js' %}"></script>

@@ -74,8 +74,8 @@ html {
   color: white;
   margin-right: 90px;
 }
-/* .appealTeacherContainer {
-} */
+.appealTeacherContainer {
+}
 .appealTeachers {
   display: flex;
   flex-direction: column;

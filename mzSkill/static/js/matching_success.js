@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    let currentCard = 0;
+    cards[1].classList.remove('active');
+    cards[2].classList.remove('active');
+    
     const cards = document.querySelectorAll('.card');
     const arrowContainer = document.querySelector('.arrow-container');
     const dots = document.querySelectorAll('.dot');
-    let currentCard = 0;
 
     arrowContainer.addEventListener('click', function() {
         cards[currentCard].classList.remove('active');

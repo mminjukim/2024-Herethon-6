@@ -1,0 +1,179 @@
+html {
+  background-color: whitesmoke;
+}
+.backgroundContainer {
+  max-width: 420px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mainContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+}
+.topContainer {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 23fr 1fr;
+  place-items: center;
+}
+.closeButton {
+  font-size: 25px;
+  color: #454347;
+  font-weight: bold;
+}
+.message {
+  font-size: 20px;
+  color: #454347;
+  font-weight: bolder;
+  margin-left: 20px;
+}
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.teacherName {
+  color: #454347;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.teacherProperty {
+  color: #a39fa6;
+  font-size: 14px;
+}
+.teacherKeyword {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 80%;
+}
+.teacherKeyword1,
+.teacherKeyword2,
+.teachingPlanKeyword {
+  font-size: 12px;
+  min-width: 95px;
+  height: 20px;
+  margin: 5px;
+  padding: 6px;
+  border-radius: 20px;
+  border-color: #8520ea;
+  border-style: solid;
+  border-width: 1.7px;
+  line-height: 20px;
+  color: #8520ea;
+  font-weight: bolder;
+  text-align: center;
+}
+.teachingPlanKeyword {
+}
+.middleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.middleContainerTop {
+  display: flex;
+  justify-content: center;
+  padding-left: 10px;
+}
+.teachingPlan,
+.runnerReview {
+  width: 150px;
+  text-align: center;
+  font-size: 14px;
+  color: #454347;
+  font-weight: bolder;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.middleContainerMessage {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.dot {
+  font-size: 10px;
+  color: #8520ea;
+}
+.introduceContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-style: solid;
+  border-color: #454347;
+}
+.middleMessage {
+  font-size: 14px;
+  color: #454347;
+  font-weight: bolder;
+}
+.middleContainerBox {
+  height: 120px;
+  width: 310px;
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  color: #454347;
+  font-size: 14px;
+  padding: 30px;
+  line-height: 20px;
+  font-weight: bold;
+}
+.teachingPlanKeyword {
+  max-width: 95px;
+  margin-top: 10px;
+}
+.matchingButton {
+  width: 314px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #8520ea;
+  color: white;
+  font-size: 14px;
+  font-weight: bolder;
+  line-height: 50px;
+  text-align: center;
+  margin: 20px;
+}
+.review {
+  background-color: #f9f9f9;
+  min-height: 100px;
+  width: 330px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  background: transparent;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.stars {
+  color: #8520ea;
+  margin-right: 10px;
+}
+
+.divider {
+  color: #cdcad0;
+  margin: 0 10px;
+}
+
+.reviewer {
+  font-size: 14px;
+  font-weight: bold;
+  color: #454347;
+}
+
+.reviewContent {
+  font-size: 14px;
+  color: #454347;
+}

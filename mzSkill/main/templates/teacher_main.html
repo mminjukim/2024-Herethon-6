@@ -1,22 +1,133 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>티쳐 페이지</title>
+    <title>MZ의 스킬 - 티쳐</title>
+    <link rel="stylesheet" href="{% static 'css/mainTeacher.css' %}" />
   </head>
   <body>
-    <h1>티쳐 메인 페이지</h1>
-    <p>환영합니다, <b>{{ profile.nickname }}</b> 티쳐님</p>
-    <br />
-    <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="mzTeacherSearchButton">MZ 티쳐 찾기</div></a>
-    <br>
-    <a href="{% url 'profiles:show_teacher_profile' profile.id %}"
-      >프로필 보기</a
-    >
-    <a href="{% url 'chat:room' %}">1:1대화</a>
-    {% if request.user.is_authenticated %}
-    <a href="{% url 'accounts:logout' %}">로그아웃</a>
-    {% endif %}
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <a href="{% url 'main:main' %}"><img src="{% static 'images/mainRunner/MZ.png' %}" /></a>
+          <a href="{% url 'profiles:show_teacher_profile' profile.id %}"
+            ><img
+              class="myPageIcon"
+              src="{% static 'images/mainRunner/🦆 icon _user_.png' %}"
+          /></a>
+        </div>
+        <div class="middleContainer">
+          <div class="middleMessage">
+            <span style="color: #8520ea; font-weight: bolder; font-size: 21px"
+              >{{ profile.nickname }} 티처</span
+            >님,<br /><span
+              style="color: #454347; font-size: 17px; font-weight: bolder"
+              >특색있는 티칭으로 스킬을 공유해주세요.</span
+            >
+          </div>
+          <a href="{% url 'profiles:update_teacher_details' profile.id %}"><div class="matchingButton">1:1 매칭 하러 가기</div></a>
+        </div>
+        <div class="teachingTeacher">
+          <div class="teachingTop">
+            <a href="{% url 'chat:room'%}"
+              ><div class="teachingTeacherTitle">나와 티칭 중인 러너</div></a
+            >
+            <a href="{% url 'chat:room'%}"
+              ><div class="꺽쇄채팅목록이동">></div></a
+            >
+          </div>
+
+          <div class="teachingTeacherContainer">
+            {% for learner in my_learners %}
+            <a href="{% url 'chat:chat_view' learner.user.username %}">
+              <div class="teacher1">
+                {% if learner.emoji %}
+                <img
+                  width="54px"
+                  height="54px"
+                  src="{{ learner.emoji.url }}"
+                />
+                {% else %}
+                <img
+                  width="54px"
+                  height="54px"
+                  src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
+                />
+                {% endif %}
+                <div class="teacher1name">{{ learner.nickname }}</div>
+                <div class="teacher1catagory">{{ learner.skills.first }}</div>
+              </div>
+            </a>
+            {% endfor %}
+            <a href="{% url 'chat:room'%}">
+              <div class="elseTeacher">
+                <img src="{% static 'images/mainRunner/🦆 icon _more vertical_.png' %}" />
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="{% url 'matching:mzteacher_list' 0 %}"
+          ><div class="mzTeacherSearchButton">
+            <img class="searchButton" src="{% static 'images/mainRunner/Group.png' %}" />
+            <div class="searcherTitle">MZ 티쳐 찾기</div>
+          </div></a
+        >
+
+        <div class="appealTeacherContainer">
+          <div class="appealMessage">어필 중인 MZ 티쳐를 소개해드려요.</div>
+          <div class="appealTeachers">
+            {% for teacher in teachers %}
+            <a href="{% url 'matching:mzteacher_profile' teacher.id %}">
+              <div class="teacherA">
+                {% if teacher.emoji %}
+                <img
+                  class="appealteacherImage"
+                  src="{{ teacher.emoji.url }}"
+                />
+                {% else %}
+                <img
+                  class="appealteacherImage"
+                  src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
+                />
+                {% endif %}
+                <div class="introducebox">
+                  <div class="teacherAname">
+                    {{ teacher.nickname }}({% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %})
+                  </div>
+                  <div class="teacherIntroduce">
+                    {{ teacher.bio }}
+                  </div>
+                </div>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        <nav>
+          <ul class="navContainer">
+            <li class="navHome">
+              <a href="{% url 'main:main' %}"
+                ><img src="{% static 'images/mainRunner/Group 214.png' %}"
+              /></a>
+            </li>
+            <li class="navTeaching">
+              <a href="{% url 'chat:room'%}"
+                ><img src="{% static 'images/mainRunner/🦆 icon _bookmark book_.png' %}"
+              /></a>
+              <a href="{% url 'chat:room'%}">1:1티칭</a>
+            </li>
+            <li class="navCommunity">
+              <a href="{% url 'community:community' 0 1 %}"
+                ><img src="{% static 'images/mainRunner/🦆 icon _chat bubble_.png' %}"
+              /></a>
+              <a href="{% url 'community:community' 0 1 %}">커뮤니티</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </body>
 </html>
