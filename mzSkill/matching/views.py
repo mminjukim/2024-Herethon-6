@@ -5,6 +5,7 @@ from django.db.models.functions import Length
 
 from django.core.paginator import Paginator
 from profiles.models import *
+from review.models import *
 
 def match_teacher_list(request, learner_id):
     learner = Learner.objects.get(id=learner_id)
@@ -41,11 +42,12 @@ def no_match_teacher_left(request, learner_id):
 
 def mzteacher_profile(request, teacher_id):
     teacher = Teacher.objects.get(id=teacher_id)
+    reviews = Review.objects.filter(teacher=teacher).order_by('-id')
     try:
         learner = Learner.objects.get(user_id=request.user.id)
-        return render(request, 'mzteacher_profile.html', {'teacher':teacher, 'profile':learner})
+        return render(request, 'mzteacher_profile.html', {'teacher':teacher, "reviews":reviews, 'profile':learner})
     except:
-        return render(request, 'mzteacher_profile_forteacher.html', {'teacher':teacher})
+        return render(request, 'mzteacher_profile_forteacher.html', {'teacher':teacher, "reviews":reviews})
 
 
 def match_a_teacher(request, teacher_id):
