@@ -73,10 +73,11 @@ mzSkill/
 
 ```
 $ python -m venv myvenv    #가상환경 생성
-$ source newvenv/Scripts/activate
+$ source myvenv/Scripts/activate
 $ pip install pillow
 $ pip install django
 $ cd mzSkill
 $ docker-compose up
 ```
-
+<h4>Django에서 Channels라이브러리를 이용한 비동기 통신 과정을 진행했습니다.
+요청-응답의 단방향통신과 구분되는 서버와 클라이언트간 메세지의 양방향 교환을 구현했으며 이를 통해 브라우저에서 WebSocket 서버로 요청이 들어오면 HTTP에서는 미리 구축해놓은 라우팅파일을 이용해 HTTP -> WS로 프로토콜을 전환 후 메세지 단위로 전달할 수 있습니다.</h4>
