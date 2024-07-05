@@ -35,7 +35,9 @@
         <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white">
     </div>
 
-<!-- Design -->    
+<!-- Design -->
+<p><strong>Design</strong></p>
+<br>
 ![image](https://github.com/2024-HERETHON/2024-Herethon-6/assets/153150703/7a175a79-c8e5-4089-b264-7f36139fce94)
 
 
