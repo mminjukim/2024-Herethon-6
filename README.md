@@ -43,7 +43,7 @@ all_project/
 │ ├── migrations/
 │ │ └── pycache/
 
-<h3>개발 환경에서 실행방법</h3>
+<li>개발환경 실행방법</li>
 $ python -m venv myvenv    #가상환경 생성
 $ source newvenv/Scripts/activate
 $ pip install pillow
