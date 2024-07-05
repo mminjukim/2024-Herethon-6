@@ -19,17 +19,39 @@
 <li>김민주</li>
 
 <hr>
-<h1>🔧 Stack</h1>
-    <div>
-        <img src="https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white">
-        <img src="https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white">
-        <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"> 
-    </div>
-        <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white">
-        <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white">
-    </div>
+<h1>Title</h1>
 
-    👋FIGMA👋
 <hr>
+<h2>path</h2>
 
+mzSkill/
+├── accounts/
+├── chat/
+│   ├── __pycache__/
+│   ├── migrations/
+│   ├── templates/
+│   │   └── chat/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── consumers.py
+│   ├── models.py
+│   ├── routing.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── community/
+├── main/
+├── matching/
+├── media/
+├── mzSkill/
+├── profiles/
+├── review/
+├── static/
+├── db.sqlite3
+├── docker-compose.yml
+├── Dockerfile
+├── manage.py
+├── requirements.txt
+└── .gitignore
 
