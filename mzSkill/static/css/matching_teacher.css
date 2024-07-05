@@ -1,120 +1,138 @@
+html {
+  background-color: whitesmoke;
+}
+
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f8f3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "pretendard";
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  flex-wrap: wrap;
 }
 
 .container {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fbf8fe;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+  font-size: 24px;
+  color: #454347;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  text-align: left;
 }
 
 .section {
-    margin-bottom: 20px;
-    border: 2px solid transparent;
-    padding: 10px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+  margin-bottom: 20px;
+  color: #454347;
+  text-align: left;
 }
 
-.options, .skills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.options,
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.option, .skill {
-    margin: 10px;
-    text-align: center;
-    position: relative;
+.option,
+.skill {
+  width: calc(
+    33.33% - 20px
+  ); /* 각 박스의 너비를 33.33%로 설정하고, 좌우 간격을 위해 20px을 뺍니다 */
+  margin: 10px;
+  text-align: center;
+  position: relative;
 }
 
-.option .label {
-    display: block;
-    cursor: pointer;
-    border: 2px solid transparent;
-    padding: 10px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+.option .label,
+.skill .label {
+  display: block;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #fbf8fe;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
-.option img {
-    width: 50px;
-    height: 50px;
-    display: block;
-    margin: 0 auto 10px;
+.option img,
+.skill img {
+  width: 50px;
+  height: 50px;
+  display: block;
+  margin: 0 auto 10px;
 }
 
-.option span, .skill {
-    display: block;
-    font-size: 14px;
-    color: #555;
+.option span,
+.skill span {
+  display: block;
+  font-size: 14px;
+  color: #555;
 }
 
 .checkbox {
-    display: none;
+  display: none;
 }
 
 .checkbox:checked + .label {
-    border-color: #a363ff;
-}
-
-.checkbox:checked + .label .checkmark {
-    display: block;
+  border-color: #8520ea;
 }
 
 .checkmark {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    background: url('images/checkmark.png') no-repeat center center;
-    background-size: cover;
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: url("../images/matching_teacher/check.png") no-repeat center
+    center;
+  background-size: cover;
 }
 
-.sub-skills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.checkbox:checked + .label .checkmark {
+  display: block;
 }
 
-.sub-skills button {
-    margin: 5px;
-    padding: 10px 15px;
-    background-color: #a363ff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+.skill-category {
+  text-align: left;
+}
+
+.skill-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  width: auto;
+}
+
+.skill-options .skill {
+  flex: 0 1 calc(33.33% - 20px); /* 한 줄에 세 개씩 배치되도록 설정 */
 }
 
 .submit-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background-color: #a363ff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #8520ea;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 .submit-button:hover {
-    background-color: #9229e7;
+  background-color: #9229e7;
 }

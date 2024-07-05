@@ -3,7 +3,7 @@ html {
 }
 .backgroundContainer {
   max-width: 420px;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
   background-color: #fbf8fe;
   display: flex;
@@ -15,6 +15,9 @@ html {
   flex-direction: column;
   align-items: center;
 }
+a {
+  text-decoration: none;
+}
 .topContainer {
   padding: 30px;
   display: grid;
@@ -24,11 +27,13 @@ html {
 .closeButton {
   font-size: 25px;
   color: #454347;
+  font-weight: bold;
 }
 .message {
   font-size: 20px;
   color: #454347;
-  font-weight: 700px;
+  font-weight: bolder;
+  margin-left: 20px;
 }
 .imageContainer {
   display: flex;
@@ -48,7 +53,6 @@ html {
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
-
   width: 80%;
 }
 .teacherKeyword1,
@@ -68,6 +72,9 @@ html {
   font-weight: bolder;
   text-align: center;
 }
+.teachingPlanKeyword {
+  margin-top: ;
+}
 .middleContainer {
   display: flex;
   flex-direction: column;
@@ -84,6 +91,8 @@ html {
   font-size: 14px;
   color: #454347;
   font-weight: bolder;
+  padding-bottom: 10px;
+  cursor: pointer;
 }
 .middleContainerMessage {
   display: flex;
@@ -125,5 +134,41 @@ html {
   font-weight: bolder;
   line-height: 50px;
   text-align: center;
-  margin: 10px;
+  margin: 20px;
+}
+.review {
+  background-color: #f9f9f9;
+  min-height: 100px;
+  width: 330px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  background: transparent;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.stars {
+  color: #8520ea;
+  margin-right: 10px;
+}
+
+.divider {
+  color: #cdcad0;
+  margin: 0 10px;
+}
+
+.reviewer {
+  font-size: 14px;
+  font-weight: bold;
+  color: #454347;
+}
+
+.reviewContent {
+  font-size: 14px;
+  color: #454347;
 }

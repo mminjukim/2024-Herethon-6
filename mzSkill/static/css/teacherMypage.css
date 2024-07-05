@@ -1,0 +1,170 @@
+html {
+  background-color: whitesmoke;
+}
+.backgroundContainer {
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mainContainer {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.topContainer {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.imageContainer {
+  position: relative;
+}
+.background {
+  background-color: #8520ea;
+  height: 123px;
+}
+.profileImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
+.runnerProfile {
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: center;
+  line-height: 23px;
+}
+.runnerName {
+  margin-left: 70px;
+  font-size: 22px;
+  color: #454347;
+  font-weight: bolder;
+}
+.runnerButton {
+  margin-left: 20px;
+  font-size: 12px;
+  width: 52px;
+  height: 20px;
+  border-radius: 20px;
+  border-color: #8520ea;
+  border-style: solid;
+  border-width: 1.7px;
+  line-height: 20px;
+  color: #8520ea;
+  font-weight: bolder;
+  text-align: center;
+}
+.matchingInfo {
+  font-size: 18px;
+  color: #454347;
+  font-weight: bolder;
+  padding: 30px;
+}
+.teachingtype {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.teachingtypeTitle,
+.skillTitle {
+  font-size: 14px;
+  color: #454347;
+  font-weight: bolder;
+}
+.teachingtypeBox {
+  padding-top: 10px;
+  display: flex;
+}
+.type1,
+.type2 {
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  min-width: 90px;
+  text-align: center;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+.skillContainer {
+  padding-top: 30px;
+  margin-top: 20px;
+}
+.skillBox {
+  display: flex;
+  padding-top: 10px;
+}
+.skill1,
+.skill2 {
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  min-width: 90px;
+  height: 30px;
+  text-align: center;
+  margin-right: 10px;
+  line-height: 30px;
+  border-radius: 10px;
+}
+.middleMessage {
+  font-size: 14px;
+  color: #454347;
+  font-weight: bolder;
+}
+.middleContainerBox {
+  height: 160px;
+  width: 330px;
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  margin: 0 auto;
+  text-align: left;
+  color: #6f6b72;
+  font-size: 13px;
+}
+.teachingPlanKeyword {
+  max-width: 95px;
+  font-size: 14px;
+  width: 100px;
+  height: 30px;
+  border-radius: 20px;
+  border-color: #8520ea;
+  border-style: solid;
+  border-width: 1.7px;
+  line-height: 30px;
+  color: #8520ea;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 10px;
+}
+.planMessage {
+  display: flex;
+}
+.planContainer {
+  margin-bottom: 30px;
+
+  padding: 30px;
+  text-align: center;
+}
+.dot {
+  font-size: 10px;
+  color: #8520ea;
+  margin-right: 5px;
+}
+.planTitle {
+  margin-top: 40px;
+  font-size: 18px;
+  color: #454347;
+  font-weight: bolder;
+  padding-left: 30px;
+}
+.myteach {
+  width: 185px;
+  height: 45px;
+  border-radius: 50px;
+  background-color: #8520ea;
+  color: white;
+  font-size: 14px;
+  font-weight: bolder;
+  line-height: 45px;
+  text-align: center;
+  transform: translate(110%, -750%);
+}
