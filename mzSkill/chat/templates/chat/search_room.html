@@ -2,23 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Select a Chat Room</title>
+    <title>Search Results</title>
     <link rel="stylesheet" href="{% static 'css/room.css' %}" />
 </head>
 <body>
-    <div class="matchingTitle">1:1 매칭</div>
+    <div class="matchingTitle">검색 결과</div>
     <br>
     <li class="infoText">* 티쳐가 답변 수락 후 이 채팅방에 뜨게 됩니다. *</li>
     <br>
     <div class="search">
         <form method="GET" action="{% url 'chat:searchroom' %}">
-            <input type="text" name="search" placeholder="Search...">
+            <input type="text" name="search" value="{{ search }}" placeholder="Search...">
             <button type="submit" class="search-button"></button>
         </form>
     </div>
-    {% if error %}
-    <p>{{ error }}</p>
-    {% endif %}
     {% if teachers %}
     <br />
     <ul>
@@ -28,22 +25,8 @@
         </li>
         {% endfor %}
     </ul>
-    {% endif %}
-    {% if learners %}
-    <br />
-    <ul>
-        {% for learner in learners %}
-        <li>
-            <a href="{% url 'chat:chat_view' learner.username %}">{{ learner.username }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% if not teachers and not learners %}
-    <p>
-        앗 아직 사람을 구하지 못하셨나요? 1:1 매칭을 통해 나랑 맞는 티쳐를
-        찾아보세요!
-    </p>
+    {% else %}
+    <p>검색 결과가 없습니다.</p>
     {% endif %}
     <a href="{% url 'main:main' %}">뒤로가기</a>
 </body>
