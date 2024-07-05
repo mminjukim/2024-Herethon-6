@@ -24,7 +24,7 @@
 <hr>
 <h2>path</h2>
 
-mzSkill/
+<h3>mzSkill/
 ├── accounts/
 ├── chat/
 │   ├── __pycache__/
@@ -54,4 +54,4 @@ mzSkill/
 ├── manage.py
 ├── requirements.txt
 └── .gitignore
-
+</h3>
