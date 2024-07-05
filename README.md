@@ -22,36 +22,27 @@
 <h1>Title</h1>
 
 <hr>
-<h2>path</h2>
 
-<h3>mzSkill/
+# 폴더 구조
+
+\```
+all_project/
 ├── accounts/
-├── chat/
-│   ├── __pycache__/
 │   ├── migrations/
+│   │   └── __pycache__/
+│   ├── static/
+│   │   ├── css/
+│   │   ├── img/
+│   │   └── js/
 │   ├── templates/
-│   │   └── chat/
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── consumers.py
-│   ├── models.py
-│   ├── routing.py
-│   ├── tests.py
-│   ├── urls.py
-│   └── views.py
-├── community/
-├── main/
-├── matching/
+│   └── __pycache__/
+├── codea/
+│   └── __pycache__/
 ├── media/
-├── mzSkill/
-├── profiles/
-├── review/
-├── static/
-├── db.sqlite3
-├── docker-compose.yml
-├── Dockerfile
-├── manage.py
-├── requirements.txt
-└── .gitignore
-</h3>
+│   └── profile_images/
+├── search/
+│   ├── migrations/
+│   │   └── __pycache__/
+\```
+
+
