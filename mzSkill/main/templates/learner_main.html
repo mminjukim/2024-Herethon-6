@@ -1,39 +1,79 @@
-{% load static %}
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MZ의 스킬 - 메인</title>
+    <title>MZ의 스킬 - 러너</title>
     <link rel="stylesheet" href="{% static 'css/mainRunner.css' %}" />
   </head>
   <body>
     <div class="backgroundContainer">
       <div class="mainContainer">
         <div class="topContainer">
-          <div class="topTitle">MZ의 스킬</div>
-          <a href="{% url 'profiles:show_learner_profile' profile.id %}">
-            <img
-            class="myPageIcon"
-            src="{% static 'images/mainRunner/🦆 icon _user_.png' %}"
+          <a href="{% url 'main:main' %}"><img src="{% static 'images/mainRunner/MZ.png' %}" /></a>
+          <a href="{% url 'profiles:show_learner_profile' profile.id %}"
+            ><img
+              class="myPageIcon"
+              src="{% static 'images/mainRunner/🦆 icon _user_.png' %}"
           /></a>
         </div>
         <div class="middleContainer">
           <div class="middleMessage">
-            {{ profile.nickname }} 러너님,<br />1:1 매칭을 통해 맞춤 티처를 찾아드릴게요.
+            <span style="color: #8520ea; font-weight: bolder; font-size: 21px"
+              >{{ profile.nickname }}</span
+            >님,<br /><span
+              style="color: #454347; font-size: 17px; font-weight: bolder"
+              >1:1 매칭을 통해 맞춤 티처를 찾아드릴게요.</span
+            >
           </div>
-          <a href="{% url 'matching:match_teacher_list' profile.id %}">
-            <div class="matchingButton">1:1 매칭 하러 가기</div>
-          </a>
+          <a href="{% url 'matching:match_teacher_list' profile.id %}"><div class="matchingButton">1:1 매칭 하러 가기</div></a>
         </div>
-        <a href="{% url 'matching:mzteacher_list' 0 %}">
-          <div class="mzTeacherSearchButton">MZ 티쳐 찾기</div>
-        </a>
+        <div class="teachingTeacher">
+          <div class="teachingTop">
+            <a href="{% url 'chat:room'%}"
+              ><div class="teachingTeacherTitle">나와 티칭 중인 티쳐</div></a
+            >
+            <a href="{% url 'chat:room'%}"
+              ><div class="꺽쇄채팅목록이동">></div></a
+            >
+          </div>
+
+          <div class="teachingTeacherContainer">
+            {% for teacher in my_teachers %}
+            <a href="{% url 'matching:mzteacher_profile' teacher.id %}">
+              <div class="teacher1">
+                {% if teacher.emoji %}
+                <img
+                  width="54px"
+                  height="54px"
+                  src="{{ teacher.emoji.url }}"
+                />
+                {% else %}
+                <img
+                  width="54px"
+                  height="54px"
+                  src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
+                />
+                {% endif %}
+                <div class="teacher1name">{{ teacher.nickname }}</div>
+                <div class="teacher1catagory">{{ teacher.skills.first }}</div>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div></a>
+
+         <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="mzTeacherSearchButton">
+          <img class="searchButton" src="{% static 'images/mainRunner/Group.png' %}" />
+          <div class="searcherTitle">MZ 티쳐 찾기</div>
+        </div></a>   
+        
         <div class="appealTeacherContainer">
           <div class="appealMessage">어필 중인 MZ 티쳐를 소개해드려요.</div>
           <div class="appealTeachers">
             {% for teacher in teachers %}
-            <div class="teacher1">
+            <div class="teacherA">
               {% if teacher.emoji %}
               <img
                 width="54px"
@@ -44,12 +84,14 @@
               <img
                 width="54px"
                 height="54px"
-                src="{% static 'images/mainRunner/3dicons (6).png' %}"
+                src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
               />
               {% endif %}
-              <div class="teacher1name">{{ teacher.nickname }}</div>
-              <div class="teacher1catagory">
-                {% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+              <div class="teacherAname">
+                {{ teacher.nickname }}({% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %})
+              </div>
+              <div class="teacherIntroduce">
+                {{ teacher.bio }}
               </div>
             </div>
             {% endfor %}
