@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Select a Chat Room</title>
+    <title>Search Results</title>
     <link rel="stylesheet" href="{% static 'css/room.css' %}" />
 </head>
 <body>
@@ -15,40 +15,21 @@
     <br>
     <div class="search">
         <form method="GET" action="{% url 'chat:searchroom' %}">
-            <input type="text" name="search" placeholder="Search...">
+            <input type="text" name="search" value="{{ search }}" placeholder="Search...">
             <button type="submit" class="search-button">💜</button>
         </form>
     </div>
-    {% if error %}
-    <p>{{ error }}</p>
-    {% endif %}
     {% if teachers %}
     <br />
     <ul>
         {% for teacher in teachers %}
-        <li class="chat1name">
-            <a href="{% url 'chat:chat_view' teacher.user.username %}">
-                        <span class="chat1name">{{ teacher.user.username }}</span>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% if learners %}
-    <br />
-    <ul>
-        {% for learner in learners %}
         <li>
-            <a href="{% url 'chat:chat_view' learner.username %}">{{ learner.username }}</a>
+            <a href="{% url 'chat:chat_view' teacher.user.username %}">{{ teacher.user.username }}</a>
         </li>
         {% endfor %}
     </ul>
-    {% endif %}
-    {% if not teachers and not learners %}
-    <p>
-        앗 아직 사람을 구하지 못하셨나요? 1:1 매칭을 통해 나랑 맞는 티쳐를
-        찾아보세요!
-    </p>
+    {% else %}
+    <p>검색 결과가 없습니다.</p>
     {% endif %}
     <nav>
         <ul class="navContainer">

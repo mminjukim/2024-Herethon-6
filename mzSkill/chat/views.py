@@ -61,3 +61,13 @@ def out(request, username):
 
 # https://codiving.kr/104
 # https://chasingdreams.tistory.com/74
+
+#검색 기능 뷰 추가
+@login_required
+def searchroom(request):
+    search = request.GET.get('search','')
+    teachers = Teacher.objects.filter(user__username__icontains=search) if search else []
+    return render(request, 'chat/search_room.html', {
+        'teachers' : teachers,
+        'search' : search
+    })

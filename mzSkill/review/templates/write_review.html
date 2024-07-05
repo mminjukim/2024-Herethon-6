@@ -1,14 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write a Review for {{ teacher.user.username }}</title>
-  </head>
-  <body>
-    <h1>리뷰작성</h1>
-    <form method="post">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">작성하기</button>
-    </form>
-    <a href="{% url 'chat:chat_view' teacher.user.username %}">Back to Chat</a>
-  </body>
+    <link rel="stylesheet" href="{% static 'css/write_review.css' %}">
+</head>
+<body>
+    <div class="backgroundContainer">
+        <div class="mainContainer">
+            <div class="topContainer">
+              <div class="reviewTitle">리뷰 작성</div>
+              <a href="{% url 'chat:chat_view' teacher.user.username %}" class="closeIcon">×</a>
+            </div>
+            <div class="teacherProfile">
+                <div class="teacherImage">
+                    <img src="{% static 'images/teacherProfile/Group 178' %}" alt="Teacher Image" />
+                </div>
+                <div class="teacherInfo">
+                    <div class="teacherName">{{ teacher.user.username }}</div>
+                    <div class="teacherCatagory">{% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                    </div>
+                </div>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="teachStar">
+                    <div class="teachSatisfy">티칭 만족도</div>
+                    <div class="stars">
+                        {{ form.rating }}
+                    </div>
+                </div>
+                <div class="teachReview">
+                    <div>티칭에 대한 리뷰</div>
+                    <div class="reviewBox">
+                        {{ form.comment }}
+                    </div>
+                </div>
+                <div class="write">
+                    <div class="writeButton" onclick="submitForm()">작성하기</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function submitForm() {
+            document.querySelector('form').submit();
+        }
+    </script>
+</body>
 </html>
+

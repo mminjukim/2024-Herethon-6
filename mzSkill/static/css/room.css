@@ -1,0 +1,119 @@
+html {
+  background-color: whitesmoke;
+}
+
+.backgroundContainer {
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.mainContainer {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topContainer {
+  display: grid;
+  grid-template-columns: 20fr 1fr;
+  place-items: center;
+  padding: 30px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search input[type="text"] {
+  min-width: 300px;
+  height: 40px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: #8520ea;
+  padding-left: 40px;
+  background-image: url('../images/mainChat/mingcute_search-line.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+.matchingTitle {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #454347;
+  text-align: center;
+}
+
+.infoText {
+  text-align: center;
+}
+
+.chatContainer {
+  padding: 0 20px;
+}
+
+.chat-item {
+  list-style: none; /* 리스트 스타일 제거 */
+  margin-bottom: 10px; /* 항목 간 간격 추가 */
+}
+
+.chat-item a {
+  text-decoration: none; /* 링크 밑줄 제거 */
+  color: inherit; /* 부모 요소의 색상 상속 */
+}
+
+.chat-item a:hover {
+  color: #8520ea; /* 링크 호버 시 색상 변경 */
+}
+
+.chat-item-box {
+  border: 1px solid #a39fa6; /* 테두리 스타일 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  padding: 10px; /* 내부 여백 */
+  display: flex;
+  align-items: center;
+}
+
+.chat1name {
+  color: #454347;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.navContainer {
+  display: flex;
+  min-width: 339px;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  height: 91px;
+  list-style-type: none;
+  padding-right: 40px;
+  position: absolute;
+  bottom: 0%;
+}
+
+.navHome,
+.navTeaching,
+.navCommunity {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navHome a,
+.navTeaching a,
+.navCommunity a {
+  text-decoration: none;
+  color: #a39fa6;
+}
+
+
