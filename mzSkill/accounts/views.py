@@ -23,7 +23,7 @@ class RoleChoiceView(View): # 1단계 : 역할 선택 (러너/티쳐)
     def post(self, request, *args, **kwargs):
         form = RoleChoiceForm(request.POST)
         if form.is_valid():
-            request.session['usertype'] = form.data['usertype'] # http 세션에 choice 데이터 저장해 다음 단계로 넘겨줌
+            request.session['usertype'] = request.POST['usertype'] # http 세션에 choice 데이터 저장해 다음 단계로 넘겨줌
             print(request.session['usertype'])
             return redirect(reverse('accounts:signup'))
         return render(request, 'rolechoice.html', {'form':form})

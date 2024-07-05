@@ -89,7 +89,7 @@ h2 {
     right: 10px;
     width: 15px;
     height: 15px;
-    background: url('static/images/matching_teacher/check.png') no-repeat center center;
+    background: url('../images/matching_teacher/check.png') no-repeat center center;
     background-size: cover;
 }
 

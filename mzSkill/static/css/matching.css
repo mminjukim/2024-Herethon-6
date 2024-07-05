@@ -123,16 +123,16 @@ h5 {
 .next-button {
     background-color: #8520EA;
     color: white;
-    padding: 10px 20px;
+    padding: 20px 30px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
-    max-width: 290px;
+    max-width: 314px;
     height: 25px;
     margin-top: 20px;
-    margin-left: 0px;
+    margin-left: 10px;
     text-align: center;
     display: flex;
     justify-content: center;

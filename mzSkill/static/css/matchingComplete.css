@@ -1,0 +1,104 @@
+html {
+  background-color: whitesmoke;
+}
+.backgroundContainer {
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mainContainer {
+  width: 100%;
+}
+.topContainer {
+  margin-top: 50px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+.middleBackground {
+  background-color: #8520ea;
+  height: 284px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.middleContainer {
+  padding-top: 40px;
+}
+.middleProfile {
+  background-color: white;
+  width: 227px;
+  height: 345px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+img {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+.teahcerMessage {
+  text-align: center;
+  font-size: 14px;
+  color: #6f6b72;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.teacherCatagory {
+  margin-bottom: 10px;
+}
+.teacherProperty {
+  display: flex;
+}
+.property1,
+.property2 {
+  font-size: 12px;
+  min-width: 80px;
+  height: 20px;
+  margin: 5px;
+  padding: 6px;
+  border-radius: 20px;
+  border-color: #8520ea;
+  border-style: solid;
+  border-width: 1.7px;
+  line-height: 20px;
+  color: #8520ea;
+  font-weight: bolder;
+  text-align: center;
+}
+.plusIcon {
+  background-color: #8520ea;
+  border-radius: 100%;
+  width: 22px;
+  height: 22px;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 22px;
+  position: relative;
+  bottom: 14.5%;
+  right: 6%;
+}
+.gotoMain {
+  margin-top: 150px;
+  color: #a39fa6;
+  margin-left: 250px;
+  margin-bottom: 30px;
+}
+.gotoChat {
+  margin: 0 auto;
+  width: 314px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #8520ea;
+  color: white;
+  font-size: 14px;
+  font-weight: bolder;
+  line-height: 50px;
+  text-align: center;
+}
