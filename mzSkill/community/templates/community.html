@@ -49,7 +49,7 @@
         <div class="posts">
             {% for post_block in posts %} 
             <a href="{% url 'community:post_detail' post_block.post.id %}" class="post">
-                <p>{{ post_block.post.title|truncatechars:15 }}</p>
+                <p>{{ post_block.post.title|truncatechars:20 }}</p>
                 <div class="tags">
                     <span class="tag">{{ post_block.post.category }}</span>
                 </div>
