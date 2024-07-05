@@ -22,7 +22,7 @@
 <h1>Title</h1>
 
 <hr>
-
+<li>폴더구조</li>
 ```
 all_project/
 ├── accounts/
@@ -43,34 +43,15 @@ all_project/
 │ │ └── pycache/
 ```
 
-<li>폴더 구조</li>
-```
-all_project/
-├── accounts/
-│ ├── migrations/
-│ │ └── pycache/
-│ ├── static/
-│ │ ├── css/
-│ │ ├── img/
-│ │ └── js/
-│ ├── templates/
-│ └── pycache/
-├── codea/
-│ └── pycache/
-├── media/
-│ └── profile_images/
-├── search/
-│ ├── migrations/
-│ │ └── pycache/
-```
 
 <li>개발환경 실행방법</li>
+
+```
 $ python -m venv myvenv    #가상환경 생성
 $ source newvenv/Scripts/activate
 $ pip install pillow
 $ pip install django
 $ cd mzSkill
 $ docker-compose up
-
-
+```
 
