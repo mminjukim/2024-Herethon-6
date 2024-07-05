@@ -11,12 +11,25 @@
     <div class="backgroundContainer">
         <div class="mainContainer">
             <div class="topContainer">
-              <div class="reviewTitle">리뷰 작성</div>
-              <a href="{% url 'chat:chat_view' teacher.user.username %}" class="closeIcon">×</a>
+              <div class="reviewTitle">리뷰 작성
+              <a href="{% url 'chat:chat_view' teacher.user.username %}" class="closeIcon">×</a></div>
             </div>
+            <hr>
             <div class="teacherProfile">
                 <div class="teacherImage">
-                    <img src="{% static 'images/teacherProfile/Group 178' %}" alt="Teacher Image" />
+                    {% if teacher.emoji %}
+                    <img
+                    width="54px"
+                    height="54px"
+                    src="{{ teacher.emoji.url }}"
+                    />
+                    {% else %}
+                    <img
+                    width="54px"
+                    height="54px"
+                    src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
+                    />
+                    {% endif %}
                 </div>
                 <div class="teacherInfo">
                     <div class="teacherName">{{ teacher.user.username }}</div>
@@ -29,7 +42,12 @@
                 <div class="teachStar">
                     <div class="teachSatisfy">티칭 만족도</div>
                     <div class="stars">
-                        {{ form.rating }}
+                        {% for i in '12345' %}
+                        <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
+                        <label for="star{{ i }}">
+                            <img src="{% static 'images/review/Star 5.png' %}" class="starImage">
+                        </label>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="teachReview">
@@ -48,7 +66,37 @@
         function submitForm() {
             document.querySelector('form').submit();
         }
+
+        function fillStars(rating) {
+            const stars = document.querySelectorAll('.starImage');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.style.filter = 'none';
+                    star.style.transform = 'scale(1.2)';
+                } else {
+                    star.style.filter = 'grayscale(100%)';
+                    star.style.transform = 'scale(1)';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const rating = document.querySelector('input[name="rating"]:checked');
+            if (rating) {
+                fillStars(parseInt(rating.value));
+            }
+
+            const labels = document.querySelectorAll('.stars label');
+            labels.forEach((label, index) => {
+                label.addEventListener('click', () => {
+                    const rating = index + 1;
+                    fillStars(rating);
+                    document.getElementById(`star${rating}`).checked = true;
+                });
+            });
+        });
     </script>
 </body>
 </html>
+
 
