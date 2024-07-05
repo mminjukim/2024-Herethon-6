@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>러너 프로필</title>
+    <link rel="stylesheet" href="{% static 'css/runnerMypage.css' %}" />
+  </head>
+  <body>
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <a class="backButton" href="{% url 'main:main' %}"
+            ><img src="{% static 'images/runnerMypage/🦆 icon _nav arrow left_.png' %}"
+          /></a>
+          <div class="profile">프로필</div>
+          <a href="{% url 'profiles:update_learner_profile' profile.id %}" class="settingButton"
+            ><img src="{% static 'images/runnerMypage/🦆 icon _settings_.png' %}"
+          /></a>
+        </div>
+        <div class="imageContainer">
+          <div class="background"></div>
+          {% if profile.emoji %}
+          <img
+            class="profileImage"
+            src="{{ profile.emoji.url }}"
+          />
+          {% else %}
+          <img
+            class="profileImage"
+            src="{% static 'images/runnerMypage/Group 178 (1).png' %}"
+          />
+          {% endif %}
+        </div>
+        <div class="runnerProfile">
+          <div class="runnerName">{{ profile.nickname }}</div>
+          <div class="runnerButton">러너</div>
+        </div>
+        <a href="{% url 'profiles:update_learner_details' profile.id %}" class="matchingInfo">
+          <div class="matchingInfoTitle">1:1 매칭 세부 정보</div>
+          <img src="{% static 'images/runnerMypage/Arrow - Left 4.png' %}" />
+        </a>
+        <div class="middleContainer">
+          <div class="teachingtype">
+            <div class="teachingtypeTitle">원하는 티칭 타입</div>
+            <div class="teachingtypeBox">
+              {% for personality in profile.personalities.all %}
+              <div class="type">
+                <a href=""
+                  ><img src="{% static 'images/runnerMypage/3dicons (10).png' %}"
+                /></a>
+                <div class="typeMessage">{{ personality.name }}</div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="skillContainer">
+              <div class="skillTitle">티칭 스킬 분야</div>
+              <div class="skillBox">
+                {% for skill in profile.skills.all %}
+                <div class="skill">{{ skill.name|truncatechars:7 }}</div>
+                {% endfor %}
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/runnerMypage.js' %}"></script>
+  </body>
+</html>

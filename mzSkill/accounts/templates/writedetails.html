@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세부사항설정</title>
+</head>
+<body>
+    <h1>세부사항설정</h1>
+    <form action="/accounts/writedetails/" method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">회원가입완료</button>
+      </form>
+</body>
+</html>

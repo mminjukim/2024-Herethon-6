@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat with {{ receiver.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">
+        <!-- <h1>{{ receiver.user.username }}</h1> -->
+        <a href="{% url 'chat:room' %}">뒤로</a>
+        {% if not is_teacher and request.user.username != receiver.user.username %}
+          <a href="{% url 'review:write_review' receiver.user.username %}">리뷰작성</a>
+        {% endif %}
+      </div>
+      <div id="chat-log" class="chat-log">
+        {% for message in messages %}
+        <div
+          class="chat-message {% if message.sender == request.user %}sent{% else %}received{% endif %}"
+        >
+          <strong>{{ message.sender.username }}</strong>
+          <p>{{ message.content }}</p>
+          <span class="timestamp">{{ message.timestamp|date:"H:i" }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      <form id="chat-form" method="post">
+        {% csrf_token %}
+        <div class="chat-input-container">
+          <input
+            type="text"
+            id="chat-message-input"
+            name="message"
+            placeholder="메시지를 입력하세요"
+          />
+          <button type="submit" id="chat-message-submit">보내기</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      const username = "{{ request.user.username }}";
+      const receiverUsername = "{{ receiver.user.username }}";
+      console.log(
+        "WebSocket URL: ws://" +
+          window.location.host +
+          "/ws/chat/" +
+          receiverUsername +
+          "/"
+      );
+
+      const chatSocket = new WebSocket(
+        "ws://" + window.location.host + "/ws/chat/" + receiverUsername + "/"
+      );
+
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        const chatLog = document.querySelector("#chat-log");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("chat-message");
+        if (data.sender === username) {
+          messageElement.classList.add("sent");
+        } else {
+          messageElement.classList.add("received");
+        }
+        messageElement.innerHTML =
+          "<strong>" +
+          data.sender +
+          "</strong><p>" +
+          data.message +
+          "</p><span class='timestamp'>" +
+          new Date().toLocaleTimeString() +
+          "</span>";
+        chatLog.appendChild(messageElement);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      };
+
+      chatSocket.onclose = function (e) {
+        console.error("Chat socket closed unexpectedly");
+      };
+
+      document.querySelector("#chat-form").onsubmit = function (e) {
+        e.preventDefault();
+        const messageInputDom = document.querySelector("#chat-message-input");
+        const message = messageInputDom.value;
+        chatSocket.send(
+          JSON.stringify({
+            message: message,
+            sender: username,
+          })
+        );
+        messageInputDom.value = "";
+      };
+    </script>
+    <br />
+    <a href="{% url 'chat:out' receiver.user.username  %}">나가기</a>
+  </body>
+</html>

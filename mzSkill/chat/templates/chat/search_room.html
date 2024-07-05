@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'css/room.css' %}" />
+</head>
+<body>
+    <div class="backgroundContainer">
+        <div class="mainContainer">
+            <div class="topContainer">
+                <div class="matchingTitle">1:1 매칭</div>
+            </div>
+    <li class="infoText">* 티쳐가 답변 수락 후 이 채팅방에 뜨게 됩니다. *</li>
+    <br>
+    <div class="search">
+        <form method="GET" action="{% url 'chat:searchroom' %}">
+            <input type="text" name="search" value="{{ search }}" placeholder="Search...">
+            <button type="submit" class="search-button">💜</button>
+        </form>
+    </div>
+    {% if teachers %}
+    <br />
+    <ul>
+        {% for teacher in teachers %}
+        <li>
+            <a href="{% url 'chat:chat_view' teacher.user.username %}">{{ teacher.user.username }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>검색 결과가 없습니다.</p>
+    {% endif %}
+    <nav>
+        <ul class="navContainer">
+          <li class="navHome">
+            <img
+              src="{% static 'images/mainRunner/🦆 icon _home simple door_ (1).png' %}"
+            /><a href="{% url 'main:main' %}">메인화면</a>
+          </li>
+          <li class="navTeaching">
+            <img src="{% static 'images/mainRunner/🦆 icon _bookmark book_.png' %}" />
+            <a href="{% url 'chat:room'%}">1:1티칭</a>
+          </li>
+          <li class="navCommunity">
+            <img src="{% static 'images/mainRunner/🦆 icon _chat bubble_.png' %}" />
+            <a href="{% url 'community:community' 0 1 %}">커뮤니티</a>
+          </li>
+        </ul>
+      </nav>
+</body>
+</html>
+

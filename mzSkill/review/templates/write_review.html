@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a Review for {{ teacher.user.username }}</title>
+    <link rel="stylesheet" href="{% static 'css/write_review.css' %}">
+</head>
+<body>
+    <div class="backgroundContainer">
+        <div class="mainContainer">
+            <div class="topContainer">
+              <div class="reviewTitle">리뷰 작성
+              <a href="{% url 'chat:chat_view' teacher.user.username %}" class="closeIcon">×</a></div>
+            </div>
+            <hr>
+            <div class="teacherProfile">
+                <div class="teacherImage">
+                    {% if teacher.emoji %}
+                    <img
+                    width="54px"
+                    height="54px"
+                    src="{{ teacher.emoji.url }}"
+                    />
+                    {% else %}
+                    <img
+                    width="54px"
+                    height="54px"
+                    src="{% static 'images/teacherIntroduce/3dicons (2).png' %}"
+                    />
+                    {% endif %}
+                </div>
+                <div class="teacherInfo">
+                    <div class="teacherName">{{ teacher.user.username }}</div>
+                    <div class="teacherCatagory">{% for skill in teacher.skills.all %}{{ skill }}{% if not forloop.last %}/{% endif %}{% endfor %}
+                    </div>
+                </div>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="teachStar">
+                    <div class="teachSatisfy">티칭 만족도</div>
+                    <div class="stars">
+                        {% for i in '12345' %}
+                        <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}">
+                        <label for="star{{ i }}">
+                            <img src="{% static 'images/review/Star 5.png' %}" class="starImage">
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="teachReview">
+                    <div>티칭에 대한 리뷰</div>
+                    <div class="reviewBox">
+                        {{ form.comment }}
+                    </div>
+                </div>
+                <div class="write">
+                    <div class="writeButton" onclick="submitForm()">작성하기</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        function submitForm() {
+            document.querySelector('form').submit();
+        }
+
+        function fillStars(rating) {
+            const stars = document.querySelectorAll('.starImage');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.style.filter = 'none';
+                    star.style.transform = 'scale(1.2)';
+                } else {
+                    star.style.filter = 'grayscale(100%)';
+                    star.style.transform = 'scale(1)';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const rating = document.querySelector('input[name="rating"]:checked');
+            if (rating) {
+                fillStars(parseInt(rating.value));
+            }
+
+            const labels = document.querySelectorAll('.stars label');
+            labels.forEach((label, index) => {
+                label.addEventListener('click', () => {
+                    const rating = index + 1;
+                    fillStars(rating);
+                    document.getElementById(`star${rating}`).checked = true;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
