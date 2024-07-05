@@ -28,10 +28,12 @@
         <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"> 
     </div>
     
-<!-- Backend -->   
-
-<img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white">
-<img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white">
+<!-- Backend -->
+    <p><strong>Backend</strong></p>
+   <div>
+        <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white">
+        <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white">
+    </div>
 
 <!-- Design -->    
 ![image](https://github.com/2024-HERETHON/2024-Herethon-6/assets/153150703/7a175a79-c8e5-4089-b264-7f36139fce94)
