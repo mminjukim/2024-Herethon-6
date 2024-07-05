@@ -1,39 +1,47 @@
+{% load static %} 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MZ티쳐로 등록되었어요</title>
-  </head>
-  <body>
-    <h1>반갑습니다 mz티쳐로 등록되었어요</h1>
-    <ul>
-      <li>닉네임: {{ profile.nickname }}</li>
-      {% if profile.emoji %}
-      <li>
-        프로필사진: <img src="{{ profile.emoji.url }}" alt="" height="100" />
-      </li>
-      {% endif %}
-      <li>
-        티칭 타입:
-        <ul>
-          {% for personality in profile.personalities.all %}
-          <li>{{ personality.name }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        티칭 스킬 분야:
-        <ul>
-          {% for skill in profile.skills.all %}
-          <li>{{ skill.name }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-    </ul>
-    <a href="{% url 'main:main' %}">메인화면으로 가기</a>
-    <a href="{% url 'profiles:write_teachingplan' profile.id %}"
-      >프로필(티칭계획) 작성하기</a
-    >
-  </body>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MZ 티쳐 등록</title>
+    <link rel="stylesheet" href="{% static 'css/teacher_signup.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p class="card-title">반갑습니다.<br><span>MZ 티쳐</span>로 등록되었습니다.</p>
+            <p class="sub-text">러너들이 확인할 수 있게 <p></p>프로필에 티칭 계획을 작성해보세요!</p>
+        </div>
+
+        <div class="card-container">
+            <!-- 카드 1 -->
+            <div class="card active">
+                {% if profile.emoji %}
+                <img src="{{ profile.emoji.url }}" alt="Sun Image" class="card-image">
+                {% else %}
+                <img src="{% static 'images/teacher_signup/umbrella.png' %}" alt="Sun Image" class="card-image">
+                {% endif %}
+                <h3>{{ profile.nickname }}</h3>
+                <p class="card-subtitle">{{profile.skills.first}}</p>
+                <p class="card-details">___________________________<br>___________________________</p>
+                <div class="card-buttons">
+                    <input type="hidden" name="teacher_name" value="춤추는 알파벳">
+                    <input type="hidden" name="category" value="외국어/과외">
+                    <input type="hidden" name="details" value="일주일 2회 1시간씩 영어 스피킹 대화 함께 해요!">
+                    <button type="button" class="button" name="feature" value="친절해요">{{ profile.skills.first }}</button>
+                    <button type="button" class="button" name="feature" value="유료 티칭">무료/유료</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-links">
+                <a href="{% url 'main:main' %}" class="footer-link gray-link">메인화면으로 가기</a>
+            </div>
+            <a href="{% url 'profiles:write_teachingplan' profile.id %}" class="submit-button">프로필 작성하기</a>
+        </div>
+    </div>
+    <script src="{% static 'js/matching_success.js' %}"></script>
+</body>
 </html>

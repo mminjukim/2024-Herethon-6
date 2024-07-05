@@ -1,16 +1,83 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>티칭 계획 작성</title>
-</head>
-<body>
-    <h1>티칭 계획을 작성해주세요</h1>
-    <form method="post">
-        {% csrf_token %} 
-        {{ form.as_p }}
-        <button type="submit">저장하기</button>
-    </form>
-</body>
+    <link rel="stylesheet" href="{% static 'css/teachingPlan.css' %}" />
+  </head>
+  <body>
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <!-- <a class="closeButton" href="close_page_url"
+            ><img class="closeButton" src="{% static 'images/review/Group 169.png' %}"
+          /></a> -->
+        </div>
+        <div class="teachingPlanTitle">티칭 계획을 작성해주세요.</div>
+
+        <form method="POST">
+            {% csrf_token %}
+          <div class="onelineComment">
+            <div class="onelineCommentTitle">한줄 티칭 표현</div>
+            <div class="onelineCommentBox">
+              <input
+                id="comment"
+                name="bio"
+                cols="30"
+                rows="10"
+                placeholder="티쳐님의 티칭을 한 줄로 표현해주세요."
+                class="comment"
+                required
+              />
+            </div>
+          </div>
+          <div class="teachingPlan">
+            <div class="teachingPlansubTitle">티칭 계획</div>
+            <div class="teachingPlanBox">
+              <input
+                id="plan"
+                name="teaching_plan"
+                cols="30"
+                rows="10"
+                placeholder="리뷰를 작성해주세요."
+                required
+                class="plan"
+                style="min-height: 200px"
+              />
+            </div>
+          </div>
+          <div class="teachMethod">
+            <div class="teachMethodTitle">티칭 방법</div>
+            <div class="methodBox">
+              <div class="method">
+                <input
+                  type="radio"
+                  id="method1"
+                  boolean="false"
+                  name="is_paid"
+                  value="False"
+                />
+                <label for="method1" class="label">무료 티칭</label>
+              </div>
+              <div class="method">
+                <input
+                  type="radio"
+                  id="method2"
+                  boolean="false"
+                  name="is_paid"
+                  value="True"
+                />
+                <label for="method2" class="label">유료 티칭</label>
+              </div>
+            </div>
+          </div>
+          <div class="write">
+            <button type="submit" class="writeButton">저장하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

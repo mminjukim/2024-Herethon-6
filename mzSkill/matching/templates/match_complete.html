@@ -1,47 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>매칭 성공</title>
+    <link rel="stylesheet" href="{% static 'css/matchingComplete.css' %}" />
   </head>
   <body>
-    <h1>
-      <b>{{ teacher.nickname }}</b> 티쳐와 <br />
-      1:1 매칭에 성공했어요.
-    </h1>
-    <ul>
-      <li>닉네임: {{ teacher.nickname }}</li>
-      {% if teacher.emoji %}
-      <li>
-        프로필사진: <img src="{{ teacher.emoji.url }}" alt="" height="100" />
-      </li>
-      {% endif %}
-      <li>
-        티칭 타입:
-        <ul>
-          {% for personality in teacher.personalities.all %}
-          <li>{{ personality.name }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>
-        티칭 스킬 분야:
-        <ul>
-          {% for skill in teacher.skills.all %}
-          <li>{{ skill.name }}</li>
-          {% endfor %}
-        </ul>
-      </li>
-      <li>한줄소개: {{ teacher.bio }}</li>
-      {% if teacher.is_paid == False %}
-      무료 티칭
-    {% else %}
-      유료 티칭
-    {% endif %}
-  </div>
-    </ul>
-    <a href="{% url 'main:main' %}">메인화면으로</a>
-    <a href="{% url 'chat:chat_view' username=teacher.user.username %}">채팅창으로 바로가기</a>
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <span style="color: #8520ea">{{ teacher.nickname }} MZ 티쳐</span>와<br />1:1 매칭에
+          성공했어요.
+        </div>
+        <div class="middleContainer">
+          <div class="middleBackground">
+            <div class="middleProfile">
+              {% if teacher.emoji %}
+              <img src="{{ teacher.emoji.url }}" alt="" height="100" />
+              {% else %}
+              <img src="images/matchingComplete/3dicons (7).png" />
+              {% endif %}
+              <div class="teacherName">{{ teacher.nickname }}</div>
+              <div class="teacherCatagory">{{ teacher.skills.first }}</div>
+              <div class="teahcerMessage">
+                {{ teacher.bio }}
+              </div>
+              <div class="teacherProperty">
+                <div class="property">{{ teacher.personalities.first }}</div>
+                <div class="property">
+                  {% if teacher.is_paid == False %}
+                  무료 티칭
+                  {% else %}
+                    유료 티칭
+                  {% endif %}
+                </div>
+              </div>
+              <!-- <div class="plusIcon">+1</div> -->
+            </div>
+          </div>
+        </div>
+        <a href="{% url 'main:main' %}"><div class="gotoMain">메인화면으로 가기></div></a>
+        <a href="{% url 'chat:chat_view' username=teacher.user.username %}"><div class="gotoChat">채팅창으로 바로가기</div></a>
+      </div>
+    </div>
   </body>
 </html>

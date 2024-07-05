@@ -11,47 +11,32 @@
     <div class="container">
         <header>
             <h1>커뮤니티</h1>
-            <!-- <div class="icon">
-                <a href="">
-                    <img src="{% static 'images/community/user.png' %}" alt="User Icon">
-                </a>
-            </div> -->
-        </header>
-
-        <div class="category-section">
-            <div class="category-section">
-                <div class="category">
-                    {% if category_id == 0 %} 전체
-                    {% else %} 
-                        {% for category in categories %}
-                        {% if category.id == category_id %}
-                            {{ category.name }}
-                        {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                </div>
+            <div class="icon">
+                <!-- 필요시 아이콘 이미지 추가 -->
             </div>
-            <a href="{% url 'community:community' category_id 1 %}">최신순</a> 
+        </header>
+        <div class="category-section">
+            <button type="button" class="category-button">
+                {% if category_id == 0 %} 전체
+                {% else %}
+                    {% for category in categories %}
+                        {% if category.id == category_id %}
+                            {{ category.name|truncatechars:5 }}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </button>
+            <a href="{% url 'community:community' category_id 1 %}">최신순</a>
             <a href="{% url 'community:community' category_id 2 %}">인기순</a>
         </div>
-        {% for category in categories %}
-            {% if category.id == category_id %}
-            <a href="{% url 'community:community' 0 1 %}"><div class="catagory" id="catagory1">
-                {{ category.name }}
-            </div></a>
-            {% else %}
-            <a href="{% url 'community:community' category.id 1 %}"><div class="catagory" id="catagory1">
-                {{ category.name }}
-            </div></a>
-            {% endif %}
-        {% endfor %}
+            <input type="hidden" name="category" id="category" value="{% if category_id == 0 %}전체{% else %}{{ category.name }}{% endif %}">
 
         <div class="posts">
-            {% for post_block in posts %} 
+            {% for post_block in posts %}
             <a href="{% url 'community:post_detail' post_block.post.id %}" class="post">
                 <p>{{ post_block.post.title|truncatechars:20 }}</p>
                 <div class="tags">
-                    <span class="tag">{{ post_block.post.category }}</span>
+                    <span class="tag">{{ post_block.post.category.name }}</span>
                 </div>
                 <div class="post-stats">
                     <span>♡{{ post_block.like_count }} 댓글:{{ post_block.comment_count }}</span>
@@ -61,7 +46,7 @@
         </div>
 
         <a href="{% url 'community:create_post' %}" class="write-button">
-            <img src="{% static 'images/community/writing.png' %}">
+            <img src="{% static 'images/community/writing.png' %}" alt="Write Icon">
         </a>
 
         <nav class="bottom-nav">
@@ -79,6 +64,64 @@
         </nav>
     </div>
 
+    <!-- 팝업 창 -->
+    <div id="category-popup" class="popup">
+        <div class="popup-content">
+            <h2>카테고리를 선택하세요</h2>
+            {% for category in categories %}
+                <a href="{% url 'community:community' category.id 1 %}" class="category-option" data-category="{{ category.name }}">{{ category.name }}</a>
+            {% endfor %}
+            <button type="button" class="close-popup">닫기</button>
+        </div>
+    </div>
+
     <script src="{% static 'js/community.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 로그를 통해 이벤트가 설정되었는지 확인
+            console.log('DOMContentLoaded event fired');
+
+            // 카테고리 버튼 클릭 이벤트
+            var categoryButton = document.querySelector('.category-button');
+            if (categoryButton) {
+                categoryButton.addEventListener('click', function() {
+                    console.log('Category button clicked');
+                    document.getElementById('category-popup').style.display = 'flex';
+                    setTimeout(function() {
+                        document.getElementById('category-popup').classList.add('show');
+                    }, 10); // CSS 애니메이션
+                });
+            }
+
+            // 카테고리 옵션 클릭 이벤트
+            var categoryOptions = document.querySelectorAll('.category-option');
+            if (categoryOptions) {
+                categoryOptions.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        console.log('Category option clicked');
+                        var selectedCategory = this.getAttribute('data-category');
+                        document.getElementById('category').value = selectedCategory;
+                        document.querySelector('.category-button').textContent = selectedCategory;
+                        document.getElementById('category-popup').classList.remove('show');
+                        setTimeout(function() {
+                            document.getElementById('category-popup').style.display = 'none';
+                        }, 300); // 애니메이션 완료 후
+                    });
+                });
+            }
+
+            // 닫기 버튼 클릭 이벤트
+            var closeButton = document.querySelector('.close-popup');
+            if (closeButton) {
+                closeButton.addEventListener('click', function() {
+                    console.log('Close button clicked');
+                    document.getElementById('category-popup').classList.remove('show');
+                    setTimeout(function() {
+                        document.getElementById('category-popup').style.display = 'none';
+                    }, 300); // 애니메이션 완료 후
+                });
+            }
+        });
+    </script>
 </body>
 </html>

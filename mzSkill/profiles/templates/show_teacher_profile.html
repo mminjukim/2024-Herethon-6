@@ -1,45 +1,92 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>티쳐 프로필</title>
-</head>
-<body>
-    <h1>티쳐 프로필 보기</h1>
-    <ul>
-        <li>닉네임: {{ profile.nickname }}</li>
-        {% if profile.emoji %}
-        <li>프로필사진: <img src="{{ profile.emoji.url }}" alt="" height="100"></li>
-        {% endif %}
-        <h2><a href="{% url 'profiles:update_teacher_details' profile.id %}">1:1 매칭 세부 정보 ></a></h2>
-        <li>티칭 타입: 
-            <ul>
+    <link rel="stylesheet" href="{% static 'css/teacherMypage.css' %}" />
+  </head>
+  <body>
+    <div class="backgroundContainer">
+      <div class="mainContainer">
+        <div class="topContainer">
+          <a class="backButton" href="{% url 'main:main' %}"
+            ><img src="{% static 'images/runnerMypage/🦆 icon _nav arrow left_.png' %}"
+          /></a>
+          <div class="profile">프로필</div>
+          <a href="{% url 'profiles:update_teacher_profile' profile.id %}" class="settingButton"
+            ><img src="{% static 'images/runnerMypage/🦆 icon _settings_.png' %}"
+          /></a>
+        </div>
+        <div class="imageContainer">
+          <div class="background"></div>
+          {% if profile.emoji %}
+          <img
+            class="profileImage"
+            src="{{ profile.emoji.url }}"
+          />
+          {% else %}
+          <img
+            class="profileImage"
+            src="{% static 'images/teacherMypage/Group 178 (2).png' %}"
+          />
+            {% endif %}
+
+        </div>
+        <div class="runnerProfile">
+          <div class="runnerName">{{ profile.nickname }}</div>
+          <div class="runnerButton">티쳐</div>
+        </div>
+        <a href="{% url 'profiles:update_teacher_details' profile.id %}" class="matchingInfo">
+          <div class="matchingInfoTitle">1:1 매칭 세부 정보</div>
+          <img src="{% static 'images/runnerMypage/Arrow - Left 4.png' %}" />
+        </a>
+        <div class="middleContainer">
+          <div class="teachingtype">
+            <div class="teachingtypeTitle">티칭 타입</div>
+            
+            <div class="teachingtypeBox">
                 {% for personality in profile.personalities.all %}
-                <li>{{ personality.name }}</li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li>티칭 스킬 분야:
-            <ul>
+              <div class="type">
+                <img src="{% static 'images/teacherMypage/3dicons (13).png' %}"/>
+                <div class="typemessage">{{ personality.name }}</div>
+              </div>
+              {% endfor %}
+            </div>
+            
+            <div class="skillContainer">
+                <div class="skillTitle">티칭 스킬 분야</div>
+                <div class="skillBox">
                 {% for skill in profile.skills.all %}
-                <li>{{ skill.name }}</li>
-                {% endfor %}
-            </ul>
-        </li>
-        <h2><a href="{% url 'profiles:write_teachingplan' profile.id %}">티칭 계획 ></a></h2>
-        <li>{{ profile.bio }}</li>
-        <li>{{ profile.teaching_plan }}</li>
-        <li>
+                  <div class="skill">{{ skill.name|truncatechars:7 }}</div>
+                  {% endfor %}
+                </div>
+            </div>
+          </div>
+        </div>
+        <a href="{% url 'profiles:write_teachingplan' profile.id %}"><div class="planTitle">티칭 계획</div></a>
+        <div class="middleContainerMessage">
+          <div class="middleContainerTop">
+            <div class="dot">●</div>
+            <div class="middleMessage">
+                {{ profile.bio }}
+            </div>
+          </div>
+
+          <div class="middleContainerBox">
+            {{ profile.teaching_plan|linebreaksbr }}
+          </div>
+          <div class="teachingPlanKeyword">
             {% if profile.is_paid == False %}
             무료 티칭
             {% else %}
             유료 티칭
             {% endif %}
-        </li>
-    </ul>
-    <a href="{% url 'profiles:update_teacher_profile' profile.id %}">프로필 수정하기</a><br>
-    <a href="{% url 'profiles:appeal_teacher' profile.id %}">어필하기</a> (마지막 어필: {{profile.last_appealed}})<br>
-    <a href="{% url 'main:main' %}">메인화면</a>
-</body>
+          </div>
+        </div>
+        <a href="{% url 'profiles:appeal_teacher' profile.id %}"><div class="myteach">♥ 나의 티칭 어필하기</div></a>
+      </div>
+    </div>
+  </body>
 </html>

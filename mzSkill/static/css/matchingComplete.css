@@ -1,6 +1,9 @@
 html {
   background-color: whitesmoke;
 }
+body {
+  font-family: "pretendard";
+}
 .backgroundContainer {
   max-width: 420px;
   height: 100vh;
@@ -16,7 +19,13 @@ html {
   margin-top: 50px;
   padding: 40px;
   margin-bottom: 40px;
+  font-size: 22px;
+  line-height: 40px;
 }
+.teacherName {
+  font-size: 20px;
+}
+
 .middleBackground {
   background-color: #8520ea;
   height: 284px;
@@ -51,12 +60,13 @@ img {
 }
 .teacherCatagory {
   margin-bottom: 10px;
+  color: #a39fa6;
+  font-size: 12px;
 }
 .teacherProperty {
   display: flex;
 }
-.property1,
-.property2 {
+.property {
   font-size: 12px;
   min-width: 80px;
   height: 20px;
@@ -101,4 +111,11 @@ img {
   font-weight: bolder;
   line-height: 50px;
   text-align: center;
+}
+a {
+  text-decoration: none;
+}
+.middleProfile img {
+  width: 83px;
+  height: 83px;
 }

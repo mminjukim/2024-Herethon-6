@@ -1,16 +1,60 @@
+{% load static %} 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>러너 프로필 수정</title>
+    <link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">
 </head>
 <body>
-    <h1>러너 프로필 수정</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %} 
-        {{ form.as_p }}
-        <button type="submit">수정하기</button>
-      </form>
+    <section class="profile-form">
+        <h1 class="profile-title">
+            <!-- <a href=""><img src="../images/profile_edit/arrow left.png" class="left-arrow"></a> -->
+            러너 프로필 수정
+        </h1>
+        <form action="" method="POST" enctype="multipart/form-data" id="profile-form">
+            {% csrf_token %}
+            <div class="profile-image-container">
+                <img src="{% static 'images/profile/profile.png' %}" alt="Default Profile" class="profile-image">
+                <label for="profile-image-input" class="camera-icon">
+                    <img src="{% static 'images/profile/camera.png' %}" alt="Camera Icon">
+                </label>
+                <input type="file" id="profile-image-input" name="emoji" accept="image/*" style="display:none;">
+            </div>
+            <!-- <div class="int-area">
+                <input type="email" name="email" id="name" autocomplete="off" required>
+                <label for="name">이메일</label>
+            </div> -->
+            <div class="int-area">
+                <input type="text" name="nickname" id="name" autocomplete="off" required>
+                <label for="name">닉네임</label>
+            </div>
+            <div class="int-area">
+                <input type="date" name="birthdate" id="birth" autocomplete="off" required>
+                <label for="birth">생년월일</label>
+                <span id="birth-error" class="error-message" style="display:none; color: rgb(95, 45, 170);">생년월일은 1981.01.01 ~ 2010.12.31 <p></p>사이여야 합니다.</span>
+            </div>
+            <div class="btn-area">
+                <button id="btn" type="submit">등록하기</button>
+            </div>
+        </form>
+    </section>
+    <script>
+        document.getElementById('profile-form').addEventListener('submit', function(event) {
+            const birthInput = document.getElementById('birth');
+            const birthError = document.getElementById('birth-error');
+            const birthDate = new Date(birthInput.value);
+            const minDate = new Date('1981-01-01');
+            const maxDate = new Date('2010-12-31');
+
+            if (birthDate < minDate || birthDate > maxDate) {
+                birthError.style.display = 'block';
+                event.preventDefault(); // 폼 제출 방지
+            } else {
+                birthError.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

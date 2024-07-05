@@ -1,17 +1,17 @@
-{% load static %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MZ티쳐 전체보기</title>
-    <link rel="stylesheet" href="{% static 'css/teacherInroduce.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/teacherIntroduce.css' %}" />
   </head>
   <body>
     <div class="backgroundContainer">
       <div class="mainContainer">
         <div class="topContainer">
-          <a href="{% url 'main:main' %}"><div class="꺽쇄">&lt;</div></a>
+          <a href="{% url 'main:main' %}"><div class="backArrow">&lt;</div></a>
           <div class="message">
             원하는 MZ 티쳐를 찾아<br />
             1:1 매칭을 신청할 수 있어요.
@@ -22,38 +22,41 @@
           <div class="teachCatagoriesTop"></div>
           <div class="teachCatagoriesMain">
             {% for category in categories %}
-              {% if category.id == category_id %}
-              <a href="{% url 'matching:mzteacher_list' 0 %}"><div class="catagory" id="catagory1" style="background-color: rgb(172, 114, 244);">
-                {{ category.name }}
-              </div></a>
-              {% else %}
-              <a href="{% url 'matching:mzteacher_list' category.id %}"><div class="catagory" id="catagory1">
-                {{ category.name }}
-              </div></a>
-              {% endif %}
+            {% if category.id == category_id %}
+            <a href="{% url 'matching:mzteacher_list' 0 %}" class="catagory" style="border: 2px solid #8520ea;">
+              {{ category.name }}
+            </a>
+            {% else %}
+            <a href="{% url 'matching:mzteacher_list' category.id %}" class="catagory">
+              {{ category.name }}
+            </a>
+            {% endif %}
             {% endfor %}
           </div>
         </div>
 
         <div class="allTeachers">
-          <div class="정렬">최신순</div>
+          <div class="sort">최근 어필 순</div>
           {% for teacher in teachers %}
-          <div class="teacherA">
+          <a href="{% url 'matching:mzteacher_profile' teacher.id %}" class="teacherA">
             {% if teacher.emoji %}
-            <img class="profileImage" height="30px" src="{{ teacher.emoji.url }}" />
+            <img
+              class="profileImage"
+              src="{{ teacher.emoji.url }}"
+            />
             {% else %}
-            <img class="profileImage" height="30px" src="{% static 'images/teacherIntroduce/3dicons (2).png' %}" />
-            {% endif %}
-            <div class="teacherName">
-                <a href="{% url 'matching:mzteacher_profile' teacher.id %}">{{teacher.nickname}}</a> ({% for skill in teacher.skills.all %}{{skill.name}}{% if not forloop.last %}/{% endif %}{% endfor %})
-            </div>
+            <img
+              class="profileImage"
+              src="{% static 'images/teacherIntroduce/3dicons (4).png' %}"
+            />{% endif %}
+            <div class="teacherName">{{teacher.nickname}}({% for skill in teacher.skills.all %}{{skill.name|truncatechars:10}}{% if not forloop.last %}/{% endif %}{% endfor %})</div>
             {% if teacher.is_paid == True %}
             <img src="{% static 'images/teacherIntroduce/Vector (1).png' %}" />
             {% endif %}
             <div class="teacherIntroduce">
               {{ teacher.bio }}
             </div>
-          </div>
+          </a>
           {% endfor %}
         </div>
       </div>

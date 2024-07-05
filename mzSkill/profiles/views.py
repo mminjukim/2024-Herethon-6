@@ -26,13 +26,13 @@ def update_learner_profile(request, id):
 def update_learner_details(request, id): # 수정
     profile = Learner.objects.get(id=id)
     if request.method == 'POST':
-        form = LearnerDetailsForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profiles:show_learner_profile', id) 
+        skills = request.POST.getlist('skills[]')
+        profile.skills.set(skills)
+        personalities = request.POST.getlist('personalities[]')
+        profile.personalities.set(personalities)
+        return redirect('profiles:show_learner_profile', id) 
     else:
-        form = LearnerDetailsForm(instance=profile)
-        return render(request, "update_learner_details.html", {'form':form})
+        return render(request, "update_learner_details.html")
 
 
 # 티쳐 프로필 보기
@@ -56,24 +56,24 @@ def update_teacher_profile(request, id):
 def update_teacher_details(request, id): 
     profile = Teacher.objects.get(id=id)
     if request.method == 'POST':
-        form = TeacherDetailsForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profiles:show_teacher_profile', id) 
+        skills = request.POST.getlist('skills[]')
+        profile.skills.set(skills)
+        personalities = request.POST.getlist('personalities[]')
+        profile.personalities.set(personalities)
+        return redirect('profiles:show_teacher_profile', id) 
     else:
-        form = TeacherDetailsForm(instance=profile)
-        return render(request, "update_teacher_details.html", {'form':form})
+        return render(request, "update_teacher_details.html")
 
 def write_teachingplan(request, id):
     profile = Teacher.objects.get(id=id)
     if request.method == 'POST':
-        form = TeachingPlanForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return redirect('profiles:show_teacher_profile', id) 
+        profile.bio = request.POST['bio']
+        profile.teaching_plan = request.POST['teaching_plan']
+        profile.is_paid = request.POST['is_paid']
+        profile.save()
+        return redirect('profiles:show_teacher_profile', id) 
     else:
-        form = TeachingPlanForm(instance=profile)
-        return render(request, "write_teachingplan.html", {'form':form})
+        return render(request, "write_teachingplan.html")
     
 def appeal_teacher(request, id):
     profile = Teacher.objects.get(id=id)

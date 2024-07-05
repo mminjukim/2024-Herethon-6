@@ -1,0 +1,101 @@
+html {
+  background-color: whitesmoke;
+}
+body {
+  font-family: "pretendard";
+}
+.backgroundContainer {
+  max-width: 420px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: #fbf8fe;
+  display: flex;
+  flex-wrap: wrap;
+}
+.mainContainer {
+  width: 100%;
+}
+.comment,
+.plan {
+  border: none;
+  width: 93%;
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  resize: none;
+  border-radius: 10px;
+  background: transparent;
+  padding: 10px;
+  color: #a39fa6;
+  font-size: 14px;
+}
+.onelineComment textarea {
+}
+.closeButton {
+  padding-top: 30px;
+  transform: translate(370px, 0);
+}
+.teachingPlanTitle {
+  padding: 30px;
+  font-size: 22px;
+  color: #454347;
+}
+.onelineComment,
+.teachingPlan {
+  padding: 30px;
+}
+.onelineCommentTitle,
+.teachingPlansubTitle,
+.teachMethodTitle {
+  margin-bottom: 20px;
+}
+#comment {
+  height: 80px;
+}
+.teachingPlan textarea {
+  min-height: 160px;
+}
+.methodBox {
+  display: flex;
+  justify-content: center;
+}
+.teachMethod {
+  padding: 30px;
+}
+.method {
+  box-shadow: 0px 4px 4px 0px rgb(236, 232, 240);
+  border-radius: 20px;
+  width: 150px;
+  height: 35px;
+  text-align: center;
+  line-height: 30px;
+  margin: 10px;
+  color: #6f6b72;
+  font-size: 14px;
+  font-weight: 2px;
+  position: relative;
+  border: 2px solid transparent;
+  cursor: pointer;
+} 
+input[type="radio"] {
+}
+input[type="radio"]:checked + .method {
+  border: 2px solid #8520ea;
+  color: #8520ea;
+}
+.writeButton {
+  width: 314px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #8520ea;
+  font-size: 14px;
+  font-weight: bolder;
+  line-height: 50px;
+  text-align: center;
+  margin: 10px;
+  cursor: pointer;
+  border: none;
+  color: white;
+}
+.write {
+  display: flex;
+  justify-content: center;
+}
