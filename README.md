@@ -24,7 +24,7 @@
 <hr>
 
 # 폴더 구조
-!<-- path -->
+
 all_project/
 ├── accounts/
 │ ├── migrations/
@@ -48,8 +48,8 @@ $ python -m venv myvenv    #가상환경 생성
 $ source newvenv/Scripts/activate
 $ pip install pillow
 $ pip install django
-$ cd Dcodea
-$ python manage.py runserver
+$ cd mzSkill
+$ docker-compose up
 
 
 
